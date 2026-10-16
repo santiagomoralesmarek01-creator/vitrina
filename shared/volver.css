@@ -1,0 +1,31 @@
+.vitrina-volver {
+  /* Arriba de la página (no fijo): se va al bajar y no tapa la navegación de cada ejemplo. */
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font: 600 13px/1 system-ui, sans-serif;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.vitrina-volver:hover,
+.vitrina-volver:focus-visible {
+  opacity: 1;
+}
+.vitrina-volver--claro {
+  background: rgb(255 255 255 / 0.8);
+  color: #111;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.15);
+}
+.vitrina-volver--oscuro {
+  background: rgb(20 20 20 / 0.7);
+  color: #f2f2f2;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.15);
+}

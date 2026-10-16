@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6efe6" />
+    <meta name="description" content="Landing de un estudio de yoga y pilates: respiración guiada, horarios filtrables con reserva y planes. Ejemplo de la Vitrina." />
+    <title>Pulso · Yoga & Pilates</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="logo" href="#inicio">pulso<span>·</span></a>
+      <nav aria-label="Principal">
+        <a href="#clases">Clases</a>
+        <a href="#horarios">Horarios</a>
+        <a href="#planes">Planes</a>
+      </nav>
+      <a class="boton boton--chico" href="#horarios">Reservar</a>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="manchas" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="hero-texto">
+          <p class="etiqueta">Estudio de yoga & pilates · Villa Crespo</p>
+          <h1>Respirá.<br /><em>Moverte también</em><br />es descansar.</h1>
+          <p class="bajada">Clases chicas, profes atentos y un espacio lleno de luz para volver a tu cuerpo.</p>
+          <div class="acciones">
+            <a class="boton" href="#horarios">Ver horarios</a>
+            <a class="boton boton--borde" href="#planes">Primera clase gratis</a>
+          </div>
+        </div>
+        <div class="respiracion">
+          <button type="button" class="burbuja" id="respirar" aria-describedby="respirar-ayuda">
+            <span class="burbuja-anillo" aria-hidden="true"></span>
+            <span class="burbuja-texto" id="respirar-texto" aria-live="polite">Tocá para respirar</span>
+          </button>
+          <p class="ayuda" id="respirar-ayuda">Un minuto de respiración 4-4-6. Tocá de nuevo para frenar.</p>
+        </div>
+      </section>
+
+      <section class="seccion" id="clases">
+        <p class="etiqueta revelar">Nuestras clases</p>
+        <h2 class="revelar">Tres maneras de <em>encontrarte</em></h2>
+        <div class="clases">
+          <article class="clase revelar" style="--tono: var(--salvia)">
+            <span class="clase-icono" aria-hidden="true">🌿</span>
+            <h3>Yoga flow</h3>
+            <p>Secuencias fluidas que conectan movimiento y respiración. Para soltar tensión y ganar energía.</p>
+            <p class="clase-meta">60 min · Todos los niveles</p>
+          </article>
+          <article class="clase revelar" style="--tono: var(--terracota)">
+            <span class="clase-icono" aria-hidden="true">🔥</span>
+            <h3>Pilates</h3>
+            <p>Fuerza desde el centro, postura y control. En grupos de hasta 6 personas, con camilla y aparatos.</p>
+            <p class="clase-meta">50 min · Inicial e intermedio</p>
+          </article>
+          <article class="clase revelar" style="--tono: var(--lavanda)">
+            <span class="clase-icono" aria-hidden="true">🌙</span>
+            <h3>Yin & meditación</h3>
+            <p>Posturas largas y quietas para estirar profundo y bajar el ritmo. Ideal para cerrar el día.</p>
+            <p class="clase-meta">75 min · Todos los niveles</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="seccion seccion--horarios" id="horarios">
+        <p class="etiqueta revelar">Esta semana</p>
+        <h2 class="revelar">Elegí tu <em>momento</em></h2>
+        <div class="filtros revelar">
+          <div class="chips" id="tipos" role="group" aria-label="Tipo de clase"></div>
+          <label class="nivel">
+            Nivel
+            <select id="nivel">
+              <option value="cualquiera">Cualquiera</option>
+              <option value="inicial">Inicial</option>
+              <option value="intermedio">Intermedio</option>
+            </select>
+          </label>
+        </div>
+        <div class="semana" id="semana"></div>
+      </section>
+
+      <section class="seccion" aria-labelledby="t-voces">
+        <p class="etiqueta revelar">Lo que dicen</p>
+        <h2 class="revelar" id="t-voces">Voces del <em>estudio</em></h2>
+        <div class="carrusel revelar">
+          <div class="pista" id="pista" tabindex="0" aria-label="Testimonios, deslizá para ver más">
+            <blockquote><p>“Llegué por un dolor de espalda y me quedé por la comunidad. Es mi lugar de la semana.”</p><footer>Carla, 34 · Pilates</footer></blockquote>
+            <blockquote><p>“Nunca había hecho yoga. Lucía tiene una paciencia infinita y las clases son chicas, te ven.”</p><footer>Joaquín, 41 · Yoga flow</footer></blockquote>
+            <blockquote><p>“El yin de los miércoles a la noche me cambió el sueño. Salgo flotando.”</p><footer>Paula, 29 · Yin</footer></blockquote>
+            <blockquote><p>“Pase libre y voy cuatro veces por semana. La mejor inversión que hice este año.”</p><footer>Diego, 52 · Pase libre</footer></blockquote>
+          </div>
+          <div class="carrusel-controles">
+            <button type="button" id="anterior" aria-label="Testimonio anterior">←</button>
+            <div class="puntos" id="puntos"></div>
+            <button type="button" id="siguiente" aria-label="Testimonio siguiente">→</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="planes">
+        <p class="etiqueta revelar">Planes</p>
+        <h2 class="revelar">Sin matrícula, <em>sin vueltas</em></h2>
+        <div class="periodo revelar" role="radiogroup" aria-label="Forma de pago">
+          <button type="button" role="radio" aria-checked="true" data-periodo="mensual">Mensual</button>
+          <button type="button" role="radio" aria-checked="false" data-periodo="trimestral">Trimestral <span>−15 %</span></button>
+        </div>
+        <div class="planes" id="planes-lista"></div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p class="logo">pulso<span>·</span></p>
+      <p>Av. Corrientes 5100, Villa Crespo · hola@pulso.estudio</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Estudio, personas y precios ficticios.</p>
+    </footer>
+
+    <dialog class="reserva" id="reserva" aria-labelledby="reserva-titulo">
+      <form method="dialog" id="reserva-form">
+        <p class="etiqueta" id="reserva-dia"></p>
+        <h2 id="reserva-titulo"></h2>
+        <p id="reserva-detalle" class="reserva-detalle"></p>
+        <label>Tu nombre <input name="nombre" required autocomplete="given-name" /></label>
+        <label>Mail <input name="mail" type="email" required autocomplete="email" /></label>
+        <div class="reserva-acciones">
+          <button type="button" class="boton boton--borde" value="cancelar" id="reserva-cancelar">Cancelar</button>
+          <button type="submit" class="boton">Confirmar lugar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

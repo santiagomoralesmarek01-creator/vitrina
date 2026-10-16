@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0d10" />
+    <meta name="description" content="Landing de bicis eléctricas: configurador de color y modelo, calculadora de ahorro y animaciones al bajar. Ejemplo de la Vitrina." />
+    <title>Volta · Bicis eléctricas</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="logo" href="#inicio">VOLTA<span>⚡</span></a>
+      <nav aria-label="Principal">
+        <a href="#config">Configurala</a>
+        <a href="#ahorro">Cuánto ahorrás</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+      <a class="boton boton--chico" href="#config">Probala gratis</a>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <p class="kicker"><span class="punto" aria-hidden="true"></span> Nueva Volta 2027 · Hecha en Rosario</p>
+        <h1>Llegá antes.<br /><span class="neon">Sin transpirar.</span></h1>
+        <p class="bajada">La bici eléctrica pensada para la ciudad: asistencia al pedaleo, batería que se saca y se carga en cualquier enchufe.</p>
+        <div class="hero-bici" id="hero-bici"></div>
+        <dl class="specs">
+          <div><dt>Autonomía</dt><dd><span data-contar="80">0</span> km</dd></div>
+          <div><dt>Velocidad</dt><dd><span data-contar="25">0</span> km/h</dd></div>
+          <div><dt>Carga completa</dt><dd><span data-contar="3">0</span> h</dd></div>
+          <div><dt>Peso</dt><dd><span data-contar="21">0</span> kg</dd></div>
+        </dl>
+      </section>
+
+      <section class="seccion config" id="config" aria-labelledby="t-config">
+        <div class="config-visor">
+          <div class="visor-bici" id="visor-bici"></div>
+          <p class="visor-nombre" id="visor-nombre">Volta Urbana · Neón</p>
+        </div>
+        <div class="config-panel">
+          <p class="kicker">Configurador</p>
+          <h2 id="t-config">Hacela tuya</h2>
+          <fieldset>
+            <legend>Modelo</legend>
+            <div class="modelos" id="modelos"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Color del cuadro</legend>
+            <div class="colores" id="colores"></div>
+          </fieldset>
+          <div class="precio-final">
+            <span>Precio final</span>
+            <strong id="precio">$ 0</strong>
+            <small id="cuotas"></small>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion ahorro" id="ahorro" aria-labelledby="t-ahorro">
+        <p class="kicker">Calculadora</p>
+        <h2 id="t-ahorro">¿Cuánto te ahorrás?</h2>
+        <div class="ahorro-grilla">
+          <form class="ahorro-form" id="ahorro-form">
+            <label class="rango">
+              <span>Kilómetros por día <small>(ida y vuelta)</small></span>
+              <output id="km-valor">12 km</output>
+              <input type="range" name="km" min="2" max="40" value="12" />
+            </label>
+            <label class="rango">
+              <span>Días por semana</span>
+              <output id="dias-valor">5 días</output>
+              <input type="range" name="dias" min="1" max="7" value="5" />
+            </label>
+            <fieldset>
+              <legend>Hoy viajás en</legend>
+              <div class="medios" id="medios"></div>
+            </fieldset>
+          </form>
+          <div class="resultado" aria-live="polite">
+            <p class="resultado-titulo">Ahorrás por mes</p>
+            <p class="resultado-numero" id="ahorro-mes">$ 0</p>
+            <div class="barras">
+              <div class="barra"><span>Hoy</span><i id="barra-actual"></i><b id="actual-mes"></b></div>
+              <div class="barra barra--volta"><span>Con Volta</span><i id="barra-bici"></i><b id="bici-mes"></b></div>
+            </div>
+            <p class="resultado-extra" id="se-paga"></p>
+            <p class="resultado-extra" id="co2"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion preguntas" id="preguntas" aria-labelledby="t-preguntas">
+        <p class="kicker">Preguntas</p>
+        <h2 id="t-preguntas">Lo que nos preguntan</h2>
+        <details><summary>¿Necesito licencia o patente?</summary><p>No. Las bicis con asistencia al pedaleo hasta 25 km/h se consideran bicicletas: podés usar la ciclovía como siempre.</p></details>
+        <details><summary>¿Cuánto dura la batería?</summary><p>Unos 1.000 ciclos de carga antes de perder el 20 % de su capacidad. Si viajás todos los días, son más de cinco años.</p></details>
+        <details><summary>¿Y si llueve?</summary><p>El motor y la batería son resistentes al agua (IP65). Podés andar bajo la lluvia; no la sumerjas.</p></details>
+        <details><summary>¿Puedo probarla antes de comprar?</summary><p>Sí: te la prestamos una semana gratis en CABA y Rosario. Si no te convence, la pasamos a buscar.</p></details>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p class="logo">VOLTA<span>⚡</span></p>
+      <p>Proyecto de ejemplo de la Vitrina. Marca, productos y precios ficticios.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

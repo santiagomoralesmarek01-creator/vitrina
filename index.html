@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Vitrina: cartas de restaurante y landings de ejemplo, cada una con su estilo y sus interacciones. Proyectos de Santiago Morales Marek." />
+    <meta property="og:title" content="Vitrina · Diseño web de ejemplo" />
+    <meta property="og:description" content="Cartas de restaurante y landings, cada una con su estilo y sus interacciones." />
+    <title>Vitrina · Diseño web de ejemplo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪟</text></svg>" />
+  </head>
+  <body>
+    <header class="cabecera">
+      <p class="sobre">Vitrina · Santiago Morales Marek</p>
+      <h1>Cada negocio,<br /><em>su propia forma</em> de mostrarse.</h1>
+      <p class="bajada">
+        Cartas de restaurante y landings de ejemplo. Ninguna comparte diseño: cada una tiene su tipografía, su paleta y sus
+        propias interacciones. Pasá el mouse por las tarjetas para recorrerlas.
+      </p>
+      <div class="filtros" role="radiogroup" aria-label="Filtrar ejemplos" id="filtros">
+        <button type="button" role="radio" aria-checked="true" data-filtro="todos">Todos <span>4</span></button>
+        <button type="button" role="radio" aria-checked="false" data-filtro="carta">Cartas <span>2</span></button>
+        <button type="button" role="radio" aria-checked="false" data-filtro="landing">Landings <span>2</span></button>
+      </div>
+    </header>
+
+    <main class="grilla" id="grilla"></main>
+
+    <section class="otros" aria-labelledby="t-otros">
+      <h2 id="t-otros">Otros proyectos</h2>
+      <div class="otros-lista">
+        <a class="otro" href="https://miti-miti.com.ar" target="_blank" rel="noopener">
+          <strong>Miti-Miti</strong>
+          <span>Web para dividir gastos con amigos. React, TypeScript, Supabase y tiempo real.</span>
+          <span class="flecha" aria-hidden="true">↗</span>
+        </a>
+        <a class="otro" href="https://amanorecetas.com.ar" target="_blank" rel="noopener">
+          <strong>A Mano</strong>
+          <span>Recetas latinoamericanas con cuentas, modo cocina y juegos. JavaScript sin frameworks.</span>
+          <span class="flecha" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="pie">
+      <p>Hecho con HTML, CSS y TypeScript, sin frameworks. Los negocios, las personas y los precios son ficticios.</p>
+      <p><a href="https://github.com/santiagomoralesmarek01-creator" target="_blank" rel="noopener">GitHub ↗</a></p>
+    </footer>
+
+    <script type="module" src="./galeria/main.ts"></script>
+  </body>
+</html>

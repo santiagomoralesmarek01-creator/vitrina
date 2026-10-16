@@ -1,0 +1,597 @@
+:root {
+  --fondo: #fbfaf7;
+  --superficie: #ffffff;
+  --tinta: #1d1f23;
+  --tinta-suave: #6b7079;
+  --linea: #e6e3dc;
+  --acento: #6f8fb0;
+  --acento-suave: #e8eef5;
+  --sombra: 0 1px 2px rgb(29 31 35 / 0.04), 0 8px 24px -12px rgb(29 31 35 / 0.18);
+  --redonda: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', system-ui, sans-serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='dia']) {
+    --fondo: #11151c;
+    --superficie: #181d26;
+    --tinta: #e8ecf2;
+    --tinta-suave: #98a1ae;
+    --linea: #29303b;
+    --acento: #a9c3e0;
+    --acento-suave: #1f2a38;
+    --sombra: 0 0 0 1px #232a35;
+    color-scheme: dark;
+  }
+}
+
+:root[data-tema='noche'] {
+  --fondo: #11151c;
+  --superficie: #181d26;
+  --tinta: #e8ecf2;
+  --tinta-suave: #98a1ae;
+  --linea: #29303b;
+  --acento: #a9c3e0;
+  --acento-suave: #1f2a38;
+  --sombra: 0 0 0 1px #232a35;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  transition: background 0.4s, color 0.4s;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+}
+
+/* ---------- Encabezado ---------- */
+.arriba {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 56px 24px 0;
+}
+
+.marca {
+  font-family: var(--redonda);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.marca span {
+  margin-left: 10px;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--tinta-suave);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tema {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--linea);
+  border-radius: 50%;
+  background: var(--superficie);
+  cursor: pointer;
+  transition: transform 0.4s;
+}
+
+.tema:hover {
+  transform: rotate(-20deg);
+}
+
+.tema svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.tema .sol {
+  display: none;
+}
+
+:root[data-tema='noche'] .tema .sol {
+  display: block;
+}
+:root[data-tema='noche'] .tema .luna {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='dia']) .tema .sol {
+    display: block;
+  }
+  :root:not([data-tema='dia']) .tema .luna {
+    display: none;
+  }
+}
+
+/* ---------- Portada ---------- */
+.portada {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 32px;
+  text-align: center;
+}
+
+.dibujo {
+  width: min(240px, 60vw);
+}
+
+.trazo {
+  fill: none;
+  stroke: var(--tinta);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: dibujar 2.2s ease-out forwards;
+}
+
+.vapor {
+  stroke: var(--acento);
+  animation:
+    dibujar 2.2s ease-out forwards,
+    flotar 3s 2.2s ease-in-out infinite;
+}
+
+@keyframes dibujar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes flotar {
+  50% {
+    transform: translateY(-4px);
+    opacity: 0.6;
+  }
+}
+
+.portada h1 {
+  margin: 18px 0 10px;
+  font-family: var(--redonda);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.horario {
+  color: var(--tinta-suave);
+}
+
+/* ---------- Opciones ---------- */
+.opciones {
+  position: sticky;
+  top: 12px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 28px;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  margin: 0 auto 8px;
+  padding: 12px 18px;
+  border: 1px solid var(--linea);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--superficie) 88%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--sombra);
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.opcion-titulo {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.segmentado {
+  position: relative;
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--acento-suave);
+}
+
+.segmentado button {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font-weight: 500;
+  line-height: 1.15;
+  cursor: pointer;
+}
+
+.segmentado small {
+  font-size: 0.68rem;
+  color: var(--tinta-suave);
+}
+
+.indicador {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  border-radius: 999px;
+  background: var(--superficie);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+  transition:
+    transform 0.35s cubic-bezier(0.3, 1.4, 0.5, 1),
+    width 0.35s;
+}
+
+/* ---------- Carta ---------- */
+.carta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 56px;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.bloque:nth-child(3),
+.bloque:nth-child(4) {
+  grid-column: 1 / -1;
+}
+
+.bloque h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 24px 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--linea);
+  font-family: var(--redonda);
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+.num {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--acento);
+}
+
+.ayuda {
+  margin-bottom: 14px;
+  color: var(--tinta-suave);
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--linea);
+}
+
+.item-nombre {
+  font-weight: 500;
+  font-size: 1.02rem;
+}
+
+.marca-leche {
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-size: 0.68rem;
+  font-weight: 500;
+  vertical-align: 2px;
+}
+
+.item-detalle {
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+}
+
+.precio {
+  flex: none;
+  font-family: var(--redonda);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s;
+}
+
+.precio.cambiando {
+  color: var(--acento);
+}
+
+/* ---------- Tarjetas que se dan vuelta ---------- */
+.origenes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  perspective: 1200px;
+}
+
+.tarjeta {
+  position: relative;
+  min-height: 300px;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.3, 1.2, 0.4, 1);
+}
+
+.tarjeta[aria-pressed='true'] {
+  transform: rotateY(180deg);
+}
+
+.tarjeta:hover:not([aria-pressed='true']) {
+  transform: rotateY(-8deg) translateY(-4px);
+}
+
+.cara {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid var(--linea);
+  border-radius: 22px;
+  background: var(--superficie);
+  box-shadow: var(--sombra);
+  backface-visibility: hidden;
+}
+
+.dorso {
+  justify-content: center;
+  gap: 14px;
+  background: var(--acento-suave);
+  transform: rotateY(180deg);
+}
+
+.tarjeta-num {
+  font-size: 0.8rem;
+  color: var(--acento);
+  font-weight: 500;
+}
+
+.tarjeta-nombre {
+  margin-top: auto;
+  font-family: var(--redonda);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.tarjeta-region {
+  color: var(--tinta-suave);
+}
+
+.notas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0;
+}
+
+.notas span {
+  padding: 3px 10px;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  font-size: 0.78rem;
+}
+
+.tarjeta-precio {
+  font-family: var(--redonda);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.girar {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  color: var(--tinta-suave);
+  font-size: 1.2rem;
+  transition: transform 0.4s;
+}
+
+.tarjeta:hover .girar {
+  transform: rotate(180deg);
+}
+
+.dato {
+  display: grid;
+  font-weight: 500;
+}
+
+.dato small {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.perfil {
+  display: grid;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--linea);
+  font-size: 0.85rem;
+}
+
+.perfil > span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.puntos {
+  display: flex;
+  gap: 4px;
+}
+
+.puntos i {
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--acento);
+  border-radius: 50%;
+}
+
+.puntos i.lleno {
+  background: var(--acento);
+}
+
+/* ---------- Dulces ---------- */
+.dulces {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dulce {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 18px;
+  border: 1px solid var(--linea);
+  border-radius: 18px;
+  background: var(--superficie);
+}
+
+.dulce svg {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 6px;
+  fill: none;
+  stroke: var(--acento);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dulce .precio {
+  margin-top: 6px;
+}
+
+/* ---------- Pie ---------- */
+.pie {
+  padding: 32px 24px 48px;
+  border-top: 1px solid var(--linea);
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+.pie strong {
+  color: var(--tinta);
+  font-weight: 500;
+}
+
+.pie-chico {
+  margin-top: 6px;
+  font-size: 0.8rem;
+}
+
+/* ---------- Pantallas chicas ---------- */
+@media (max-width: 820px) {
+  .carta {
+    grid-template-columns: 1fr;
+  }
+  .origenes {
+    grid-template-columns: repeat(3, 78%);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 4px 4px 12px;
+    margin: 0 -4px;
+  }
+  .tarjeta {
+    scroll-snap-align: center;
+  }
+  .dulces {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .opciones {
+    top: 8px;
+    gap: 10px;
+    padding: 10px;
+  }
+  .opcion {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .segmentado button {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trazo {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .tarjeta,
+  .indicador {
+    transition: none;
+  }
+}

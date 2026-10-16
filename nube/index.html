@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Carta de un café de especialidad: tarjetas de origen que se dan vuelta, precios según tamaño y leche, y modo noche. Ejemplo de la Vitrina." />
+    <title>nube · café de especialidad</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>" />
+    <script>
+      // Antes de pintar, para que no parpadee: tema guardado o el del sistema.
+      try {
+        const t = localStorage.getItem('nube-tema')
+        if (t) document.documentElement.dataset.tema = t
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <header class="arriba">
+      <span class="marca">nube<span>café de especialidad</span></span>
+      <button type="button" id="tema" class="tema" aria-label="Cambiar a modo noche">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sol" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0-5v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /><path class="luna" d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z" /></svg>
+      </button>
+    </header>
+
+    <section class="portada">
+      <svg class="dibujo" viewBox="0 0 220 160" aria-hidden="true">
+        <path class="trazo" d="M60 70 C40 70 34 48 52 42 C54 24 80 20 90 34 C98 18 128 20 132 40 C150 38 160 58 146 70 Z" />
+        <path class="trazo vapor" d="M92 82 c-6 -8 6 -12 0 -20 M110 82 c-6 -8 6 -12 0 -20" />
+        <path class="trazo" d="M70 90 h80 v22 a28 28 0 0 1 -28 28 h-24 a28 28 0 0 1 -28 -28 Z M150 96 h8 a12 12 0 0 1 0 24 h-10" />
+        <path class="trazo" d="M56 150 h108" />
+      </svg>
+      <h1>Café liviano,<br />como una nube.</h1>
+      <p class="horario">Palermo · Lunes a domingo, de 8 a 20 h</p>
+    </section>
+
+    <section class="opciones" aria-label="Personalizá tu bebida">
+      <div class="opcion">
+        <span class="opcion-titulo" id="t-tamanio">Tamaño</span>
+        <div class="segmentado" role="radiogroup" aria-labelledby="t-tamanio" id="tamanios"></div>
+      </div>
+      <div class="opcion">
+        <span class="opcion-titulo" id="t-leche">Leche</span>
+        <div class="segmentado" role="radiogroup" aria-labelledby="t-leche" id="leches"></div>
+      </div>
+    </section>
+
+    <main class="carta">
+      <section class="bloque">
+        <h2><span class="num">01</span> Espresso bar</h2>
+        <ul class="lista" id="espresso"></ul>
+      </section>
+
+      <section class="bloque">
+        <h2><span class="num">02</span> Fríos</h2>
+        <ul class="lista" id="frios"></ul>
+      </section>
+
+      <section class="bloque">
+        <h2><span class="num">03</span> Filtrados de origen</h2>
+        <p class="ayuda">Tocá una tarjeta para conocer de dónde viene.</p>
+        <div class="origenes" id="origenes"></div>
+      </section>
+
+
+      <section class="bloque">
+        <h2><span class="num">04</span> Para acompañar</h2>
+        <ul class="dulces" id="dulces"></ul>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p>Wi-Fi <strong>nube-invitados</strong> · clave <strong>cafeconleche</strong></p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Precios ficticios.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

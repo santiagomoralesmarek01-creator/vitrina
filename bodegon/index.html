@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1f2622" />
+    <meta name="description" content="Carta digital de un bodegón porteño: filtros, secciones que te siguen y pedido por WhatsApp. Ejemplo de la Vitrina." />
+    <title>Bodegón Don Ernesto · Carta</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍷</text></svg>" />
+  </head>
+  <body>
+    <header class="pizarra">
+      <p class="pizarra-arriba">Bodegón</p>
+      <h1>Don Ernesto</h1>
+      <p class="pizarra-abajo">Desde 1962 · Almagro, Buenos Aires</p>
+      <svg class="garabato" viewBox="0 0 220 24" aria-hidden="true"><path d="M2 14 C40 2, 70 22, 110 12 S180 4, 218 14" /></svg>
+    </header>
+
+    <nav class="pestanias" aria-label="Secciones de la carta">
+      <ul id="pestanias"></ul>
+    </nav>
+
+    <main class="carta">
+      <section class="filtros" aria-label="Filtrar platos">
+        <span class="filtros-titulo">Mostrar solo:</span>
+        <div id="filtros" class="filtros-lista"></div>
+      </section>
+      <div id="secciones"></div>
+      <footer class="pie">
+        <p>Precios finales en pesos, IVA incluido. Servicio de mesa $ 1.500 por persona.</p>
+        <p>Avisanos si tenés alguna alergia: la cocina se adapta.</p>
+      </footer>
+    </main>
+
+    <div class="barra-pedido" id="barra" hidden>
+      <button type="button" id="ver-pedido">
+        <span class="barra-cantidad" id="barra-cantidad">0</span>
+        <span>Tu pedido</span>
+        <strong id="barra-total">$ 0</strong>
+      </button>
+    </div>
+
+    <dialog id="pedido" class="pedido" aria-labelledby="pedido-titulo">
+      <form method="dialog" class="pedido-caja">
+        <header>
+          <h2 id="pedido-titulo">Tu pedido</h2>
+          <button class="cerrar" value="cerrar" aria-label="Cerrar">✕</button>
+        </header>
+        <ul id="pedido-lineas" class="pedido-lineas"></ul>
+        <label class="pedido-mesa">
+          Número de mesa (opcional)
+          <input id="mesa" inputmode="numeric" maxlength="3" placeholder="Ej.: 12" />
+        </label>
+        <p class="pedido-total">Total <strong id="pedido-total">$ 0</strong></p>
+        <a id="enviar" class="boton-enviar" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+        <p class="nota">Proyecto de ejemplo: el número de WhatsApp es ficticio.</p>
+      </form>
+    </dialog>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
