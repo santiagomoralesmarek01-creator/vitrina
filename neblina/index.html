@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d0c0b" />
+    <meta name="description" content="Carta de un bar de tragos art déco: test para descubrir tu trago, perfil de sabor y cuenta regresiva al happy hour. Ejemplo de la Vitrina." />
+    <title>Neblina · Bar de autor</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍸</text></svg>" />
+  </head>
+  <body>
+    <header class="portada">
+      <svg class="abanico" viewBox="0 0 400 220" aria-hidden="true">
+        <g id="rayos"></g>
+        <path d="M60 220 A140 140 0 0 1 340 220" />
+        <path d="M100 220 A100 100 0 0 1 300 220" />
+      </svg>
+      <p class="sobre">Bar de autor · Palermo Soho</p>
+      <h1>Neblina</h1>
+      <div class="happy" id="happy" aria-live="off">
+        <span class="happy-titulo" id="happy-titulo">Happy hour 2×1</span>
+        <span class="happy-reloj" id="happy-reloj">--:--:--</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="test" aria-labelledby="t-test">
+        <p class="ornamento" aria-hidden="true">◆ ◆ ◆</p>
+        <h2 id="t-test">¿Qué trago sos?</h2>
+        <p class="sub">Tres preguntas y te decimos qué pedir.</p>
+        <div class="test-caja" id="test"></div>
+      </section>
+
+      <section class="carta" aria-labelledby="t-carta">
+        <p class="ornamento" aria-hidden="true">◆ ◆ ◆</p>
+        <h2 id="t-carta">La carta</h2>
+        <div class="bases" role="radiogroup" aria-label="Filtrar por bebida base" id="bases"></div>
+        <div class="tragos" id="tragos"></div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p>Jueves a sábado de 18 a 3 h · Reservas por Instagram</p>
+      <p class="pie-chico">Beber con moderación. Prohibida su venta a menores de 18 años.<br />Proyecto de ejemplo de la Vitrina: bar y precios ficticios.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

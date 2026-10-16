@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#121212" />
+    <meta name="description" content="Turnero de barbería: reserva en pasos con horarios reales, mis turnos y evento para el calendario. Ejemplo de la Vitrina." />
+    <title>Filo · Sacá tu turno</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💈</text></svg>" />
+  </head>
+  <body>
+    <header class="barra">
+      <a class="logo" href="./"><span class="logo-poste" aria-hidden="true"></span>FILO<small>Barbería · Palermo</small></a>
+      <button type="button" class="mis-turnos" id="abrir-mis-turnos">Mis turnos <span id="cuenta-turnos">0</span></button>
+    </header>
+
+    <main class="app">
+      <div class="flujo" id="flujo">
+        <ol class="pasos" id="pasos" aria-label="Pasos de la reserva"></ol>
+        <section class="panel" id="panel" aria-live="polite"></section>
+      </div>
+
+      <aside class="resumen" id="resumen" aria-label="Tu turno"></aside>
+    </main>
+
+    <footer class="pie">
+      <p>Filo Barbería · Av. Scalabrini Ortiz 1500 · Martes a sábado de 10 a 20 h</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Los turnos se guardan solo en este navegador.</p>
+    </footer>
+
+    <dialog class="cajon" id="mis-turnos" aria-labelledby="t-mis-turnos">
+      <div class="cajon-cabeza">
+        <h2 id="t-mis-turnos">Mis turnos</h2>
+        <button type="button" class="cerrar" id="cerrar-mis-turnos" aria-label="Cerrar">✕</button>
+      </div>
+      <ul class="lista-turnos" id="lista-turnos"></ul>
+    </dialog>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

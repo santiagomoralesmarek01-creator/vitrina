@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c8321f" />
+    <meta name="description" content="Carta de una pizzería napolitana con armador de pizza mitad y mitad y precio en vivo. Ejemplo de la Vitrina." />
+    <title>Tano · Pizzería napolitana</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>" />
+  </head>
+  <body>
+    <header class="cartel">
+      <p class="cartel-arriba">Pizzería napolitana · desde 1978</p>
+      <h1>Tano</h1>
+      <p class="cartel-abajo">Horno a leña · Boedo, Buenos Aires</p>
+    </header>
+    <div class="mantel" aria-hidden="true"></div>
+
+    <main>
+      <section class="clasicas" aria-labelledby="t-clasicas">
+        <h2 id="t-clasicas">Las clásicas</h2>
+        <p class="sub">Masa madurada 48 horas, tomate San Marzano y muzzarella de verdad.</p>
+        <div class="grilla-clasicas" id="clasicas"></div>
+      </section>
+
+      <section class="armador" id="armador" aria-labelledby="t-armador">
+        <h2 id="t-armador">Armá la tuya</h2>
+        <p class="sub">Elegí el tamaño, sumá ingredientes y mirá cómo queda. ¿No se ponen de acuerdo? Pedila mitad y mitad.</p>
+
+        <div class="armador-grilla">
+          <div class="mesa-columna">
+            <div class="mesa">
+              <svg id="pizza" class="pizza" viewBox="0 0 300 300" role="img" aria-label="Tu pizza"></svg>
+            </div>
+            <p class="mesa-ayuda" id="mesa-ayuda"></p>
+          </div>
+
+          <div class="panel">
+            <div class="fila">
+              <span class="rotulo">Tamaño</span>
+              <div class="interruptor" role="radiogroup" aria-label="Tamaño" id="tamanios"></div>
+            </div>
+            <label class="fila llave">
+              <span class="rotulo">Mitad y mitad</span>
+              <input type="checkbox" id="mitades" role="switch" />
+              <span class="llave-pista" aria-hidden="true"></span>
+            </label>
+            <div class="fila" id="fila-mitad" hidden>
+              <span class="rotulo">Estás armando</span>
+              <div class="interruptor" role="radiogroup" aria-label="Mitad que estás armando" id="mitad-activa">
+                <button type="button" role="radio" data-mitad="izq" aria-checked="true">Mitad izquierda</button>
+                <button type="button" role="radio" data-mitad="der" aria-checked="false">Mitad derecha</button>
+              </div>
+            </div>
+
+            <fieldset class="ingredientes">
+              <legend class="rotulo">Ingredientes <small>(la muzzarella va siempre)</small></legend>
+              <div id="ingredientes" class="ingredientes-lista"></div>
+            </fieldset>
+
+            <div class="ticket" aria-live="polite">
+              <p class="ticket-desc" id="descripcion"></p>
+              <p class="ticket-precio" id="precio"></p>
+              <div class="ticket-acciones">
+                <button type="button" class="boton" id="copiar">Copiar pedido</button>
+                <button type="button" class="boton boton--borde" id="vaciar">Empezar de nuevo</button>
+              </div>
+              <p class="ticket-aviso" id="aviso"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p>Pedidos al 4921-0000 · Martes a domingo de 19 a 0 h</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Pizzería y precios ficticios.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

@@ -2,9 +2,12 @@ import '@fontsource/instrument-serif/400.css'
 import '@fontsource/instrument-serif/400-italic.css'
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/500.css'
+import '../shared/volver.css'
 import './style.css'
 
-type Tipo = 'carta' | 'landing'
+type Tipo = 'carta' | 'landing' | 'app'
+
+const NOMBRE_TIPO: Record<Tipo, string> = { carta: 'Carta', landing: 'Landing', app: 'App' }
 
 interface Ejemplo {
   id: string
@@ -53,9 +56,51 @@ const EJEMPLOS: Ejemplo[] = [
     interacciones: ['Configurador de color y modelo', 'Calculadora de ahorro', 'Animaciones al bajar'],
     fondo: '#13171c',
   },
+  {
+    id: 'tano',
+    tipo: 'carta',
+    nombre: 'Tano',
+    rubro: 'Pizzería napolitana',
+    descripcion: 'Cartel de neón viejo y mantel a cuadros, con una pizza que se arma en pantalla.',
+    interacciones: ['Armador de pizza en SVG', 'Mitad y mitad', 'Precio en vivo y pedido'],
+    fondo: '#c8321f',
+  },
+  {
+    id: 'neblina',
+    tipo: 'carta',
+    nombre: 'Neblina',
+    rubro: 'Bar de tragos de autor',
+    descripcion: 'Art déco nocturno, dorado sobre negro, con cuenta regresiva del happy hour.',
+    interacciones: ['Test que te recomienda un trago', 'Perfil de sabor en radar', 'Happy hour en vivo'],
+    fondo: '#0d0c0b',
+  },
+  {
+    id: 'filo',
+    tipo: 'app',
+    nombre: 'Filo',
+    rubro: 'Turnero de barbería',
+    descripcion: 'Reserva en cinco pasos con horarios ocupados de verdad y resumen siempre a la vista.',
+    interacciones: ['Reserva paso a paso', 'Mis turnos guardados', 'Evento para el calendario (.ics)'],
+    fondo: '#f3f2ee',
+  },
+  {
+    id: 'mercadito',
+    tipo: 'app',
+    nombre: 'Mercadito Verde',
+    rubro: 'Panel de ventas',
+    descripcion: 'Dashboard de una tienda orgánica: indicadores, comparación con el período anterior y modo oscuro.',
+    interacciones: ['Gráficos con tooltip y vista de tabla', 'Rango de 7, 30 o 90 días', 'Tabla ordenable con búsqueda'],
+    fondo: '#f4f5f1',
+  },
 ]
 
 const grilla = document.getElementById('grilla')!
+
+// Cantidad de cada tipo en los filtros, calculada para que nunca quede desactualizada.
+document.querySelectorAll<HTMLElement>('#filtros [data-filtro]').forEach((b) => {
+  const f = b.dataset.filtro
+  b.querySelector('span')!.textContent = String(EJEMPLOS.filter((e) => f === 'todos' || e.tipo === f).length)
+})
 grilla.innerHTML = EJEMPLOS.map(
   (e, i) => `
   <article class="tarjeta" data-tipo="${e.tipo}" style="--fondo-tarjeta: ${e.fondo}; --i: ${i}">
@@ -65,7 +110,7 @@ grilla.innerHTML = EJEMPLOS.map(
       </div>
     </a>
     <div class="tarjeta-texto">
-      <p class="tipo">${e.tipo === 'carta' ? 'Carta' : 'Landing'} · ${e.rubro}</p>
+      <p class="tipo">${NOMBRE_TIPO[e.tipo]} · ${e.rubro}</p>
       <h2><a href="/${e.id}/">${e.nombre}</a></h2>
       <p class="descripcion">${e.descripcion}</p>
       <ul class="interacciones">${e.interacciones.map((x) => `<li>${x}</li>`).join('')}</ul>

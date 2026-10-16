@@ -1,0 +1,518 @@
+:root {
+  --crema: #fff3df;
+  --tomate: #c8321f;
+  --tomate-oscuro: #9c2414;
+  --albahaca: #2f7d4a;
+  --tinta: #24160f;
+  --tinta-suave: #6d5545;
+  --masa: #e3a659;
+  --display: 'Abril Fatface', Georgia, serif;
+  --sans: 'Rubik', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--albahaca);
+  outline-offset: 2px;
+}
+
+/* ---------- Cartel ---------- */
+.cartel {
+  padding: 64px 20px 44px;
+  background: var(--tomate);
+  color: var(--crema);
+  text-align: center;
+}
+
+.cartel h1 {
+  font-size: clamp(5rem, 22vw, 12rem);
+  letter-spacing: 0.02em;
+  text-shadow: 6px 6px 0 var(--tomate-oscuro);
+  /* Leve curva, como un cartel de neón viejo. */
+  transform: rotate(-3deg);
+}
+
+.cartel-arriba,
+.cartel-abajo {
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.cartel-abajo {
+  margin-top: 10px;
+}
+
+.mantel {
+  height: 44px;
+  background:
+    repeating-linear-gradient(90deg, rgb(200 50 31 / 0.85) 0 22px, transparent 22px 44px),
+    repeating-linear-gradient(0deg, rgb(200 50 31 / 0.5) 0 22px, transparent 22px 44px),
+    #fff;
+  border-bottom: 4px solid var(--tinta);
+}
+
+/* ---------- Secciones ---------- */
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section {
+  padding: 72px 0 24px;
+}
+
+section h2 {
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  color: var(--tomate);
+}
+
+.sub {
+  max-width: 56ch;
+  margin: 10px 0 32px;
+  color: var(--tinta-suave);
+  font-size: 1.05rem;
+}
+
+/* ---------- Clásicas ---------- */
+.grilla-clasicas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.clasica {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 24px;
+  border: 3px solid var(--tinta);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 6px 6px 0 var(--tomate);
+  transform: rotate(var(--giro));
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.clasica:hover {
+  transform: rotate(0) translateY(-4px);
+  box-shadow: 9px 9px 0 var(--albahaca);
+}
+
+.clasica h3 {
+  font-size: 2rem;
+}
+
+.clasica p {
+  color: var(--tinta-suave);
+}
+
+.clasica .clasica-precio {
+  margin-top: 4px;
+  color: var(--tinta);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.clasica small {
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+
+.boton {
+  justify-self: start;
+  padding: 12px 20px;
+  border: 3px solid var(--tinta);
+  border-radius: 999px;
+  background: var(--albahaca);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--tinta);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.boton:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+.boton--chico {
+  padding: 7px 14px;
+  font-size: 0.9rem;
+}
+
+.boton--borde {
+  background: #fff;
+  color: var(--tinta);
+}
+
+/* ---------- Armador ---------- */
+.armador-grilla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.mesa-columna {
+  position: sticky;
+  top: 20px;
+}
+
+.mesa {
+  padding: 28px;
+  border: 3px solid var(--tinta);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  background:
+    repeating-linear-gradient(90deg, rgb(200 50 31 / 0.18) 0 18px, transparent 18px 36px),
+    repeating-linear-gradient(0deg, rgb(200 50 31 / 0.12) 0 18px, transparent 18px 36px),
+    #fff;
+}
+
+.pizza {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 14px rgb(36 22 15 / 0.35));
+}
+
+.pizza .borde {
+  fill: var(--masa);
+  stroke: #b97b33;
+  stroke-width: 4;
+}
+
+.pizza .salsa {
+  fill: #cf3b1f;
+}
+
+.pizza .queso {
+  fill: #f7dc8a;
+  opacity: 0.92;
+}
+
+.pizza .corte {
+  stroke: rgb(36 22 15 / 0.55);
+  stroke-width: 3;
+  stroke-dasharray: 8 6;
+}
+
+.pizza .zona {
+  fill: transparent;
+  cursor: pointer;
+  transition: fill 0.25s;
+}
+
+.pizza .zona:not(.zona--activa) {
+  fill: rgb(255 243 223 / 0.35);
+}
+
+.pizza .zona--activa {
+  stroke: var(--albahaca);
+  stroke-width: 5;
+  stroke-dasharray: 2 8;
+  stroke-linecap: round;
+}
+
+.pieza.cae {
+  animation: cae 0.45s calc(var(--i) * 25ms) both cubic-bezier(0.3, 1.5, 0.5, 1);
+  transform-box: fill-box;
+}
+
+@keyframes cae {
+  from {
+    opacity: 0;
+    scale: 1.8;
+  }
+}
+
+.mesa-ayuda {
+  min-height: 1.5em;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+}
+
+.panel {
+  display: grid;
+  gap: 22px;
+}
+
+.fila {
+  display: grid;
+  gap: 8px;
+}
+
+.rotulo {
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.rotulo small {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--tinta-suave);
+}
+
+.interruptor {
+  display: flex;
+  border: 3px solid var(--tinta);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.interruptor button {
+  flex: 1;
+  display: grid;
+  padding: 10px;
+  border: 0;
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.interruptor button + button {
+  border-left: 3px solid var(--tinta);
+}
+
+.interruptor small {
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--tinta-suave);
+}
+
+.interruptor button[aria-checked='true'] {
+  background: var(--tomate);
+  color: var(--crema);
+}
+
+.interruptor button[aria-checked='true'] small {
+  color: var(--crema);
+}
+
+/* Interruptor tipo llave. */
+.llave {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  cursor: pointer;
+}
+
+.llave input {
+  position: absolute;
+  opacity: 0;
+}
+
+.llave-pista {
+  position: relative;
+  width: 58px;
+  height: 32px;
+  border: 3px solid var(--tinta);
+  border-radius: 999px;
+  background: #fff;
+  transition: background 0.2s;
+}
+
+.llave-pista::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--tinta);
+  transition: transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+.llave input:checked + .llave-pista {
+  background: var(--albahaca);
+}
+
+.llave input:checked + .llave-pista::after {
+  transform: translateX(26px);
+  background: #fff;
+}
+
+.llave input:focus-visible + .llave-pista {
+  outline: 3px solid var(--albahaca);
+  outline-offset: 2px;
+}
+
+.ingredientes {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ingredientes legend {
+  margin-bottom: 8px;
+}
+
+.ingredientes-lista {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.ingrediente {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2px 10px;
+  padding: 10px 12px;
+  border: 2px solid var(--tinta);
+  border-radius: 10px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.ingrediente:hover {
+  transform: translateY(-2px);
+}
+
+.ingrediente .punto {
+  grid-row: span 2;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--tinta);
+  border-radius: 50%;
+}
+
+.ingrediente small {
+  color: var(--tinta-suave);
+}
+
+.ingrediente[aria-pressed='true'] {
+  background: #fde7c3;
+  box-shadow: inset 0 0 0 2px var(--tinta);
+}
+
+.ingrediente[aria-pressed='true'] span:not(.punto)::before {
+  content: '✓ ';
+  color: var(--albahaca);
+}
+
+.ticket {
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+  border: 3px dashed var(--tinta);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.ticket-desc {
+  color: var(--tinta-suave);
+}
+
+.ticket-precio {
+  font-family: var(--display);
+  font-size: 2.6rem;
+  color: var(--tomate);
+}
+
+.ticket-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ticket-aviso {
+  min-height: 1.5em;
+  font-size: 0.9rem;
+  color: var(--albahaca);
+  font-weight: 600;
+}
+
+/* ---------- Pie ---------- */
+.pie {
+  margin-top: 72px;
+  padding: 40px 20px;
+  background: var(--tinta);
+  color: var(--crema);
+  text-align: center;
+}
+
+.pie-chico {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 860px) {
+  .grilla-clasicas {
+    grid-template-columns: 1fr 1fr;
+  }
+  .armador-grilla {
+    grid-template-columns: 1fr;
+  }
+  .mesa-columna {
+    position: relative;
+    top: 0;
+  }
+  .mesa {
+    width: min(420px, 100%);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .grilla-clasicas {
+    grid-template-columns: 1fr;
+  }
+  .ingredientes-lista {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .pieza.cae {
+    animation: none;
+  }
+}

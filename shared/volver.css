@@ -29,3 +29,23 @@
   color: #f2f2f2;
   box-shadow: 0 0 0 1px rgb(255 255 255 / 0.15);
 }
+
+/* Firma: toma el color del pie de cada ejemplo para combinar con su estilo. */
+.firma-mrk {
+  margin: 14px 0 0;
+  font: 500 13px/1 system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  /* Siempre "MrK", aunque el pie del ejemplo use mayúsculas. */
+  text-transform: none;
+  opacity: 0.8;
+}
+
+.firma-mrk strong {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+body > .firma-mrk {
+  padding: 24px;
+  text-align: center;
+}

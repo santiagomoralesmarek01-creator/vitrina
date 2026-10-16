@@ -1,0 +1,719 @@
+:root {
+  --fondo: #f3f2ee;
+  --papel: #ffffff;
+  --tinta: #121212;
+  --tinta-suave: #6b6a66;
+  --linea: #e3e1da;
+  --mostaza: #e3a72f;
+  --mostaza-suave: #fbf0d6;
+  --rojo: #c7372f;
+  --sans: 'Manrope', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--mostaza);
+  outline-offset: 2px;
+}
+
+h2:focus {
+  outline: none;
+}
+
+/* ---------- Barra ---------- */
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 36px;
+  padding: 16px clamp(16px, 4vw, 48px);
+  background: var(--tinta);
+  color: #fff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: 0.2em;
+}
+
+.logo small {
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+/* El poste de barbería, con sus franjas que suben. */
+.logo-poste {
+  width: 14px;
+  height: 34px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: repeating-linear-gradient(-45deg, var(--rojo) 0 5px, #fff 5px 10px, #2e5ea8 10px 15px, #fff 15px 20px);
+  background-size: 100% 28px;
+  animation: poste 1.4s linear infinite;
+}
+
+@keyframes poste {
+  to {
+    background-position: 0 -28px;
+  }
+}
+
+.mis-turnos {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1.5px solid rgb(255 255 255 / 0.4);
+  border-radius: 999px;
+  background: none;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mis-turnos span {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--mostaza);
+  color: var(--tinta);
+  font-size: 0.8rem;
+}
+
+/* ---------- App ---------- */
+.app {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 32px clamp(16px, 4vw, 48px) 64px;
+  align-items: start;
+}
+
+.pasos {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.pasos li {
+  flex: 1;
+  min-width: max-content;
+}
+
+.pasos button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-bottom: 3px solid var(--linea);
+  background: none;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  cursor: pointer;
+}
+
+.pasos button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.paso-num {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--linea);
+  font-size: 0.8rem;
+}
+
+.pasos .hecho button {
+  color: var(--tinta);
+  border-color: var(--tinta);
+}
+
+.pasos .hecho .paso-num {
+  background: var(--tinta);
+  color: #fff;
+}
+
+.pasos .actual button {
+  color: var(--tinta);
+  border-color: var(--mostaza);
+}
+
+.pasos .actual .paso-num {
+  background: var(--mostaza);
+  color: var(--tinta);
+}
+
+.panel {
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--papel);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 12px 32px -20px rgb(0 0 0 / 0.25);
+}
+
+.panel.entra {
+  animation: entrar 0.35s ease-out;
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+}
+
+.panel h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.ayuda {
+  margin: -10px 0 18px;
+  color: var(--tinta-suave);
+}
+
+.datos .ayuda {
+  text-transform: none;
+  margin: 0;
+}
+
+/* ---------- Opciones ---------- */
+.opciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.opcion {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  padding: 18px;
+  border: 2px solid var(--linea);
+  border-radius: 16px;
+  background: var(--papel);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s, background 0.15s;
+}
+
+.opcion:hover {
+  border-color: var(--tinta);
+  transform: translateY(-2px);
+}
+
+.opcion strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.opcion > span {
+  color: var(--tinta-suave);
+  font-size: 0.92rem;
+}
+
+.opcion-pie {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--linea);
+}
+
+.opcion-pie b {
+  color: var(--tinta);
+}
+
+.elegida {
+  border-color: var(--mostaza) !important;
+  background: var(--mostaza-suave) !important;
+}
+
+.opciones--barberos {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.opcion--barbero {
+  justify-items: center;
+  text-align: center;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: var(--tinta);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+/* ---------- Días ---------- */
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.dia {
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  padding: 10px 4px;
+  border: 2px solid var(--linea);
+  border-radius: 14px;
+  background: var(--papel);
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.dia:hover:not(:disabled) {
+  border-color: var(--tinta);
+  transform: translateY(-2px);
+}
+
+.dia:disabled {
+  background: var(--fondo);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.dia-semana,
+.dia-mes {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.dia-num {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.dia-estado {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #2f7d4a;
+}
+
+.dia:disabled .dia-estado {
+  color: var(--tinta-suave);
+}
+
+.dia-estado--pocos {
+  color: var(--rojo);
+}
+
+/* ---------- Horarios ---------- */
+.franja {
+  margin: 18px 0 10px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.horas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 8px;
+}
+
+.hora {
+  display: grid;
+  padding: 10px;
+  border: 2px solid var(--linea);
+  border-radius: 12px;
+  background: var(--papel);
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.hora small {
+  font-weight: 400;
+  font-size: 0.72rem;
+  color: var(--tinta-suave);
+}
+
+.hora:hover:not(:disabled) {
+  border-color: var(--tinta);
+}
+
+.hora:disabled {
+  color: #b5b3ac;
+  text-decoration: line-through;
+  background: var(--fondo);
+  cursor: not-allowed;
+}
+
+/* ---------- Datos ---------- */
+.datos {
+  display: grid;
+  gap: 16px;
+  max-width: 420px;
+}
+
+.datos label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.datos input {
+  padding: 14px 16px;
+  border: 2px solid var(--linea);
+  border-radius: 12px;
+  background: var(--fondo);
+}
+
+.datos input:focus {
+  outline: none;
+  border-color: var(--mostaza);
+  background: var(--papel);
+}
+
+.boton {
+  padding: 14px 22px;
+  border: 2px solid var(--tinta);
+  border-radius: 14px;
+  background: var(--tinta);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+}
+
+.boton--borde {
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+/* ---------- Confirmado ---------- */
+.listo {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.tilde {
+  width: 84px;
+  height: 84px;
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tilde circle {
+  stroke: var(--mostaza);
+  stroke-dasharray: 160;
+  stroke-dashoffset: 160;
+  animation: trazo 0.6s ease-out forwards;
+}
+
+.tilde path {
+  stroke: var(--tinta);
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: trazo 0.4s 0.5s ease-out forwards;
+}
+
+@keyframes trazo {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.codigo {
+  color: var(--tinta-suave);
+}
+
+.codigo span {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 4px 12px;
+  border: 2px dashed var(--tinta);
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--tinta);
+}
+
+.listo-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* ---------- Resumen ---------- */
+.resumen {
+  position: sticky;
+  top: 20px;
+  padding: 24px;
+  border-radius: 22px;
+  background: var(--tinta);
+  color: #fff;
+}
+
+.resumen h2 {
+  margin-bottom: 14px;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.resumen dl {
+  margin: 0;
+}
+
+.fila {
+  display: grid;
+  gap: 2px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.fila dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.fila dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.fila--vacia dd {
+  opacity: 0.4;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 16px;
+}
+
+.total strong {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--mostaza);
+}
+
+.nota {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* ---------- Cajón de mis turnos ---------- */
+.cajon {
+  width: min(460px, 100%);
+  height: 100dvh;
+  max-height: none;
+  margin: 0 0 0 auto;
+  padding: 28px;
+  border: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  animation: deslizar 0.3s ease-out;
+}
+
+.cajon::backdrop {
+  background: rgb(18 18 18 / 0.5);
+}
+
+@keyframes deslizar {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+}
+
+.cajon-cabeza {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.cajon h2 {
+  font-weight: 800;
+}
+
+.cerrar {
+  border: 0;
+  background: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.lista-turnos {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-turnos li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 2px solid var(--linea);
+  border-radius: 14px;
+}
+
+.lista-turnos li div {
+  display: grid;
+}
+
+.lista-turnos span {
+  color: var(--tinta-suave);
+  font-size: 0.88rem;
+}
+
+.lista-turnos .vacio {
+  justify-content: center;
+  color: var(--tinta-suave);
+}
+
+.cancelar {
+  padding: 6px 12px;
+  border: 1.5px solid var(--rojo);
+  border-radius: 999px;
+  background: none;
+  color: var(--rojo);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- Pie ---------- */
+.pie {
+  padding: 32px 20px 48px;
+  text-align: center;
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+}
+
+.pie-chico {
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 860px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .resumen {
+    position: static;
+  }
+  .opciones--barberos {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dias {
+    grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  }
+  .paso-nombre {
+    display: none;
+  }
+  .pasos .actual .paso-nombre {
+    display: inline;
+  }
+}
+
+@media (max-width: 520px) {
+  .logo small {
+    display: none;
+  }
+  .opciones {
+    grid-template-columns: 1fr;
+  }
+  .opciones--barberos {
+    grid-template-columns: 1fr 1fr;
+  }
+  .panel {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-poste,
+  .panel.entra,
+  .cajon {
+    animation: none;
+  }
+  .tilde circle,
+  .tilde path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

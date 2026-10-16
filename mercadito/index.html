@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f7f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1110" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Panel de ventas de una tienda orgánica: indicadores, comparación con el período anterior, gráficos interactivos y tabla ordenable. Ejemplo de la Vitrina." />
+    <title>Mercadito Verde · Panel de ventas</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥬</text></svg>" />
+  </head>
+  <body>
+    <div class="marco">
+      <aside class="lateral" aria-label="Navegación del panel">
+        <a class="marca" href="./">
+          <span class="marca-hoja" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15" /><path d="M5 19 13 11" /></svg>
+          </span>
+          <span>Mercadito<b>Verde</b></span>
+        </a>
+        <nav class="menu">
+          <a href="./" aria-current="page"><span aria-hidden="true">◧</span> Resumen</a>
+          <a href="#productos"><span aria-hidden="true">▤</span> Productos</a>
+          <span class="menu-off" title="Disponible en la versión completa"><span aria-hidden="true">◎</span> Clientes</span>
+          <span class="menu-off" title="Disponible en la versión completa"><span aria-hidden="true">⚙</span> Ajustes</span>
+        </nav>
+        <div class="tienda">
+          <span class="tienda-avatar" aria-hidden="true">MV</span>
+          <span><strong>Sucursal Villa Crespo</strong><small>Tienda online + local</small></span>
+        </div>
+      </aside>
+
+      <main class="contenido">
+        <header class="cabeza">
+          <div>
+            <p class="miga">Panel · Ventas</p>
+            <h1>Buen día, Lucía</h1>
+            <p class="cabeza-sub" id="subtitulo"></p>
+          </div>
+          <div class="cabeza-acciones">
+            <div class="rango" role="radiogroup" aria-label="Período">
+              <button type="button" role="radio" data-dias="7">7 días</button>
+              <button type="button" role="radio" data-dias="30">30 días</button>
+              <button type="button" role="radio" data-dias="90">90 días</button>
+            </div>
+            <button type="button" class="tema" id="tema" aria-label="Cambiar a modo oscuro"></button>
+          </div>
+        </header>
+
+        <section class="kpis" id="kpis" aria-label="Indicadores del período"></section>
+
+        <section class="tarjeta tarjeta--linea" aria-labelledby="t-ingresos">
+          <div class="tarjeta-cabeza">
+            <div>
+              <h2 id="t-ingresos">Ingresos por día</h2>
+              <p class="tarjeta-sub" id="sub-ingresos"></p>
+            </div>
+            <div class="vista-switch" role="radiogroup" aria-label="Ver como">
+              <button type="button" role="radio" aria-checked="true" data-vista="grafico">Gráfico</button>
+              <button type="button" role="radio" aria-checked="false" data-vista="tabla">Tabla</button>
+            </div>
+          </div>
+          <ul class="leyenda" id="leyenda"></ul>
+          <div class="grafico" id="grafico-linea">
+            <div class="tip" id="tip-linea" role="status" hidden></div>
+          </div>
+          <div class="tabla-envoltura" id="tabla-linea" hidden></div>
+        </section>
+
+        <div class="fila-dos">
+          <section class="tarjeta" aria-labelledby="t-categorias">
+            <div class="tarjeta-cabeza">
+              <div>
+                <h2 id="t-categorias">Ventas por categoría</h2>
+                <p class="tarjeta-sub" id="sub-categorias"></p>
+              </div>
+            </div>
+            <div class="barras" id="barras">
+              <div class="tip" id="tip-barras" role="status" hidden></div>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="t-horario">
+            <div class="tarjeta-cabeza">
+              <div>
+                <h2 id="t-horario">Pedidos por día de la semana</h2>
+                <p class="tarjeta-sub">Promedio del período</p>
+              </div>
+            </div>
+            <div class="semana" id="semana">
+              <div class="tip" id="tip-semana" role="status" hidden></div>
+            </div>
+          </section>
+        </div>
+
+        <section class="tarjeta" id="productos" aria-labelledby="t-productos">
+          <div class="tarjeta-cabeza">
+            <div>
+              <h2 id="t-productos">Productos más vendidos</h2>
+              <p class="tarjeta-sub">Tocá un encabezado para ordenar</p>
+            </div>
+            <label class="buscar">
+              <span class="sr">Buscar producto</span>
+              <input type="search" id="buscar" placeholder="Buscar producto…" autocomplete="off" />
+            </label>
+          </div>
+          <div class="tabla-envoltura">
+            <table class="tabla tabla--productos" id="tabla-productos">
+              <thead>
+                <tr>
+                  <th scope="col"><button type="button" data-orden="nombre">Producto</button></th>
+                  <th scope="col" class="num"><button type="button" data-orden="unidades">Unidades</button></th>
+                  <th scope="col" class="num"><button type="button" data-orden="ingresos">Ingresos</button></th>
+                  <th scope="col" class="num"><button type="button" data-orden="variacion">Variación</button></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="pie">
+      <p>Mercadito Verde es un comercio inventado: los datos se generan en el navegador.</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

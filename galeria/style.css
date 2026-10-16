@@ -89,6 +89,8 @@ a {
 
 .filtros {
   display: inline-flex;
+  max-width: 100%;
+  overflow-x: auto;
   gap: 4px;
   margin-top: 36px;
   padding: 4px;
@@ -98,7 +100,7 @@ a {
 }
 
 .filtros button {
-  padding: 9px 18px;
+  padding: 9px 16px;
   border: 0;
   border-radius: 999px;
   background: none;
@@ -309,6 +311,10 @@ a {
   }
   .cabecera {
     padding-top: 64px;
+  }
+  .filtros button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 }
 

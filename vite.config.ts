@@ -2,7 +2,7 @@ import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 // Cada ejemplo es una página independiente con su propio HTML, CSS y TS.
-const PAGINAS = ['index', 'bodegon', 'nube', 'pulso', 'volta']
+const PAGINAS = ['index', 'bodegon', 'nube', 'pulso', 'volta', 'tano', 'neblina', 'filo', 'mercadito']
 
 export default defineConfig({
   build: {
