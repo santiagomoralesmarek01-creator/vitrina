@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4efe4" />
+    <meta name="description" content="Barra de sushi y cocina nikkei con armador de combinados, bandeja que se llena pieza por pieza y pedido por WhatsApp. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Kaze · Sushi y cocina nikkei" />
+    <meta property="og:description" content="Barra de sushi y cocina nikkei con armador de combinados, bandeja que se llena pieza por pieza y pedido por WhatsApp. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/kaze/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/kaze.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Kaze · Sushi y cocina nikkei</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍣</text></svg>" />
+  </head>
+  <body>
+    <header class="tapa">
+      <nav class="barra" aria-label="Secciones">
+        <a class="marca" href="#inicio">
+          <span class="hanko hanko--chico" aria-hidden="true">風</span>
+          <span>Kaze</span>
+        </a>
+        <ul>
+          <li><a href="#combinado">Combinado</a></li>
+          <li><a href="#carta">Carta</a></li>
+          <li><a href="#omakase">Omakase</a></li>
+        </ul>
+      </nav>
+
+      <div class="portada" id="inicio">
+        <p class="vertical portada-lateral" aria-hidden="true">風の寿司 · 日系料理</p>
+        <div class="portada-texto">
+          <p class="volanta">Palermo · Buenos Aires</p>
+          <h1>Kaze</h1>
+          <p class="bajada">Barra de sushi y cocina nikkei. Pescado del día, arroz a temperatura de mano y el ácido justo de la cocina peruana.</p>
+          <dl class="datos">
+            <div><dt>Dónde</dt><dd>Honduras 5120, Palermo</dd></div>
+            <div><dt>Cuándo</dt><dd>Martes a domingo, 19:30 a 0:30</dd></div>
+            <div><dt>Barra</dt><dd>12 lugares frente al itamae</dd></div>
+          </dl>
+          <a class="boton" href="#combinado">Armá tu combinado</a>
+        </div>
+        <figure class="enso" aria-hidden="true">
+          <svg viewBox="0 0 320 320">
+            <path class="enso-trazo" d="M232 66c-34-26-92-34-136-8C46 88 30 150 52 204c24 58 92 86 152 66 58-20 88-78 76-134-6-28-18-50-36-66" />
+            <path class="enso-gota" d="M244 70c6 2 8 8 4 12" />
+            <g transform="translate(160 168) rotate(-12)">
+              <ellipse rx="74" ry="40" fill="#fbf8f1" stroke="#e3dccb" stroke-width="2" />
+              <path d="M-80 -6c10-26 52-40 90-38 40 2 70 16 74 34 2 14-14 26-40 30-40 6-96 4-116-8-8-6-10-12-8-18z" fill="#ef7d4f" />
+              <g stroke="#fbe6da" stroke-width="5" stroke-linecap="round" opacity=".8" fill="none">
+                <path d="M-56 -30c8 14 10 30 4 44" />
+                <path d="M-24 -38c8 16 10 34 4 52" />
+                <path d="M10 -40c8 16 10 34 4 54" />
+                <path d="M44 -34c8 14 8 30 2 46" />
+              </g>
+            </g>
+          </svg>
+          <span class="hanko hanko--grande">風</span>
+        </figure>
+      </div>
+    </header>
+
+    <main>
+      <section class="seccion" id="combinado" aria-labelledby="t-combinado">
+        <div class="titulo">
+          <span class="titulo-num" aria-hidden="true">一</span>
+          <div>
+            <p class="volanta">01 — Para llevar o comer en la barra</p>
+            <h2 id="t-combinado">Armá tu combinado</h2>
+            <p class="sub">Elegí el tamaño de la bandeja y sumá pieza por pieza. Cuando la completás, el combo tiene descuento.</p>
+          </div>
+        </div>
+
+        <div class="armador">
+          <div class="mesa">
+            <div class="bandeja-marco">
+              <div class="bandeja" id="bandeja" role="img" aria-label="Tu bandeja"></div>
+            </div>
+            <svg class="hashi" viewBox="0 0 400 40" aria-hidden="true">
+              <path d="M8 12 L392 4" />
+              <path d="M8 30 L392 22" />
+              <rect x="300" y="0" width="34" height="36" rx="3" class="hashi-faja" />
+            </svg>
+            <p class="contador" aria-hidden="true"><strong id="contador-n">0</strong> / <span id="contador-t">30</span></p>
+            <p class="estado" id="estado" aria-live="polite"></p>
+          </div>
+
+          <div class="panel">
+            <div class="grupo">
+              <span class="rotulo" id="r-tamanio">Tamaño de la bandeja</span>
+              <div class="tamanios" role="radiogroup" aria-labelledby="r-tamanio" id="tamanios"></div>
+            </div>
+
+            <ul class="piezas" id="piezas" aria-label="Piezas"></ul>
+
+            <div class="ticket">
+              <div class="ticket-lineas" aria-live="polite" id="ticket">
+                <p><span>Subtotal</span><span id="subtotal"></span></p>
+                <p class="ticket-desc"><span id="desc-rotulo">Descuento combo</span><span id="descuento"></span></p>
+                <p class="ticket-total"><span>Total</span><span id="total"></span></p>
+              </div>
+              <div class="acciones">
+                <a class="boton boton--sello" id="pedir" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+                <button type="button" class="boton boton--linea" id="azar">Completar al azar</button>
+                <button type="button" class="boton boton--linea" id="vaciar">Vaciar</button>
+              </div>
+              <p class="aviso" id="aviso" aria-live="assertive"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion" id="carta" aria-labelledby="t-carta">
+        <div class="titulo">
+          <span class="titulo-num" aria-hidden="true">二</span>
+          <div>
+            <p class="volanta">02 — Cocina</p>
+            <h2 id="t-carta">La carta</h2>
+            <p class="sub">Platos para compartir entre crudos, robata y wok. Filtrá por lo que te gusta o lo que podés comer.</p>
+          </div>
+        </div>
+
+        <div class="filtros">
+          <div class="coccion" role="radiogroup" aria-label="Cocción" id="coccion">
+            <button type="button" role="radio" aria-checked="true" data-coccion="todo">Todo</button>
+            <button type="button" role="radio" aria-checked="false" data-coccion="crudo">Crudo</button>
+            <button type="button" role="radio" aria-checked="false" data-coccion="cocido">Cocido</button>
+          </div>
+          <div class="marcas">
+            <button type="button" class="marca-filtro" aria-pressed="false" data-filtro="veggie">Veggie</button>
+            <button type="button" class="marca-filtro" aria-pressed="false" data-filtro="sintacc">Sin TACC</button>
+          </div>
+          <p class="filtros-cuenta" id="cuenta" aria-live="polite"></p>
+        </div>
+
+        <div class="platos" id="platos"></div>
+      </section>
+
+      <section class="omakase" id="omakase" aria-labelledby="t-omakase">
+        <p class="vertical omakase-lateral" aria-hidden="true">おまかせ</p>
+        <div class="omakase-cabeza">
+          <p class="volanta">03 — Sólo en la barra</p>
+          <h2 id="t-omakase">Omakase de la noche</h2>
+          <p class="sub">Nueve pasos que decide el itamae según lo que llegó del puerto. Se sirve a las 21 h en punto.</p>
+          <p class="omakase-precio"><span id="omakase-precio"></span> <small>por persona</small></p>
+        </div>
+        <ol class="pasos" id="pasos"></ol>
+        <div class="reserva">
+          <p class="lugares"><span class="lugares-puntos" id="lugares-puntos" aria-hidden="true"></span> <span id="lugares-texto"></span></p>
+          <div class="paso-a-paso">
+            <span class="rotulo" id="r-comensales">Comensales</span>
+            <div class="stepper" role="group" aria-labelledby="r-comensales">
+              <button type="button" id="menos-comensal" aria-label="Uno menos">−</button>
+              <output id="comensales" aria-live="polite">2</output>
+              <button type="button" id="mas-comensal" aria-label="Uno más">+</button>
+            </div>
+          </div>
+          <p class="reserva-total" aria-live="polite"><span>Total</span> <strong id="omakase-total"></strong></p>
+          <a class="boton boton--papel" id="reservar" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+          <p class="aviso aviso--claro" id="aviso-omakase" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <div class="pie-fila">
+        <span class="hanko" aria-hidden="true">風</span>
+        <div>
+          <p class="pie-nombre">Kaze · 風</p>
+          <p>Honduras 5120, Palermo · Martes a domingo de 19:30 a 0:30</p>
+        </div>
+      </div>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Kaze y sus precios son ficticios.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

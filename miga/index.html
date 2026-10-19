@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6ede4" />
+    <meta name="description" content="Pastelería de tortas por encargo con configurador que dibuja tu torta en vivo, calendario de retiro y pedido por WhatsApp. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Miga · Pastelería y tortas por encargo" />
+    <meta property="og:description" content="Pastelería de tortas por encargo con configurador que dibuja tu torta en vivo, calendario de retiro y pedido por WhatsApp. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/miga/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/miga.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Miga · Pastelería y tortas por encargo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+  </head>
+  <body>
+    <header class="portada">
+      <nav class="nav" aria-label="Secciones">
+        <a href="#vitrina">La vitrina</a>
+        <a href="#encargo">Encargá</a>
+        <a href="#visita">Visitanos</a>
+      </nav>
+
+      <div class="marca">
+        <p class="marca-arriba">Pastelería de autor</p>
+        <h1>Miga</h1>
+        <p class="ornamento" aria-hidden="true"><span></span>✦<span></span></p>
+        <p class="marca-abajo">Caballito · Buenos Aires · desde 2019</p>
+      </div>
+
+      <div class="portada-grilla">
+        <div class="portada-texto">
+          <p class="bajada">Tortas por encargo, hechas a mano y sin apuro. Bizcochuelos horneados el mismo día, rellenos de olla y coberturas que se terminan con paciencia.</p>
+          <div class="acciones">
+            <a class="boton" href="#encargo">Encargá tu torta</a>
+            <a class="boton boton--linea" href="#vitrina">Ver la vitrina</a>
+          </div>
+          <dl class="datos">
+            <div><dt>48 h</dt><dd>de anticipación</dd></div>
+            <div><dt>50 %</dt><dd>de seña</dd></div>
+            <div><dt>10–30</dt><dd>porciones</dd></div>
+          </dl>
+        </div>
+        <figure class="arco">
+          <svg id="torta-portada" role="img" aria-label="Torta de tres pisos con fondant y perlas"></svg>
+        </figure>
+      </div>
+    </header>
+
+    <main>
+      <section class="vitrina" id="vitrina" aria-labelledby="t-vitrina">
+        <header class="titulo-seccion">
+          <p class="numeral">I.</p>
+          <h2 id="t-vitrina">La vitrina</h2>
+          <p class="sub">Las tortas de la casa. Pedí cualquiera tal cual o usala de punto de partida.</p>
+        </header>
+        <div class="grilla-vitrina" id="de-la-casa"></div>
+      </section>
+
+      <section class="como" aria-labelledby="t-como">
+        <h2 id="t-como" class="visual-oculto">Cómo encargar</h2>
+        <ol class="pasos">
+          <li><span class="paso-num">01</span><strong>Armala</strong> Elegí tamaño, sabores y cobertura. La ves mientras la armás.</li>
+          <li><span class="paso-num">02</span><strong>Reservá el día</strong> Con 48 h de anticipación como mínimo. Los lunes descansamos.</li>
+          <li><span class="paso-num">03</span><strong>Señá y retirá</strong> Confirmamos por WhatsApp con el 50 % y la retirás en el local.</li>
+        </ol>
+      </section>
+
+      <section class="encargo" id="encargo" aria-labelledby="t-encargo">
+        <header class="titulo-seccion">
+          <p class="numeral">II.</p>
+          <h2 id="t-encargo">Encargá tu torta</h2>
+          <p class="sub">Cada elección cambia el dibujo y el precio. Nada se cobra hasta que te confirmemos.</p>
+        </header>
+
+        <div class="encargo-grilla">
+          <div class="pasos-form">
+            <fieldset class="bloque">
+              <legend><span class="romano">i</span> Tamaño</legend>
+              <div class="opciones opciones--tamanio" role="radiogroup" aria-label="Tamaño" id="tamanios"></div>
+            </fieldset>
+
+            <fieldset class="bloque">
+              <legend><span class="romano">ii</span> Bizcochuelo</legend>
+              <div class="opciones" role="radiogroup" aria-label="Bizcochuelo" id="bizcochuelos"></div>
+            </fieldset>
+
+            <fieldset class="bloque">
+              <legend><span class="romano">iii</span> Relleno <small>elegí hasta dos</small></legend>
+              <div class="opciones" id="rellenos"></div>
+              <p class="aviso" id="aviso-relleno" aria-live="polite"></p>
+            </fieldset>
+
+            <fieldset class="bloque">
+              <legend><span class="romano">iv</span> Cobertura</legend>
+              <div class="opciones" role="radiogroup" aria-label="Cobertura" id="coberturas"></div>
+            </fieldset>
+
+            <fieldset class="bloque">
+              <legend><span class="romano">v</span> Mensaje <small>opcional</small></legend>
+              <label class="campo" for="mensaje">
+                <span>Escrito a mano en un banderín de chocolate</span>
+                <span class="campo-fila">
+                  <input id="mensaje" type="text" autocomplete="off" placeholder="Feliz cumple, Sofi" aria-describedby="mensaje-cuenta" />
+                  <span class="cuenta" id="mensaje-cuenta">0/24</span>
+                </span>
+              </label>
+            </fieldset>
+
+            <fieldset class="bloque">
+              <legend><span class="romano">vi</span> Retiro en el local</legend>
+              <div class="calendario">
+                <div class="cal-cabecera">
+                  <p class="cal-mes" id="cal-mes"></p>
+                  <ul class="cal-leyenda" aria-label="Referencias">
+                    <li><i class="ref ref--libre"></i>Disponible</li>
+                    <li><i class="ref ref--completo"></i>Agenda llena</li>
+                    <li><i class="ref ref--no"></i>Sin turno</li>
+                  </ul>
+                </div>
+                <div class="cal-semana" aria-hidden="true">
+                  <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span>Do</span>
+                </div>
+                <div class="cal-dias" id="dias" role="radiogroup" aria-label="Día de retiro"></div>
+              </div>
+              <div class="turnos-caja">
+                <p class="turnos-titulo" id="turnos-titulo">Elegí un día para ver los horarios.</p>
+                <div class="turnos" id="turnos" role="radiogroup" aria-labelledby="turnos-titulo"></div>
+              </div>
+              <label class="campo" for="nombre">
+                <span>¿A nombre de quién?</span>
+                <input id="nombre" type="text" autocomplete="given-name" placeholder="Tu nombre" />
+              </label>
+            </fieldset>
+          </div>
+
+          <aside class="mesa" aria-label="Tu torta">
+            <div class="mesa-pegajosa">
+              <div class="lamina">
+                <svg id="torta" role="img" aria-label="Tu torta"></svg>
+              </div>
+              <div class="resumen" aria-live="polite">
+                <p class="resumen-titulo">Tu encargo</p>
+                <p class="resumen-desc" id="descripcion"></p>
+                <p class="resumen-retiro" id="retiro"></p>
+                <dl class="cuentas">
+                  <div><dt>Total</dt><dd id="total"></dd></div>
+                  <div class="cuentas-senia"><dt>Seña del 50 %</dt><dd id="senia"></dd></div>
+                </dl>
+                <a class="boton boton--whatsapp" id="enviar" href="#" target="_blank" rel="noopener">Enviar encargo por WhatsApp</a>
+                <p class="aviso" id="aviso-envio"></p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="visita" id="visita" aria-labelledby="t-visita">
+        <div class="visita-texto">
+          <p class="numeral">III.</p>
+          <h2 id="t-visita">Visitanos</h2>
+          <p>Av. Pedro Goyena 1180, Caballito. A dos cuadras del Parque Rivadavia.</p>
+        </div>
+        <dl class="horarios">
+          <div><dt>Martes a sábado</dt><dd>9 a 20 h</dd></div>
+          <div><dt>Domingo</dt><dd>9 a 14 h</dd></div>
+          <div><dt>Lunes</dt><dd>Cerrado, horneamos para la semana</dd></div>
+        </dl>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p class="pie-marca">Miga</p>
+      <p>Encargos por WhatsApp al 11 5042-0000 · @miga.caballito</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Miga y sus precios son ficticios.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

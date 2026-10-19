@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e39b2d" />
+    <meta name="description" content="Taproom de cerveza artesanal en Saavedra con 12 canillas, filtros por amargor y alcohol, y armador de vuelos de degustación. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Lúpulo · Taproom en Saavedra" />
+    <meta property="og:description" content="Taproom de cerveza artesanal en Saavedra con 12 canillas, filtros por amargor y alcohol, y armador de vuelos de degustación. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/lupulo/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/lupulo.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Lúpulo · Taproom en Saavedra</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍺</text></svg>" />
+  </head>
+  <body>
+    <header class="etiqueta-tapa">
+      <div class="tapa-interior">
+        <p class="tapa-lote">Lote Nº 0412 · Embotellado en el barrio</p>
+        <div class="rotulo">
+          <svg class="sello" viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <path id="aro" d="M100 100 m-74 0 a74 74 0 1 1 148 0 a74 74 0 1 1 -148 0" />
+            </defs>
+            <circle cx="100" cy="100" r="96" class="sello-borde" />
+            <circle cx="100" cy="100" r="60" class="sello-centro" />
+            <text class="sello-texto"><textPath href="#aro">TAPROOM · SAAVEDRA · BUENOS AIRES · EST. 2019 ·</textPath></text>
+            <!-- flor de lúpulo -->
+            <g transform="translate(100 104)" class="lupulo-flor">
+              <path d="M0 -40c10 0 16 8 14 16-6 4-22 4-28 0-2-8 4-16 14-16z" />
+              <path d="M-18 -22c8-2 16 4 18 12-4 6-18 10-26 6-2-8 0-16 8-18zM18 -22c-8-2-16 4-18 12 4 6 18 10 26 6 2-8 0-16-8-18z" />
+              <path d="M-22 0c8-2 18 4 22 12-4 8-18 12-26 8-4-8-4-18 4-20zM22 0c-8-2-18 4-22 12 4 8 18 12 26 8 4-8 4-18-4-20z" />
+              <path d="M0 6c10 0 16 10 14 20-6 6-22 6-28 0-2-10 4-20 14-20z" />
+              <path d="M0 -40v-10c4-6 12-6 16-2" class="tallo" />
+            </g>
+          </svg>
+          <div class="rotulo-texto">
+            <p class="rotulo-arriba">Cervecería artesanal</p>
+            <h1>Lúpulo</h1>
+            <p class="rotulo-abajo">12 canillas · <span id="estado-ahora">Mar a dom de 17 a 1 h</span></p>
+          </div>
+        </div>
+        <dl class="ficha">
+          <div><dt>Canillas</dt><dd>12</dd></div>
+          <div><dt>De la casa</dt><dd>9</dd></div>
+          <div><dt>Invitadas</dt><dd>3</dd></div>
+          <div><dt>Barrio</dt><dd>Saavedra</dd></div>
+        </dl>
+      </div>
+    </header>
+
+    <nav class="cinta-nav" aria-label="Secciones">
+      <a href="#canillas">01 · Canillas</a>
+      <a href="#vuelo">02 · Armá tu vuelo</a>
+      <a href="#happy">03 · Happy hour y eventos</a>
+    </nav>
+
+    <main>
+      <section class="canillas" id="canillas" aria-labelledby="t-canillas">
+        <div class="titulo-seccion">
+          <span class="titulo-num" aria-hidden="true">01</span>
+          <div>
+            <h2 id="t-canillas">Lo que sale hoy</h2>
+            <p class="sub">Precios por pinta (473 ml) y media pinta. La pizarra se actualiza cuando pinchamos un barril nuevo.</p>
+          </div>
+        </div>
+
+        <div class="filtros">
+          <fieldset class="filtro filtro--estilos">
+            <legend>Estilo</legend>
+            <div class="chips" id="estilos"></div>
+          </fieldset>
+
+          <fieldset class="filtro">
+            <legend>Amargor <span class="unidad">IBU</span></legend>
+            <div class="rango" id="rango-ibu">
+              <label class="oculto" for="ibu-min">IBU mínimo</label>
+              <input type="range" id="ibu-min" min="0" max="80" step="1" value="0" />
+              <label class="oculto" for="ibu-max">IBU máximo</label>
+              <input type="range" id="ibu-max" min="0" max="80" step="1" value="80" />
+            </div>
+            <p class="rango-valor" id="ibu-valor"></p>
+          </fieldset>
+
+          <fieldset class="filtro">
+            <legend>Alcohol <span class="unidad">ABV %</span></legend>
+            <div class="rango" id="rango-abv">
+              <label class="oculto" for="abv-min">ABV mínimo</label>
+              <input type="range" id="abv-min" min="4" max="10" step="0.1" value="4" />
+              <label class="oculto" for="abv-max">ABV máximo</label>
+              <input type="range" id="abv-max" min="4" max="10" step="0.1" value="10" />
+            </div>
+            <p class="rango-valor" id="abv-valor"></p>
+          </fieldset>
+
+          <fieldset class="filtro">
+            <legend>Ordenar por</legend>
+            <div class="segmentos" role="radiogroup" aria-label="Ordenar por" id="orden">
+              <button type="button" role="radio" data-orden="canilla" aria-checked="true">Nº</button>
+              <button type="button" role="radio" data-orden="nombre" aria-checked="false">Nombre</button>
+              <button type="button" role="radio" data-orden="abv" aria-checked="false">ABV</button>
+              <button type="button" role="radio" data-orden="ibu" aria-checked="false">IBU</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="conteo">
+          <p id="conteo" aria-live="polite"></p>
+          <button type="button" class="link" id="limpiar">Limpiar filtros</button>
+        </div>
+
+        <ol class="pizarra" id="pizarra"></ol>
+        <p class="vacio" id="vacio" hidden>Ninguna canilla con esos filtros. Probá aflojar el amargor o el alcohol.</p>
+      </section>
+
+      <section class="vuelo" id="vuelo" aria-labelledby="t-vuelo">
+        <div class="titulo-seccion">
+          <span class="titulo-num" aria-hidden="true">02</span>
+          <div>
+            <h2 id="t-vuelo">Armá tu vuelo</h2>
+            <p class="sub">Cuatro probetas de 150 ml sobre la tabla. Elegí exactamente 4 y llevate un 10 % de descuento.</p>
+          </div>
+        </div>
+
+        <div class="vuelo-grilla">
+          <div class="tabla-caja">
+            <svg id="paleta" class="paleta" viewBox="0 0 560 190" role="img" aria-label="Tu vuelo"></svg>
+            <ol class="vuelo-nombres" id="vuelo-nombres"></ol>
+          </div>
+
+          <div class="vuelo-panel">
+            <fieldset class="elegir">
+              <legend>Elegí 4 canillas</legend>
+              <div class="elegir-lista" id="elegir"></div>
+            </fieldset>
+            <div class="cuenta" aria-live="polite">
+              <p class="cuenta-estado" id="vuelo-estado"></p>
+              <p class="cuenta-precio" id="vuelo-precio"></p>
+              <p class="cuenta-detalle" id="vuelo-detalle"></p>
+            </div>
+            <div class="vuelo-acciones">
+              <button type="button" class="boton" id="pedir">Pedí el vuelo</button>
+              <button type="button" class="boton boton--borde" id="vaciar">Vaciar tabla</button>
+            </div>
+            <p class="aviso" id="aviso" role="status"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="happy" id="happy" aria-labelledby="t-happy">
+        <div class="happy-cartel">
+          <p class="happy-sello" id="happy-sello">Martes a viernes</p>
+          <h2 id="t-happy">Happy<br />hour</h2>
+          <p class="happy-horas">17 → 20 h</p>
+          <p class="happy-texto">Pintas de <strong>Siesta</strong> y <strong>Andén 7</strong> a <strong id="precio-happy"></strong>. Papas con cheddar y verdeo al 2×1.</p>
+        </div>
+
+        <div class="eventos">
+          <h3 class="eventos-titulo">Esta semana en la barra</h3>
+          <ul class="eventos-lista">
+            <li class="evento">
+              <p class="evento-dia">Mar<span>21 h</span></p>
+              <div>
+                <h4>Trivia cervecera</h4>
+                <p>Equipos de hasta 4. El ganador se lleva un growler lleno.</p>
+              </div>
+            </li>
+            <li class="evento">
+              <p class="evento-dia">Jue<span>20 h</span></p>
+              <div>
+                <h4>Pinchamos barril nuevo</h4>
+                <p>Lanzamiento de la Hazy de primavera, con el cervecero en la barra.</p>
+              </div>
+            </li>
+            <li class="evento">
+              <p class="evento-dia">Vie<span>22 h</span></p>
+              <div>
+                <h4>Vinilos + smash burgers</h4>
+                <p>Soul y funk en bandeja, food truck en la vereda.</p>
+              </div>
+            </li>
+            <li class="evento">
+              <p class="evento-dia">Dom<span>18 h</span></p>
+              <div>
+                <h4>Stouts y fuego</h4>
+                <p>Choripanes al disco y canilla de Medianoche en nitro.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <div class="pie-columnas">
+        <p class="pie-marca">Lúpulo</p>
+        <p>Av. García del Río 3150, Saavedra<br />Martes a domingo de 17 a 1 h</p>
+        <p>Growlers de 1 y 2 litros para llevar<br />Prohibida la venta a menores de 18 años</p>
+      </div>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Lúpulo y sus precios son ficticios. Beber con moderación.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

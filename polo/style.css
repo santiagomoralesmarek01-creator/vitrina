@@ -1,0 +1,1252 @@
+:root {
+  --crema: #fff7f0;
+  --blanco: #ffffff;
+  --menta: #c9f1e4;
+  --menta-fuerte: #6fd0b2;
+  --cielo: #d9eeff;
+  --frutilla: #ffb3c7;
+  --frutilla-fuerte: #ff6f91;
+  --vainilla: #fff1c1;
+  --lavanda: #ebe3ff;
+  --lavanda-fuerte: #a58cf5;
+  --tinta: #4a2f5c;
+  --tinta-suave: #765f88;
+  --verde-wa: #128c4a;
+  --sombra: 0 14px 34px -16px rgb(74 47 92 / 0.35);
+  --sombra-chica: 0 6px 16px -8px rgb(74 47 92 / 0.3);
+  --redondo: 28px;
+  --fuente: 'Fredoka', 'Nunito', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--tinta);
+  font-family: var(--fuente);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--lavanda-fuerte);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- Botones ---------- */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--tinta);
+  color: var(--blanco);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  box-shadow: 0 6px 0 var(--frutilla-fuerte);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--frutilla-fuerte);
+}
+
+.boton:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--frutilla-fuerte);
+}
+
+.boton[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.boton--blanco {
+  background: var(--blanco);
+  color: var(--tinta);
+  box-shadow: 0 6px 0 var(--lavanda-fuerte);
+}
+
+.boton--blanco:hover {
+  box-shadow: 0 8px 0 var(--lavanda-fuerte);
+}
+
+.boton--blanco:active {
+  box-shadow: 0 2px 0 var(--lavanda-fuerte);
+}
+
+.pastilla {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--blanco);
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: var(--sombra-chica);
+}
+
+.pastilla--lila {
+  background: var(--lavanda-fuerte);
+  color: var(--blanco);
+}
+
+/* ---------- Tapa ---------- */
+.tapa {
+  position: relative;
+  background:
+    radial-gradient(circle at 85% 20%, rgb(255 255 255 / 0.7) 0 120px, transparent 121px),
+    linear-gradient(170deg, var(--menta) 10%, var(--cielo) 90%);
+  padding-top: 52px;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 8px 24px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.logo svg {
+  width: 36px;
+  height: 36px;
+}
+
+.barra ul {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.barra ul a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.barra ul a:hover {
+  background: rgb(255 255 255 / 0.7);
+}
+
+.nav-pedido {
+  background: var(--blanco);
+  box-shadow: var(--sombra-chica);
+}
+
+.globito {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--frutilla-fuerte);
+  color: var(--blanco);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.portada {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 32px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 40px 24px 40px;
+}
+
+.portada h1 {
+  margin: 18px 0 18px;
+  font-size: clamp(4.4rem, 11vw, 8.2rem);
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+}
+
+.portada h1 span {
+  display: inline-block;
+  text-shadow: 0 6px 0 rgb(255 255 255 / 0.9);
+}
+
+.portada h1 span:last-child {
+  color: var(--frutilla-fuerte);
+  transform: rotate(-4deg);
+}
+
+.bajada {
+  max-width: 34ch;
+  font-size: 1.2rem;
+  color: var(--tinta-suave);
+}
+
+.portada-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 28px 0 26px;
+}
+
+.datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.datos li {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.65);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.pinguino svg {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.pinguino-cuerpo,
+.pinguino-brazo {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.pinguino-cuerpo {
+  animation: bamboleo 3.2s ease-in-out infinite;
+}
+
+.pinguino-brazo {
+  transform-origin: 0% 100%;
+  animation: saludo 3.2s ease-in-out infinite;
+}
+
+.hielo {
+  animation: flota 4s ease-in-out infinite;
+}
+
+.hielo--2 {
+  animation-delay: -2s;
+}
+
+.brillo {
+  animation: titila 2.4s ease-in-out infinite;
+}
+
+@keyframes bamboleo {
+  50% {
+    transform: rotate(-2deg);
+  }
+}
+
+@keyframes saludo {
+  50% {
+    transform: rotate(-4deg) translateY(-3px);
+  }
+}
+
+@keyframes flota {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes titila {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.ola {
+  display: block;
+  width: 100%;
+  height: 60px;
+  fill: var(--crema);
+}
+
+/* ---------- Secciones ---------- */
+main {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.cabeza {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.cabeza h2,
+.pedido h2 {
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+}
+
+.sub {
+  margin-top: 8px;
+  color: var(--tinta-suave);
+  font-size: 1.1rem;
+}
+
+/* ---------- Sabor de la semana ---------- */
+.semana {
+  position: relative;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  align-items: center;
+  gap: 32px;
+  max-width: 860px;
+  margin: 8px auto 0;
+  padding: 28px 40px;
+  border-radius: 40px;
+  background:
+    radial-gradient(circle at 95% 10%, rgb(255 255 255 / 0.6) 0 60px, transparent 61px),
+    var(--lavanda);
+  box-shadow: var(--sombra);
+  scroll-margin-top: 20px;
+}
+
+.semana-dibujo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.semana h2 {
+  margin: 12px 0 8px;
+  font-size: clamp(2rem, 4.6vw, 2.8rem);
+}
+
+.semana-texto > p:not(.pastilla) {
+  max-width: 46ch;
+  margin-bottom: 18px;
+  color: var(--tinta-suave);
+}
+
+.semana .semana-aviso {
+  margin: 14px 0 0;
+  font-weight: 500;
+  color: var(--tinta);
+}
+
+.semana-aviso:empty {
+  display: none;
+}
+
+/* ---------- Armar ---------- */
+.armar {
+  padding: 96px 0 24px;
+  scroll-margin-top: 10px;
+}
+
+.armar-grilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 32px;
+  align-items: start;
+}
+
+.pasos {
+  display: grid;
+  gap: 40px;
+}
+
+.paso h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: 1.6rem;
+}
+
+.paso-n {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--frutilla);
+  font-size: 1.2rem;
+}
+
+.envases {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.envase {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 16px 10px 14px;
+  border: 3px solid transparent;
+  border-radius: var(--redondo);
+  background: var(--blanco);
+  box-shadow: var(--sombra-chica);
+  text-align: center;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.envase:hover {
+  transform: translateY(-3px);
+}
+
+.envase svg {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 4px;
+}
+
+.envase-nombre {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.envase-max {
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+}
+
+.envase-precio {
+  margin-top: 6px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: var(--menta);
+  font-weight: 600;
+}
+
+.envase[aria-checked='true'] {
+  border-color: var(--tinta);
+  background: var(--vainilla);
+  transform: translateY(-3px);
+}
+
+.envase[aria-checked='true'] .envase-precio {
+  background: var(--tinta);
+  color: var(--blanco);
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 18px;
+}
+
+.categorias,
+.toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip,
+.toggle {
+  padding: 7px 16px;
+  border: 2px solid var(--lavanda);
+  border-radius: 999px;
+  background: var(--blanco);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.chip:hover,
+.toggle:hover {
+  border-color: var(--lavanda-fuerte);
+}
+
+.chip[aria-checked='true'] {
+  border-color: var(--tinta);
+  background: var(--tinta);
+  color: var(--blanco);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--menta-fuerte);
+  border-radius: 50%;
+  background: var(--blanco);
+}
+
+.toggle[aria-pressed='true'] {
+  border-color: var(--menta-fuerte);
+  background: var(--menta);
+}
+
+.toggle[aria-pressed='true']::before {
+  background: var(--menta-fuerte);
+  box-shadow: inset 0 0 0 3px var(--blanco);
+}
+
+.sabores {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.sabor {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 2px;
+  padding: 12px 10px 14px;
+  border: 3px solid transparent;
+  border-radius: var(--redondo);
+  background: color-mix(in srgb, var(--color) 32%, var(--blanco));
+  text-align: center;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
+}
+
+.sabor:hover {
+  transform: translateY(-3px) rotate(-1deg);
+}
+
+.sabor svg {
+  width: 84px;
+  height: 76px;
+  overflow: visible;
+}
+
+.sabor-nombre {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.sabor-cat {
+  font-size: 0.8rem;
+  color: var(--tinta-suave);
+}
+
+.sabor-marcas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.marca {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.8);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.marca--vegano {
+  background: var(--menta-fuerte);
+  color: var(--tinta);
+}
+
+.marca--semana {
+  background: var(--lavanda-fuerte);
+  color: var(--blanco);
+}
+
+.sabor-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--tinta);
+  color: var(--blanco);
+  font-size: 0.9rem;
+  transform: scale(0);
+  transition: transform 0.2s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.sabor-check::before {
+  content: '✓';
+}
+
+.sabor[aria-pressed='true'] {
+  border-color: var(--tinta);
+}
+
+.sabor[aria-pressed='true'] .sabor-check {
+  transform: scale(1);
+}
+
+.sabor--tope {
+  opacity: 0.5;
+}
+
+.sin-resultados {
+  padding: 28px;
+  border-radius: var(--redondo);
+  background: var(--blanco);
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Vista ---------- */
+.vista {
+  position: sticky;
+  top: 20px;
+  overflow: hidden;
+  border-radius: 36px;
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+}
+
+.vista-escena {
+  background:
+    radial-gradient(circle at 50% 110%, var(--frutilla) 0 30%, transparent 31%),
+    radial-gradient(circle at 20% 20%, var(--blanco) 0 8px, transparent 9px),
+    radial-gradient(circle at 80% 30%, var(--blanco) 0 5px, transparent 6px),
+    linear-gradient(180deg, var(--vainilla), #ffe3ea);
+  padding: 16px 30px 0;
+}
+
+.vista-escena svg {
+  display: block;
+  width: 100%;
+  max-height: 330px;
+  height: auto;
+  overflow: visible;
+}
+
+.bocha {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.bocha.cae {
+  animation: cae 0.6s cubic-bezier(0.3, 0.9, 0.4, 1) both;
+}
+
+@keyframes cae {
+  0% {
+    transform: translateY(-260px);
+    opacity: 0;
+  }
+  55% {
+    transform: translateY(6px) scale(1.08, 0.86);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-6px) scale(0.96, 1.05);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.fantasma {
+  animation: titila 1.8s ease-in-out infinite;
+}
+
+.pote-marca {
+  font-family: var(--fuente);
+  font-weight: 700;
+  fill: var(--frutilla-fuerte);
+}
+
+.vista-info {
+  display: grid;
+  gap: 12px;
+  padding: 20px 24px 26px;
+}
+
+.vista-info h3 {
+  font-size: 1.5rem;
+}
+
+.vista-cuenta {
+  margin-top: -8px;
+  color: var(--tinta-suave);
+}
+
+.elegidos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.elegidos:empty {
+  display: none;
+}
+
+.elegidos li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px 3px 12px;
+  border-radius: 999px;
+  background: var(--color);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.elegidos button {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.75);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.elegidos button:hover {
+  background: var(--blanco);
+}
+
+.aviso {
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: var(--vainilla);
+  font-size: 0.95rem;
+}
+
+.aviso:empty {
+  display: none;
+}
+
+.aviso.sacude {
+  animation: sacude 0.4s;
+}
+
+@keyframes sacude {
+  25% {
+    transform: translateX(-6px);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+}
+
+.sellos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sellos:empty {
+  display: none;
+}
+
+.sellos li {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--menta);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.sellos .sello--ojo {
+  background: #ffe0cc;
+}
+
+.sellos .sello--vegano {
+  background: var(--menta-fuerte);
+}
+
+.vista-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.vista-precio {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.vista-precio small {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Pedido ---------- */
+.pedido {
+  padding: 96px 0 24px;
+  scroll-margin-top: 10px;
+}
+
+.pedido-tarjeta {
+  display: grid;
+  gap: 20px;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 36px;
+  border-radius: 40px;
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+  /* Borde de "ticket" con festón. */
+  background-image: radial-gradient(circle at 50% 0, var(--crema) 0 9px, transparent 10px);
+  background-size: 28px 14px;
+  background-repeat: repeat-x;
+}
+
+.pedido h2 {
+  text-align: center;
+}
+
+.pedido-vacio {
+  padding: 20px;
+  border: 2px dashed var(--lavanda);
+  border-radius: 20px;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+.items {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.items:empty {
+  display: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 10px 14px;
+  border-radius: 20px;
+  background: var(--crema);
+}
+
+.item--nuevo {
+  animation: entra 0.5s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+@keyframes entra {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+}
+
+.item-bochas {
+  display: flex;
+}
+
+.item-bochas i {
+  width: 22px;
+  height: 22px;
+  margin-left: -7px;
+  border: 2px solid var(--blanco);
+  border-radius: 50%;
+}
+
+.item-bochas i:first-child {
+  margin-left: 0;
+}
+
+.item-desc {
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.item-precio {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.item-quitar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--blanco);
+  font-size: 1.2rem;
+}
+
+.item-quitar:hover {
+  background: var(--frutilla);
+}
+
+.entrega {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--lavanda);
+}
+
+.entrega button {
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-weight: 500;
+}
+
+.entrega button[aria-checked='true'] {
+  background: var(--blanco);
+  box-shadow: var(--sombra-chica);
+  font-weight: 600;
+}
+
+.totales {
+  display: grid;
+  gap: 4px;
+}
+
+.totales p {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--tinta-suave);
+}
+
+.totales p span:last-child {
+  text-align: right;
+}
+
+.totales .total {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 2px dashed var(--lavanda);
+  color: var(--tinta);
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+.boton--whatsapp {
+  background: var(--verde-wa);
+  box-shadow: 0 6px 0 #0b5f31;
+  font-size: 1.15rem;
+}
+
+.boton--whatsapp:hover {
+  box-shadow: 0 8px 0 #0b5f31;
+}
+
+.boton--whatsapp:active {
+  box-shadow: 0 2px 0 #0b5f31;
+}
+
+/* ---------- Pie ---------- */
+.pie {
+  margin-top: 96px;
+  padding: 0 24px 48px;
+  background: var(--tinta);
+  color: var(--crema);
+  text-align: center;
+}
+
+.ola--pie {
+  margin: 0 -24px 32px;
+  width: calc(100% + 48px);
+}
+
+.pie-logo {
+  margin-bottom: 6px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--frutilla);
+}
+
+.pie-chico {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.pie .firma-mrk {
+  margin-top: 16px;
+  font-family: var(--fuente);
+  font-size: 0.9rem;
+  color: var(--crema);
+}
+
+.pie .firma-mrk strong {
+  color: var(--frutilla);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .armar-grilla {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+  .envases {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 16px;
+  }
+  .barra,
+  .portada,
+  main {
+    padding-inline: 16px;
+  }
+  .barra ul li:first-child {
+    display: none;
+  }
+  .portada {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .pinguino {
+    order: -1;
+  }
+  .pinguino svg {
+    max-width: 230px;
+  }
+  .portada h1 {
+    font-size: 4.6rem;
+  }
+  .ola {
+    height: 36px;
+  }
+  .semana {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 16px;
+    padding: 22px 20px;
+    border-radius: 30px;
+  }
+  .semana-dibujo {
+    align-self: start;
+  }
+  .armar {
+    padding-top: 72px;
+  }
+  .armar-grilla {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  /* En el celular, el helado queda pegado arriba mientras elegís sabores. */
+  .vista {
+    order: 1;
+    top: 0;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: 116px minmax(0, 1fr);
+    margin-inline: -8px;
+    border-radius: 28px;
+  }
+  .pasos {
+    order: 2;
+  }
+  .vista-escena {
+    display: grid;
+    align-items: end;
+    padding: 6px 6px 0;
+  }
+  .vista-escena svg {
+    max-height: 150px;
+  }
+  .vista-info {
+    gap: 6px;
+    padding: 12px 14px 14px 12px;
+  }
+  .vista-info h3 {
+    font-size: 1.15rem;
+  }
+  .vista-cuenta {
+    margin-top: -4px;
+    font-size: 0.88rem;
+  }
+  .elegidos {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .elegidos li {
+    flex: none;
+    font-size: 0.8rem;
+  }
+  .elegidos button {
+    width: 22px;
+    height: 22px;
+  }
+  .aviso {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+  .sellos li {
+    font-size: 0.75rem;
+  }
+  .vista-pie {
+    margin-top: 2px;
+  }
+  .vista-precio {
+    font-size: 1.2rem;
+  }
+  .vista-precio small {
+    font-size: 0.75rem;
+  }
+  .vista .boton {
+    padding: 9px 14px;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 0 var(--frutilla-fuerte);
+  }
+  .paso h3 {
+    font-size: 1.35rem;
+  }
+  .envases {
+    gap: 10px;
+  }
+  .sabores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .sabor svg {
+    width: 70px;
+    height: 62px;
+  }
+  .pedido-tarjeta {
+    padding: 28px 16px;
+    border-radius: 30px;
+  }
+  .item {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'bochas desc quitar'
+      'bochas precio quitar';
+    gap: 2px 10px;
+  }
+  .item-bochas {
+    grid-area: bochas;
+  }
+  .item-desc {
+    grid-area: desc;
+  }
+  .item-precio {
+    grid-area: precio;
+  }
+  .item-quitar {
+    grid-area: quitar;
+  }
+  .entrega button {
+    font-size: 0.9rem;
+    padding-inline: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

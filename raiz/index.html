@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3efe7" />
+    <meta name="description" content="Restaurante de cocina de autor con menú de siete pasos, maridaje, versiones vegetariana y sin TACC, y reserva con seña. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Raíz · Cocina de estación en San Telmo" />
+    <meta property="og:description" content="Restaurante de cocina de autor con menú de siete pasos, maridaje, versiones vegetariana y sin TACC, y reserva con seña. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/raiz/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/raiz.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Raíz · Cocina de estación en San Telmo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+  </head>
+  <body>
+    <header class="portada">
+      <nav class="barra" aria-label="Secciones">
+        <span class="barra-marca">Raíz</span>
+        <ul>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#productores">Productores</a></li>
+          <li><a href="#reserva" class="barra-reserva">Reservá</a></li>
+        </ul>
+      </nav>
+
+      <div class="portada-grilla">
+        <div class="portada-texto">
+          <p class="volanta">Primavera 2026 · San Telmo</p>
+          <h1>Raíz</h1>
+          <p class="bajada">Cocina de autor con <em>producto argentino de estación</em>. Siete pasos que cambian con lo que trae la tierra cada semana.</p>
+          <dl class="datos">
+            <div><dt>Menú de pasos</dt><dd id="dato-precio"></dd></div>
+            <div><dt>Servicio</dt><dd>Martes a domingo, desde las 20</dd></div>
+            <div><dt>Dirección</dt><dd>Defensa 1180, San Telmo</dd></div>
+          </dl>
+        </div>
+        <figure class="portada-dibujo" aria-hidden="true">
+          <svg viewBox="0 0 160 210" id="dibujo-raiz" class="trazo"></svg>
+          <figcaption>Beta vulgaris · remolacha de Villa Elisa</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <main>
+      <section class="menu" id="menu" aria-labelledby="t-menu">
+        <header class="seccion-cabeza">
+          <p class="volanta">El menú</p>
+          <h2 id="t-menu">Siete pasos, <em>una estación</em></h2>
+          <p class="seccion-bajada">Bajá despacio: cada paso aparece con el ingrediente que lo sostiene. Si hay algo que no comés, avisanos y lo cambiamos.</p>
+        </header>
+
+        <div class="ajustes" role="group" aria-label="Ajustá el menú">
+          <button type="button" class="ajuste" id="ajuste-maridaje" aria-pressed="false">
+            <span class="ajuste-caja" aria-hidden="true"></span>
+            <span>Maridaje <small id="precio-maridaje"></small></span>
+          </button>
+          <button type="button" class="ajuste" data-restriccion="vegetariano" aria-pressed="false">
+            <span class="ajuste-caja" aria-hidden="true"></span>
+            <span>Vegetariano</span>
+          </button>
+          <button type="button" class="ajuste" data-restriccion="sinTacc" aria-pressed="false">
+            <span class="ajuste-caja" aria-hidden="true"></span>
+            <span>Sin TACC</span>
+          </button>
+          <p class="ajustes-aviso" id="aviso-cambios" aria-live="polite"></p>
+        </div>
+
+        <div class="progreso-movil" aria-hidden="true">
+          <div class="progreso-movil-barras" id="progreso-barras"></div>
+          <p id="progreso-texto"></p>
+        </div>
+
+        <div class="secuencia">
+          <nav class="progreso" aria-label="Pasos del menú">
+            <ol id="progreso"></ol>
+          </nav>
+          <ol class="pasos" id="pasos"></ol>
+        </div>
+
+        <div class="cuenta" aria-live="polite">
+          <p class="cuenta-rotulo">Por persona</p>
+          <p class="cuenta-numero" id="cuenta-persona"></p>
+          <p class="cuenta-detalle" id="cuenta-detalle"></p>
+          <a href="#reserva" class="boton">Reservá tu mesa</a>
+        </div>
+      </section>
+
+      <section class="productores" id="productores" aria-labelledby="t-productores">
+        <header class="seccion-cabeza">
+          <p class="volanta">Nuestros productores</p>
+          <h2 id="t-productores">Lo que llega <em>a la puerta</em></h2>
+          <p class="seccion-bajada">Compramos directo a quienes siembran, crían y recolectan. Si no está bueno esa semana, no está en el menú.</p>
+        </header>
+        <ul class="productores-lista" id="productores-lista"></ul>
+      </section>
+
+      <section class="reserva" id="reserva" aria-labelledby="t-reserva">
+        <header class="seccion-cabeza">
+          <p class="volanta">Reservas</p>
+          <h2 id="t-reserva">Reservá <em>tu mesa</em></h2>
+          <p class="seccion-bajada">Dos turnos por noche, dieciocho cubiertos. Lunes cerrado; los domingos, sólo el primer turno.</p>
+        </header>
+
+        <form class="reserva-grilla" id="form-reserva" novalidate>
+          <div class="reserva-campos">
+            <fieldset>
+              <legend>Fecha</legend>
+              <div class="fechas" role="radiogroup" aria-label="Fecha" id="fechas"></div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Turno</legend>
+              <div class="turnos" role="radiogroup" aria-label="Turno" id="turnos"></div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Comensales</legend>
+              <div class="contador">
+                <button type="button" id="menos" aria-label="Un comensal menos">−</button>
+                <output id="comensales" aria-live="polite">2</output>
+                <button type="button" id="mas" aria-label="Un comensal más">+</button>
+                <span class="contador-nota">De 2 a 8. Para grupos más grandes, escribinos.</span>
+              </div>
+            </fieldset>
+
+            <div class="campos-texto">
+              <label>
+                <span>Nombre</span>
+                <input type="text" id="nombre" autocomplete="name" required />
+              </label>
+              <label>
+                <span>Teléfono <small>(opcional)</small></span>
+                <input type="tel" id="telefono" autocomplete="tel" inputmode="tel" />
+              </label>
+            </div>
+          </div>
+
+          <aside class="resumen" aria-labelledby="t-resumen">
+            <h3 id="t-resumen">Tu reserva</h3>
+            <div aria-live="polite" id="resumen-vivo">
+              <p class="resumen-cuando" id="resumen-cuando"></p>
+              <dl class="resumen-lineas" id="resumen-lineas"></dl>
+              <div class="resumen-total">
+                <span>Total</span>
+                <strong id="resumen-total"></strong>
+              </div>
+              <div class="resumen-senia">
+                <span>Seña del 30 %</span>
+                <strong id="resumen-senia"></strong>
+              </div>
+              <p class="resumen-saldo" id="resumen-saldo"></p>
+            </div>
+            <button type="submit" class="boton boton--lleno">Reservar y pagar la seña</button>
+            <p class="resumen-aviso" id="resumen-aviso" role="status"></p>
+          </aside>
+        </form>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p class="pie-marca">Raíz</p>
+      <p>Defensa 1180, San Telmo · Martes a domingo desde las 20 h · reservas@raiz.example</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Raíz y sus precios son ficticios.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

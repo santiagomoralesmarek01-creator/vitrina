@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4c430" />
+    <meta name="description" content="Hamburguesería de smash burgers con armador capa por capa, medidor de altura, combos y pedido por WhatsApp. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Bunker · Smash burgers en Colegiales" />
+    <meta property="og:description" content="Hamburguesería de smash burgers con armador capa por capa, medidor de altura, combos y pedido por WhatsApp. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/bunker/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/bunker.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Bunker · Smash burgers en Colegiales</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>" />
+  </head>
+  <body>
+    <header class="portada">
+      <nav class="nav" aria-label="Secciones">
+        <a href="#carta">La carta</a>
+        <a href="#armador">Armá la tuya</a>
+        <a href="#donde">Dónde</a>
+      </nav>
+
+      <div class="portada-grilla">
+        <div class="portada-texto">
+          <p class="etiqueta etiqueta--negra">Smash burgers · Colegiales</p>
+          <h1>Bunker</h1>
+          <p class="bajada">Carne aplastada contra la plancha hasta que cruje. Cheddar que chorrea. Pan de papa que aguanta todo.</p>
+          <div class="acciones">
+            <a class="boton boton--negro" href="#armador">Armá la tuya</a>
+            <a class="boton" href="#carta">Ver la carta</a>
+          </div>
+        </div>
+        <div class="portada-burger">
+          <div class="sticker sticker--rojo" aria-hidden="true">¡Smash<br />de verdad!</div>
+          <div class="sticker sticker--blanco" aria-hidden="true">Abierto<br /><b>hasta las 2</b></div>
+          <div class="burger burger--portada" id="burger-portada" aria-hidden="true"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="marquesina" aria-hidden="true">
+      <div class="marquesina-pista">
+        <span>Smash ★ Cheddar doble ★ Pan de papa ★ Salsa Bunker ★ Colegiales ★ Hasta las 2 AM ★ </span>
+        <span>Smash ★ Cheddar doble ★ Pan de papa ★ Salsa Bunker ★ Colegiales ★ Hasta las 2 AM ★ </span>
+      </div>
+    </div>
+
+    <main>
+      <section class="carta" id="carta" aria-labelledby="t-carta">
+        <h2 id="t-carta" class="titulo"><span>Las de</span> la casa</h2>
+        <p class="sub">Tocá «Armala así» y la cargamos en el armador para que le cambies lo que quieras.</p>
+        <div class="grilla-carta" id="de-la-casa"></div>
+      </section>
+
+      <section class="armador" id="armador" aria-labelledby="t-armador">
+        <h2 id="t-armador" class="titulo titulo--claro">Armá <span>la tuya</span></h2>
+        <p class="sub sub--claro">Cada capa cae arriba de la anterior. Tocá una capa de la pila para sacarla.</p>
+
+        <div class="armador-grilla">
+          <div class="escenario-col">
+            <div class="escenario">
+              <div class="regla" aria-hidden="true">
+                <div class="regla-marca" id="regla-marca"><span id="regla-cm"></span></div>
+              </div>
+              <div class="burger burger--armador" id="burger" role="group" aria-label="Tu burger, de arriba hacia abajo"></div>
+            </div>
+            <div class="medidores" aria-live="polite">
+              <p class="medidor"><span class="medidor-rotulo">Altura</span><strong id="altura"></strong></p>
+              <p class="medidor"><span class="medidor-rotulo">Calorías aprox.</span><strong id="calorias"></strong></p>
+              <p class="veredicto" id="veredicto"></p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="caja">
+              <h3 class="caja-titulo"><span>1</span> Pan</h3>
+              <div class="segmentos" role="radiogroup" aria-label="Pan" id="panes"></div>
+            </div>
+
+            <div class="caja caja--doble">
+              <div>
+                <h3 class="caja-titulo" id="t-med"><span>2</span> Medallones</h3>
+                <div class="contador" role="group" aria-labelledby="t-med">
+                  <button type="button" class="contador-boton" data-menos="medallon" aria-label="Sacar un medallón">−</button>
+                  <output id="n-medallon" aria-live="polite">1</output>
+                  <button type="button" class="contador-boton" data-mas="medallon" aria-label="Sumar un medallón">+</button>
+                </div>
+                <p class="nota">90 g c/u · máx. 4</p>
+              </div>
+              <div>
+                <h3 class="caja-titulo" id="t-ched"><span>3</span> Cheddar</h3>
+                <div class="contador" role="group" aria-labelledby="t-ched">
+                  <button type="button" class="contador-boton" data-menos="cheddar" aria-label="Sacar una feta de cheddar">−</button>
+                  <output id="n-cheddar" aria-live="polite">1</output>
+                  <button type="button" class="contador-boton" data-mas="cheddar" aria-label="Sumar una feta de cheddar">+</button>
+                </div>
+                <p class="nota">Fetas · máx. 4</p>
+              </div>
+            </div>
+
+            <div class="caja">
+              <h3 class="caja-titulo"><span>4</span> Extras</h3>
+              <div class="extras" id="extras"></div>
+              <div class="caja-pie">
+                <button type="button" class="boton-texto" id="acomodar">Acomodar como la casa</button>
+                <button type="button" class="boton-texto" id="reiniciar">Empezar de nuevo</button>
+              </div>
+            </div>
+
+            <div class="caja">
+              <div class="combo-fila">
+                <h3 class="caja-titulo"><span>5</span> ¿Combo?</h3>
+                <button type="button" class="interruptor" id="combo" aria-pressed="false">
+                  <span class="interruptor-pista" aria-hidden="true"></span>
+                  <span id="combo-texto"></span>
+                </button>
+              </div>
+              <fieldset class="combo" id="combo-opciones" disabled>
+                <legend class="visual-oculto">Opciones del combo</legend>
+                <p class="combo-rotulo">Papas</p>
+                <div class="segmentos segmentos--chicos" role="radiogroup" aria-label="Papas" id="papas"></div>
+                <p class="combo-rotulo">Bebida</p>
+                <div class="segmentos segmentos--chicos" role="radiogroup" aria-label="Bebida" id="bebidas"></div>
+              </fieldset>
+            </div>
+
+            <div class="ticket">
+              <p class="ticket-titulo">Tu pedido</p>
+              <p class="ticket-desc" id="descripcion" aria-live="polite"></p>
+              <div class="ticket-fila">
+                <div class="contador contador--ticket" role="group" aria-label="Cantidad">
+                  <button type="button" class="contador-boton" id="menos-cant" aria-label="Una menos">−</button>
+                  <output id="cantidad" aria-live="polite">1</output>
+                  <button type="button" class="contador-boton" id="mas-cant" aria-label="Una más">+</button>
+                </div>
+                <p class="ticket-total" aria-live="polite"><span class="visual-oculto">Total: </span><span id="total"></span></p>
+              </div>
+              <a class="boton boton--rojo boton--ancho" id="pedir" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+              <p class="aviso" id="aviso" role="status"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="donde" id="donde" aria-labelledby="t-donde">
+        <div class="donde-caja">
+          <h2 id="t-donde" class="titulo">Dónde</h2>
+          <p class="donde-dir">Zabala 3510<br />Colegiales, CABA</p>
+          <p>A media cuadra de la plaza. Retiro en el mostrador o delivery en 3 km a la redonda.</p>
+        </div>
+        <dl class="donde-horarios">
+          <div><dt>Mar a jue</dt><dd>19 a 0 h</dd></div>
+          <div><dt>Vie y sáb</dt><dd>19 a 2 h</dd></div>
+          <div><dt>Domingo</dt><dd>12 a 16 · 19 a 0 h</dd></div>
+          <div><dt>Lunes</dt><dd>Limpiamos la plancha</dd></div>
+        </dl>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p class="pie-marca">Bunker</p>
+      <p>Pedidos por WhatsApp al 11 6033-0000 · @bunker.smash</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Bunker y sus precios son ficticios.</p>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

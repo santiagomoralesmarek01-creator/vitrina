@@ -1,0 +1,1554 @@
+:root {
+  --crema: #fff7e8;
+  --crema-2: #f7ecd6;
+  --salvia: #5f7d50;
+  --salvia-media: #87a271;
+  --salvia-clara: #dfe8cc;
+  --bosque: #2f4128;
+  --durazno: #f5ae86;
+  --durazno-claro: #fde2d0;
+  --durazno-oscuro: #c8663a;
+  --manteca: #f8d564;
+  --tinta: #2a2f22;
+  --tinta-suave: #5b6350;
+  --gris-mesa: #c9c4b6;
+  --display: 'Fraunces', Georgia, serif;
+  --sans: 'Karla', system-ui, sans-serif;
+  --radio: 28px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+}
+
+h2 em,
+h1 em {
+  font-style: italic;
+  font-weight: 800;
+}
+
+p,
+ul,
+dl,
+figure {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--durazno-oscuro);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.volanta {
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.volanta--salvia {
+  color: var(--salvia);
+}
+
+.volanta--crema {
+  color: var(--manteca);
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.98rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+}
+
+.boton--manteca {
+  background: var(--manteca);
+  color: var(--bosque);
+  box-shadow: 0 4px 0 var(--bosque);
+}
+
+.boton--manteca:hover {
+  box-shadow: 0 6px 0 var(--bosque);
+}
+
+.boton--linea {
+  border-color: var(--crema);
+  color: var(--crema);
+}
+
+.boton--salvia {
+  background: var(--salvia);
+  color: var(--crema);
+}
+
+.boton--texto {
+  background: none;
+  color: var(--salvia);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  padding: 0 12px;
+}
+
+/* ---------- Franja y tapa ---------- */
+.franja {
+  background: var(--bosque);
+  color: var(--salvia-clara);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 14px 16px;
+}
+
+.tapa {
+  position: relative;
+  background: var(--salvia);
+  color: var(--crema);
+  padding: 0 24px 90px;
+}
+
+.nav {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 0;
+}
+
+.logo {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2rem;
+  text-decoration: none;
+  letter-spacing: -0.03em;
+}
+
+.logo span {
+  color: var(--manteca);
+}
+
+.nav ul {
+  display: flex;
+  gap: 26px;
+  margin-left: auto;
+  font-weight: 600;
+}
+
+.nav ul a {
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.nav ul a:hover {
+  border-color: var(--manteca);
+}
+
+.nav-cta {
+  min-height: 42px;
+}
+
+.tapa-grilla {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding-top: 30px;
+}
+
+.tapa .volanta {
+  color: var(--manteca);
+}
+
+.tapa h1 {
+  font-size: clamp(3.4rem, 8.6vw, 7.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.tapa h1 em {
+  color: var(--durazno);
+}
+
+.bajada {
+  max-width: 34ch;
+  margin-top: 26px;
+  font-size: 1.15rem;
+  color: var(--salvia-clara);
+}
+
+.tapa-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.tapa-ilustra svg {
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin-left: auto;
+  overflow: visible;
+}
+
+.blob-durazno {
+  fill: var(--durazno);
+}
+
+.sol {
+  fill: var(--manteca);
+}
+
+.texto-circular {
+  font: 800 13.5px var(--sans);
+  letter-spacing: 0.32em;
+  fill: var(--crema);
+}
+
+.giro {
+  transform-origin: 210px 210px;
+  animation: girar 40s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.plato-svg {
+  fill: var(--crema);
+  filter: drop-shadow(0 14px 0 rgb(47 65 40 / 0.35));
+}
+
+.plato-borde {
+  fill: none;
+  stroke: var(--crema-2);
+  stroke-width: 3;
+}
+
+.medialuna {
+  fill: #dc9a4f;
+  stroke: #9c5d22;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.medialuna-linea {
+  fill: none;
+  stroke: #9c5d22;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.platito {
+  fill: var(--crema);
+  filter: drop-shadow(0 10px 0 rgb(47 65 40 / 0.3));
+}
+
+.taza {
+  fill: #fff;
+  stroke: var(--crema-2);
+  stroke-width: 3;
+}
+
+.cafe {
+  fill: #7a4a2a;
+}
+
+.espuma {
+  fill: #f1d7b5;
+}
+
+.asa {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.hoja {
+  fill: var(--salvia-media);
+}
+
+.ola {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 50px;
+  fill: var(--durazno);
+}
+
+/* ---------- Cinta ---------- */
+.cinta {
+  background: var(--durazno);
+  color: var(--bosque);
+  overflow: hidden;
+  padding: 6px 0 18px;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.cinta-pista {
+  display: flex;
+  width: max-content;
+  animation: correr 38s linear infinite;
+}
+
+@keyframes correr {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Secciones ---------- */
+main > section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 110px 24px 0;
+}
+
+/* ---------- Carta ---------- */
+.carta-cabeza {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.carta-cabeza h2 em {
+  color: var(--durazno-oscuro);
+}
+
+.llave-tipo {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--salvia-clara);
+  isolation: isolate;
+}
+
+.llave-tipo button {
+  position: relative;
+  z-index: 1;
+  min-width: 120px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--bosque);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.llave-tipo button[aria-checked='true'] {
+  color: var(--crema);
+}
+
+.llave-perilla {
+  position: absolute;
+  z-index: 0;
+  inset: 6px auto 6px 6px;
+  width: calc(50% - 6px);
+  border-radius: 999px;
+  background: var(--salvia);
+  transition: transform 0.35s cubic-bezier(0.5, 1.6, 0.4, 1), background 0.3s;
+}
+
+.llave-tipo[data-tipo='salado'] .llave-perilla {
+  transform: translateX(100%);
+  background: var(--durazno-oscuro);
+}
+
+.carta-cuerpo {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 56px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.platos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 40px;
+}
+
+.plato {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 0;
+  border-bottom: 2px dotted var(--gris-mesa);
+  animation: entra 0.5s backwards;
+  animation-delay: calc(var(--i) * 50ms);
+}
+
+@keyframes entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.plato h3 {
+  font-size: 1.45rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.plato p {
+  margin-top: 6px;
+  color: var(--tinta-suave);
+  font-size: 0.97rem;
+}
+
+.etiqueta {
+  display: inline-block;
+  vertical-align: 3px;
+  margin-left: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--durazno-claro);
+  color: #8f3f17;
+  font: 800 0.66rem/1.2 var(--sans);
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plato-precio {
+  flex: none;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--bosque);
+  background: var(--salvia-clara);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.bebidas {
+  position: relative;
+  padding: 34px 30px 30px;
+  background: var(--manteca);
+  border-radius: var(--radio) 120px var(--radio) var(--radio);
+}
+
+.bebidas h3 {
+  font-size: 1.8rem;
+  font-style: italic;
+  margin-bottom: 14px;
+  color: var(--bosque);
+}
+
+.bebidas li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgb(47 65 40 / 0.2);
+  font-weight: 600;
+}
+
+.bebidas li span:last-child {
+  flex: none;
+  white-space: nowrap;
+}
+
+.bebidas-nota {
+  margin-top: 16px;
+  font-size: 0.88rem;
+  color: #4f4a1f;
+}
+
+/* ---------- Combos ---------- */
+.combos h2 em {
+  color: var(--salvia);
+}
+
+.combos-grilla {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 26px;
+  margin-top: 44px;
+  align-items: stretch;
+}
+
+.combo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 32px 32px;
+  background: var(--durazno-claro);
+  border-radius: 60% 40% 48% 52% / 22% 26% 16% 18%;
+}
+
+.combo:nth-child(3) {
+  background: var(--salvia-clara);
+  border-radius: 42% 58% 40% 60% / 18% 22% 20% 24%;
+}
+
+.combo--estrella {
+  background: var(--bosque);
+  color: var(--crema);
+  border-radius: 38% 62% 54% 46% / 16% 20% 18% 22%;
+}
+
+.combo h3 {
+  font-size: 1.85rem;
+  font-style: italic;
+  line-height: 1.05;
+}
+
+.combo--estrella h3 {
+  font-size: 2.3rem;
+  color: var(--manteca);
+}
+
+.combo ul {
+  margin: 20px 0 24px;
+  display: grid;
+  gap: 6px;
+}
+
+.combo li {
+  padding-left: 22px;
+  position: relative;
+}
+
+.combo li::before {
+  content: '✺';
+  position: absolute;
+  left: 0;
+  color: var(--durazno-oscuro);
+}
+
+.combo--estrella li::before {
+  color: var(--durazno);
+}
+
+.combo-precio {
+  margin-top: auto;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 2.3rem;
+  letter-spacing: -0.02em;
+}
+
+.combo-detalle {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--tinta-suave);
+}
+
+.combo--estrella .combo-detalle {
+  color: var(--salvia-clara);
+}
+
+.combo-sello {
+  position: absolute;
+  top: -20px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  padding: 12px;
+  border-radius: 50%;
+  background: var(--manteca);
+  color: var(--bosque);
+  font-weight: 800;
+  font-size: 0.76rem;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transform: rotate(12deg);
+  box-shadow: 0 0 0 4px var(--bosque), 0 0 0 6px var(--manteca);
+}
+
+/* ---------- Reservas ---------- */
+main > section.reservas {
+  max-width: none;
+  margin-top: 120px;
+  padding: 90px 24px 100px;
+  background: var(--bosque);
+  color: var(--crema);
+  border-radius: 64px 64px 0 0;
+}
+
+.reservas-cabeza,
+.reservas-grilla {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.reservas h2 em {
+  color: var(--durazno);
+}
+
+.reservas .sub {
+  max-width: 56ch;
+  margin-top: 18px;
+  color: var(--salvia-clara);
+  font-size: 1.08rem;
+}
+
+.reservas-grilla {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  grid-template-areas:
+    'controles plano'
+    'controles ticket';
+  gap: 28px 36px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.controles {
+  grid-area: controles;
+  display: grid;
+  gap: 28px;
+}
+
+.control {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.control legend,
+.control label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--manteca);
+  padding: 0;
+}
+
+.dias {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.dia {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  padding: 10px 4px;
+  border: 2px solid rgb(255 247 232 / 0.18);
+  border-radius: 18px;
+  background: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.dia:hover:not(:disabled) {
+  border-color: var(--salvia-media);
+}
+
+.dia-nombre {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.dia-numero {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.dia-mes {
+  font-size: 0.74rem;
+  opacity: 0.75;
+}
+
+.dia[aria-checked='true'] {
+  background: var(--manteca);
+  border-color: var(--manteca);
+  color: var(--bosque);
+}
+
+.dia:disabled,
+.hora:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+  text-decoration: line-through;
+}
+
+.dia:disabled .dia-numero {
+  text-decoration: line-through;
+}
+
+.horas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.hora {
+  min-height: 42px;
+  border: 2px solid rgb(255 247 232 / 0.18);
+  border-radius: 999px;
+  background: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.hora:hover:not(:disabled) {
+  border-color: var(--salvia-media);
+}
+
+.hora[aria-checked='true'] {
+  background: var(--durazno);
+  border-color: var(--durazno);
+  color: var(--bosque);
+}
+
+.contador {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--crema);
+  color: var(--bosque);
+  padding: 5px;
+}
+
+.contador button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--salvia-clara);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contador button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.contador input {
+  width: 64px;
+  border: 0;
+  background: none;
+  text-align: center;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.8rem;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.contador input::-webkit-inner-spin-button,
+.contador input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pista {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  color: var(--salvia-clara);
+  opacity: 0.85;
+}
+
+.plano-caja {
+  grid-area: plano;
+  min-width: 0;
+  padding: 22px;
+  background: var(--crema);
+  color: var(--tinta);
+  border-radius: var(--radio);
+}
+
+.plano-arriba {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 24px;
+  margin-bottom: 14px;
+}
+
+.resumen {
+  font-size: 0.98rem;
+}
+
+.resumen strong {
+  color: var(--salvia);
+}
+
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.leyenda li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ref {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--bosque);
+}
+
+.ref--libre {
+  background: var(--durazno);
+}
+
+.ref--elegida {
+  background: var(--salvia);
+}
+
+.ref--ocupada {
+  background: var(--gris-mesa);
+  border-color: var(--gris-mesa);
+}
+
+.ref--no-entra {
+  background: var(--crema);
+  border-style: dashed;
+  border-color: #a39d8c;
+}
+
+.plano {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.piso {
+  fill: #fdf3df;
+}
+
+.zona-ventana {
+  fill: #fbe9cf;
+}
+
+.zona-patio {
+  fill: #e6eed8;
+}
+
+.divisoria {
+  stroke: var(--salvia-media);
+  stroke-width: 3;
+  stroke-dasharray: 2 8;
+  stroke-linecap: round;
+}
+
+.vidrio {
+  fill: #bfdde0;
+  stroke: var(--bosque);
+  stroke-width: 2;
+}
+
+.cocina {
+  fill: #ece2cc;
+}
+
+.barra {
+  fill: #b58a5c;
+  stroke: var(--bosque);
+  stroke-width: 2;
+}
+
+.paredes {
+  fill: none;
+  stroke: var(--bosque);
+  stroke-width: 6;
+}
+
+.puerta {
+  stroke: #fdf3df;
+  stroke-width: 8;
+}
+
+.puerta-giro {
+  fill: none;
+  stroke: var(--tinta-suave);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.planta circle {
+  fill: var(--salvia-media);
+}
+
+.planta .planta-brillo {
+  fill: #a9c290;
+}
+
+.rotulo-zona,
+.rotulo-barra,
+.rotulo-cocina,
+.rotulo-entrada {
+  font: 800 13px var(--sans);
+  letter-spacing: 0.22em;
+  fill: var(--tinta-suave);
+}
+
+.rotulo-barra {
+  fill: #fff7e8;
+  font-size: 11px;
+}
+
+.rotulo-cocina,
+.rotulo-entrada {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.mesa .golpe {
+  fill: transparent;
+}
+
+.mesa .silla {
+  fill: var(--crema);
+  stroke: var(--tinta-suave);
+  stroke-width: 2;
+}
+
+.mesa .tabla {
+  stroke-width: 3;
+}
+
+.mesa .numero {
+  font: 800 17px var(--display);
+  pointer-events: none;
+}
+
+.mesa--libre {
+  cursor: pointer;
+}
+
+.mesa--libre .tabla {
+  fill: var(--durazno);
+  stroke: var(--bosque);
+}
+
+.mesa--libre .silla {
+  stroke: var(--bosque);
+}
+
+.mesa--libre .numero {
+  fill: var(--bosque);
+}
+
+.mesa--libre:hover .tabla,
+.mesa--libre:focus-visible .tabla {
+  fill: var(--manteca);
+}
+
+.mesa--libre:focus-visible {
+  outline: none;
+}
+
+.mesa--libre:focus-visible .tabla {
+  stroke: var(--durazno-oscuro);
+  stroke-width: 5;
+}
+
+.mesa--elegida .tabla {
+  fill: var(--salvia);
+  stroke: var(--bosque);
+}
+
+.mesa--elegida .silla {
+  fill: var(--salvia-clara);
+  stroke: var(--bosque);
+}
+
+.mesa--elegida .numero {
+  fill: var(--crema);
+}
+
+.mesa--elegida {
+  cursor: pointer;
+}
+
+.mesa--elegida:focus-visible {
+  outline: none;
+}
+
+.mesa--elegida:focus-visible .tabla {
+  stroke: var(--durazno-oscuro);
+  stroke-width: 5;
+}
+
+.mesa--ocupada .tabla {
+  fill: var(--gris-mesa);
+  stroke: var(--gris-mesa);
+}
+
+.mesa--ocupada .silla {
+  fill: #e4dfd2;
+  stroke: #e4dfd2;
+}
+
+.mesa--ocupada .numero {
+  fill: #8d8778;
+}
+
+.mesa--no-entra .tabla {
+  fill: #fdf3df;
+  stroke: #a39d8c;
+  stroke-dasharray: 5 4;
+}
+
+.mesa--no-entra .silla {
+  stroke: #c3bdad;
+}
+
+.mesa--no-entra .numero {
+  fill: #8d8778;
+}
+
+.mesa--libre .tabla,
+.mesa--elegida .tabla {
+  transition: fill 0.2s;
+}
+
+.plano-info {
+  margin-top: 10px;
+  min-height: 1.5em;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+}
+
+/* Ticket */
+.ticket-caja {
+  grid-area: ticket;
+  min-width: 0;
+}
+
+.ticket {
+  position: relative;
+  padding: 28px 30px;
+  background: var(--durazno-claro);
+  color: var(--tinta);
+  border-radius: 20px;
+  animation: aparece 0.45s cubic-bezier(0.3, 1.4, 0.5, 1);
+  /* Borde dentado arriba, como un ticket cortado. */
+  -webkit-mask: radial-gradient(circle 9px at 50% 0, #0000 98%, #000) 50% 0 / 26px 51% repeat-x,
+    linear-gradient(#000 0 0) 0 100% / 100% 50% no-repeat;
+  mask: radial-gradient(circle 9px at 50% 0, #0000 98%, #000) 50% 0 / 26px 51% repeat-x,
+    linear-gradient(#000 0 0) 0 100% / 100% 50% no-repeat;
+}
+
+@keyframes aparece {
+  from {
+    opacity: 0;
+    transform: translateY(16px) rotate(-1deg);
+  }
+}
+
+.ticket--vacio {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgb(255 247 232 / 0.08);
+  color: var(--salvia-clara);
+  animation: none;
+  -webkit-mask: none;
+  mask: none;
+  border: 2px dashed rgb(255 247 232 / 0.25);
+}
+
+.ticket--vacio svg {
+  width: 56px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+}
+
+.ticket-ok {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--bosque);
+  margin-top: 4px;
+}
+
+.ticket dl {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 14px 24px;
+  margin-top: 18px;
+}
+
+.ticket dt {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8f3f17;
+}
+
+.ticket dd {
+  margin: 2px 0 0;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.ticket-corte {
+  margin: 22px -30px 18px;
+  border-top: 3px dashed rgb(42 47 34 / 0.25);
+}
+
+.ticket-rotulo {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.ticket-codigo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  letter-spacing: 0.08em;
+  color: var(--salvia);
+}
+
+.ticket-nota {
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: var(--tinta-suave);
+}
+
+.ticket-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.ticket-aviso {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--salvia);
+}
+
+.ticket-aviso:empty {
+  display: none;
+}
+
+/* ---------- Cómo llegar ---------- */
+main > section.llegar {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+  padding-bottom: 110px;
+}
+
+.llegar h2 em {
+  color: var(--durazno-oscuro);
+}
+
+.horario {
+  width: 100%;
+  margin-top: 34px;
+  border-collapse: collapse;
+}
+
+.horario th,
+.horario td {
+  padding: 14px 0;
+  border-bottom: 2px dotted var(--gris-mesa);
+  text-align: left;
+  font-weight: 600;
+}
+
+.horario td {
+  text-align: right;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+.horario tr.hoy th,
+.horario tr.hoy td {
+  color: var(--salvia);
+  font-weight: 800;
+}
+
+.hoy-marca {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--manteca);
+  color: var(--bosque);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+}
+
+address {
+  margin-top: 28px;
+  font-style: normal;
+  line-height: 1.8;
+  color: var(--tinta-suave);
+}
+
+address strong {
+  color: var(--tinta);
+  font-size: 1.1rem;
+}
+
+.mapa svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 180px 40px 180px 40px;
+  box-shadow: 14px 14px 0 var(--durazno);
+}
+
+.mapa-fondo {
+  fill: var(--crema-2);
+}
+
+.mapa-verde {
+  fill: var(--salvia-clara);
+}
+
+.calle {
+  stroke: #fffaf0;
+  stroke-width: 14;
+}
+
+.calle--ancha {
+  stroke-width: 24;
+}
+
+.via {
+  stroke: var(--tinta-suave);
+  stroke-width: 3;
+  stroke-dasharray: 10 6;
+  fill: none;
+}
+
+.mapa-rotulo {
+  font: 600 11px var(--sans);
+  letter-spacing: 0.08em;
+  fill: var(--tinta-suave);
+  text-transform: uppercase;
+}
+
+.mapa-rotulo--verde {
+  text-anchor: middle;
+  fill: var(--salvia);
+  font-weight: 800;
+}
+
+.subte {
+  fill: var(--durazno-oscuro);
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.subte-letra {
+  font: 800 14px var(--sans);
+  fill: #fff;
+  text-anchor: middle;
+}
+
+.pin path {
+  fill: var(--salvia);
+  stroke: var(--bosque);
+  stroke-width: 2;
+}
+
+.pin-centro {
+  fill: var(--manteca);
+}
+
+.mapa-marca {
+  font: italic 800 22px var(--display);
+  fill: var(--bosque);
+}
+
+/* ---------- Pie ---------- */
+.pie {
+  background: var(--salvia);
+  color: var(--crema);
+  text-align: center;
+  padding: 70px 24px 48px;
+  border-radius: 64px 64px 0 0;
+}
+
+.pie p {
+  margin-top: 6px;
+}
+
+.pie-grande {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+}
+
+.pie-grande em {
+  color: var(--manteca);
+}
+
+.pie-chico {
+  font-size: 0.85rem;
+  color: var(--salvia-clara);
+}
+
+.pie .firma-mrk {
+  margin-top: 22px;
+  font-family: var(--sans);
+  color: var(--manteca);
+  opacity: 1;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .carta-cuerpo {
+    grid-template-columns: 1fr;
+  }
+  .bebidas {
+    max-width: 520px;
+  }
+  .combos-grilla {
+    grid-template-columns: 1fr 1fr;
+  }
+  .combo--estrella {
+    grid-column: 1 / -1;
+  }
+  .reservas-grilla {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'controles' 'plano' 'ticket';
+  }
+  .controles {
+    grid-template-columns: 1fr 1fr;
+  }
+  .control--personas {
+    grid-column: 1 / -1;
+  }
+  .dias {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 16px;
+  }
+  .nav ul {
+    display: none;
+  }
+  .nav-cta {
+    margin-left: auto;
+  }
+  .tapa {
+    padding-bottom: 70px;
+  }
+  .tapa-grilla {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-top: 10px;
+  }
+  .tapa-ilustra svg {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  main > section {
+    padding-top: 80px;
+  }
+  .platos {
+    grid-template-columns: 1fr;
+  }
+  .combos-grilla {
+    grid-template-columns: 1fr;
+  }
+  .combo,
+  .combo:nth-child(3),
+  .combo--estrella {
+    border-radius: var(--radio) 80px var(--radio) var(--radio);
+  }
+  main > section.reservas {
+    padding: 70px 16px 70px;
+    border-radius: 40px 40px 0 0;
+  }
+  .controles {
+    grid-template-columns: 1fr;
+  }
+  .dias {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .plano-caja {
+    padding: 14px;
+    margin: 0 -6px;
+  }
+  .ticket {
+    padding: 26px 22px;
+  }
+  .ticket dl {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ticket-corte {
+    margin: 22px -22px 18px;
+  }
+  main > section.llegar {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .mapa svg {
+    border-radius: 100px 28px 100px 28px;
+    box-shadow: 8px 8px 0 var(--durazno);
+  }
+  .pie {
+    border-radius: 40px 40px 0 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .franja {
+    text-align: right;
+    font-size: 0.74rem;
+  }
+  main > section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .tapa {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .llave-tipo {
+    width: 100%;
+  }
+  .llave-tipo button {
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
