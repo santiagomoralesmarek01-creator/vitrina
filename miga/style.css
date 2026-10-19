@@ -1091,6 +1091,16 @@ input {
   .resumen {
     margin-top: 8px;
   }
+  /* Que el foco con teclado no quede tapado por el dibujo pegado arriba. */
+  .pasos-form :is(button, input) {
+    scroll-margin-top: 250px;
+  }
+}
+
+@media (max-width: 960px) and (max-height: 620px) {
+  .lamina {
+    position: relative;
+  }
 }
 
 @media (max-width: 720px) {
