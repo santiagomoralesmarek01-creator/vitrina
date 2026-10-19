@@ -13,7 +13,6 @@ import {
   buscarZona,
   cantidadTotal,
   costoEnvio,
-  desglose,
   entrega,
   linkWhatsApp,
   mensajeWhatsApp,
@@ -182,6 +181,13 @@ function pintarBandejas(ids: string[]) {
   anteriores = ids
 }
 
+// La barra del celu se esconde mientras la bandeja está a la vista (no tapa el botón de WhatsApp).
+let bandejaVisible = false
+new IntersectionObserver(([e]) => {
+  bandejaVisible = e.isIntersecting
+  $('barra-movil').hidden = bandejaVisible || cantidadTotal(pedido) === 0
+}).observe($('bandeja'))
+
 // ---------- Pintar ----------
 function pintar() {
   const ids = SABORES.flatMap((s) => Array<string>(pedido[s.id] ?? 0).fill(s.id))
@@ -207,7 +213,7 @@ function pintar() {
   $('bandeja-cuenta').innerHTML = pr.cantidad
     ? pr.cantidad % 12 === 0
       ? `<strong>${pr.cantidad}</strong> empanadas · ¡${pr.cantidad === 12 ? 'docena completa' : `${pr.cantidad / 12} docenas justas`}!`
-      : `<strong>${pr.cantidad}</strong> de ${Math.ceil(pr.cantidad / 12) * 12} · te faltan ${12 - (pr.cantidad % 12)} para la docena`
+      : `<strong>${pr.cantidad}</strong> de ${Math.ceil(pr.cantidad / 12) * 12} · ${12 - (pr.cantidad % 12) === 1 ? 'te falta 1' : `te faltan ${12 - (pr.cantidad % 12)}`} para la docena`
     : 'Tocá <strong>+</strong> en los gustos para llenar la bandeja.'
 
   document.querySelectorAll<HTMLButtonElement>('[data-coccion]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.coccion === coccion)))
@@ -267,7 +273,7 @@ function pintar() {
   if (listo) $('motivo').textContent = ''
 
   // Barra flotante en el celu.
-  $('barra-movil').hidden = pr.cantidad === 0
+  $('barra-movil').hidden = pr.cantidad === 0 || bandejaVisible
   $('barra-movil-texto').innerHTML = `<strong>${pr.cantidad}</strong> empanada${pr.cantidad === 1 ? '' : 's'} · ${formatPesos(pr.total + envio)}`
 
   guardar()

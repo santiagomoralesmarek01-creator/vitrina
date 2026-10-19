@@ -465,8 +465,14 @@ a {
 }
 
 .progreso a.progreso--cambiado .progreso-nombre::after {
-  content: ' ·';
-  color: var(--sangre);
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: var(--sangre);
+  vertical-align: 2px;
 }
 
 .paso {
