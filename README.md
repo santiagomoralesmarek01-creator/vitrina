@@ -14,6 +14,14 @@ como trabajos para clientes ficticios.
 | [Neblina](neblina/) | Carta de bar de tragos | Art déco nocturno, dorado sobre negro | Test que recomienda un trago, perfil de sabor en radar SVG, cuenta regresiva del happy hour |
 | [Filo](filo/) | App: turnero de barbería | Sobria, blanco y negro con acento ámbar | Reserva en 5 pasos con horarios ocupados, "Mis turnos" guardados, descarga del evento `.ics` |
 | [Mercadito Verde](mercadito/) | App: panel de ventas | Dashboard limpio con modo claro y oscuro | KPIs vs. período anterior, gráfico con cruz y tooltip (o vista de tabla), filtro 7/30/90 días, tabla ordenable con búsqueda |
+| [Kaze](kaze/) | Carta de sushi y nikkei | Editorial japonés: washi, tinta sumi y sello bermellón | Combinado que llena la bandeja pieza por pieza, filtros crudo / cocido / veggie, omakase con lugares |
+| [Polo Sur](polo/) | Carta de heladería | Pastel y redondeada, con pingüino de mascota | Bochas que se apilan con el color de cada sabor, envases con límite de sabores, filtros sin TACC y veganos |
+| [Miga](miga/) | App: tortas por encargo | Pastelería editorial en rosa y chocolate | Configurador que dibuja la torta en vivo, calendario de retiro con 48 h de aviso, seña del 50 % |
+| [Bunker](bunker/) | Carta de hamburguesería | Neo-brutalista callejera: mostaza, negro y ketchup | Burger que crece capa por capa, medidor de altura y calorías, combos y "las de la casa" precargadas |
+| [Domingo](domingo/) | App: brunch y reservas | Salvia, crema y durazno, serif en cursiva | Reserva eligiendo la mesa en el plano del salón, carta dulce / salada, combos |
+| [Lúpulo](lupulo/) | Carta de cervecería | Etiqueta artesanal: kraft, tinta y cobre | Vasos con el color real de cada cerveza, filtros por amargor y alcohol, vuelo de degustación de 4 |
+| [Raíz](raiz/) | Landing de restaurante de autor | Alta cocina en blanco hueso, Didone y dibujos de una línea | Menú de siete pasos que se revela al bajar, maridaje y versiones vegetariana / sin TACC, reserva con seña |
+| [La Norteña](nortena/) | Carta de empanadas | Folclore norteño: guardas de aguayo en CSS | Docena mixta que llena la bandeja, mejor precio entre docenas / medias / sueltas, zonas de envío |
 
 La página de inicio es una galería: al pasar el mouse por cada tarjeta se
 recorre la captura completa de la página, y se puede filtrar por tipo.
