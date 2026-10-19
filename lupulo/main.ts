@@ -290,7 +290,7 @@ function pintarVuelo() {
     .map((i) => {
       const c = vuelo[i] ? porNumero(vuelo[i]) : null
       return c
-        ? `<li><strong>${c.nombre}</strong><span>${c.estilo} · ${c.abv.toFixed(1).replace('.', ',')} %</span></li>`
+        ? `<li><strong>${c.nombre}</strong><span>${c.estilo}<i class="vn-sep"> · </i><i>${c.abv.toFixed(1).replace('.', ',')}&nbsp;%</i></span></li>`
         : `<li class="libre"><strong>Probeta ${i + 1}</strong><span>sin elegir</span></li>`
     })
     .join('')

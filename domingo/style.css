@@ -564,7 +564,7 @@ main > section {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 40px 32px 32px;
+  padding: 40px 32px 52px;
   background: var(--durazno-claro);
   border-radius: 60% 40% 48% 52% / 22% 26% 16% 18%;
 }
@@ -589,6 +589,8 @@ main > section {
 .combo--estrella h3 {
   font-size: 2.3rem;
   color: var(--manteca);
+  padding-right: 84px;
+  text-wrap: balance;
 }
 
 .combo ul {
@@ -1437,13 +1439,8 @@ address strong {
     grid-template-columns: 1fr;
     grid-template-areas: 'controles' 'plano' 'ticket';
   }
-  .controles {
-    grid-template-columns: 1fr 1fr;
-  }
-  .control--personas {
-    grid-column: 1 / -1;
-  }
-  .dias {
+  .dias,
+  .horas {
     grid-template-columns: repeat(7, 1fr);
   }
 }
@@ -1484,6 +1481,22 @@ address strong {
   .combo--estrella {
     border-radius: var(--radio) 80px var(--radio) var(--radio);
   }
+  .combo--estrella {
+    margin-top: 20px;
+    padding-top: 74px;
+  }
+  .combo--estrella h3 {
+    font-size: 2.1rem;
+    padding-right: 0;
+    text-wrap: balance;
+  }
+  .combo-sello {
+    width: 96px;
+    height: 96px;
+    font-size: 0.7rem;
+    top: -26px;
+    right: 14px;
+  }
   main > section.reservas {
     padding: 70px 16px 70px;
     border-radius: 40px 40px 0 0;
@@ -1491,7 +1504,8 @@ address strong {
   .controles {
     grid-template-columns: 1fr;
   }
-  .dias {
+  .dias,
+  .horas {
     grid-template-columns: repeat(4, 1fr);
   }
   .plano-caja {

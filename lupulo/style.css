@@ -176,7 +176,7 @@ input {
   font-size: clamp(5rem, 17vw, 11.5rem);
   letter-spacing: 0.02em;
   line-height: 0.86;
-  margin: 0.16em 0 12px;
+  margin: 0.3em 0 12px;
   /* Tinta corrida, como un sello de goma. */
   text-shadow: 3px 3px 0 var(--ambar-oscuro);
 }
@@ -850,6 +850,10 @@ main > section {
   color: rgb(245 230 200 / 0.7);
 }
 
+.vuelo-nombres i {
+  font-style: normal;
+}
+
 .vuelo-nombres .libre strong {
   color: rgb(245 230 200 / 0.45);
 }
@@ -982,6 +986,7 @@ main > section {
 }
 
 .cuenta-detalle {
+  margin-top: 6px;
   font-size: 0.8rem;
   color: var(--tinta-suave);
 }
@@ -1068,7 +1073,7 @@ main > section.happy {
 .happy h2 {
   margin-top: 18px;
   font-size: clamp(4.4rem, 10vw, 7.4rem);
-  line-height: 0.82;
+  line-height: 0.9;
   color: var(--ambar);
   text-shadow: 4px 4px 0 var(--tinta);
 }
@@ -1269,7 +1274,12 @@ main > section.happy {
     padding: 64px 16px 0;
   }
   .titulo-seccion {
-    gap: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .titulo-num {
+    font-size: 3.4rem;
   }
   .filtros {
     grid-template-columns: 1fr;
@@ -1287,7 +1297,16 @@ main > section.happy {
     grid-template-columns: 1fr;
   }
   .elegir-lista {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+  .opcion-nombre {
+    flex: 1;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    column-gap: 10px;
+  }
+  .opcion-nombre small {
+    text-align: right;
   }
   .tabla-caja {
     padding: 18px 12px 16px;
@@ -1302,6 +1321,12 @@ main > section.happy {
   }
   .vuelo-nombres span {
     font-size: 0.62rem;
+  }
+  .vuelo-nombres .vn-sep {
+    display: none;
+  }
+  .vuelo-nombres i {
+    display: block;
   }
   .vuelo-panel {
     padding: 16px 14px;

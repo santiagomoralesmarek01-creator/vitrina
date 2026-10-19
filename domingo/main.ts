@@ -198,7 +198,7 @@ function dibujarSalon() {
     el('text', { x: 540, y: 400, class: 'rotulo-zona', 'text-anchor': 'middle' }, 'PATIO'),
     el('text', { x: 240, y: 390, class: 'rotulo-barra', 'text-anchor': 'middle' }, 'BARRA'),
     el('text', { x: 60, y: 356, class: 'rotulo-cocina', 'text-anchor': 'middle' }, 'COCINA'),
-    el('text', { x: 402, y: 400, class: 'rotulo-entrada', 'text-anchor': 'middle' }, 'ENTRADA'),
+    el('text', { x: 410, y: 400, class: 'rotulo-entrada', 'text-anchor': 'middle' }, 'ENTRADA'),
   )
   return fondo
 }
