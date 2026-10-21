@@ -1,7 +1,7 @@
 // Interfaz de los armadores (ver nucleo/armadores.js). Cada uno devuelve una <section class="armador">
 // lista para insertar; el aspecto base está en nucleo/armadores.css y cada plantilla lo ajusta
 // con sus variables.
-import { box, burger, juntada, mitades, vianda } from "./armadores.js";
+import { box, burger, cafe, juntada, menu, mitades, pizza, vianda } from "./armadores.js";
 import { dibujoPara, svgDibujo } from "./dibujos.js";
 import { formatearPesos } from "./formato.js";
 import { crear, svg } from "./pagina.js";
@@ -11,7 +11,7 @@ export function armadores(local, carrito) {
   return (local.armadores ?? []).map((cfg) => ARMADORES[cfg.tipo]?.(local, cfg, carrito)).filter(Boolean);
 }
 
-const ARMADORES = { vianda: armadorVianda, box: armadorBox, burger: armadorBurger, mitades: armadorMitades, juntada: armadorJuntada };
+const ARMADORES = { vianda: armadorVianda, box: armadorBox, burger: armadorBurger, mitades: armadorMitades, juntada: armadorJuntada, cafe: armadorCafe, pizza: armadorPizza, menu: armadorMenu };
 
 function cabeza(cfg, tituloPorDefecto, bajadaPorDefecto) {
   return crear(
@@ -315,6 +315,16 @@ function armadorBurger(local, cfg, carrito) {
 
 // ---------- Pizza por mitades ----------
 
+/** Capa de queso: un círculo apenas ondulado, centrado en la pizza de 240 × 240. */
+function queso(radio) {
+  const puntos = Array.from({ length: 36 }, (_, i) => {
+    const a = (i / 36) * Math.PI * 2;
+    const r = radio * (1 + 0.025 * Math.sin(a * 5) + 0.015 * Math.cos(a * 3));
+    return `${(120 + r * Math.cos(a)).toFixed(1)} ${(120 + r * Math.sin(a)).toFixed(1)}`;
+  });
+  return `<path d="M${puntos.join("L")}Z" fill="#f6d98c" stroke="none" stroke-linejoin="round"/>`;
+}
+
 // Lugares fijos de los ingredientes en cada mitad (x, y sobre la pizza de 240 × 240, mitad izquierda).
 const LUGARES = [[70, 70], [52, 118], [82, 160], [100, 104], [62, 190], [104, 52], [96, 200], [40, 152], [108, 148]];
 const INGREDIENTE = {
@@ -356,10 +366,10 @@ export function dibujoPizza(izq, der, activa) {
     <defs><clipPath id="mitad-izq"><rect x="0" y="0" width="120" height="240"/></clipPath><clipPath id="mitad-der"><rect x="120" y="0" width="120" height="240"/></clipPath></defs>
     <circle cx="120" cy="120" r="114" fill="#d99a4e" stroke="#a8692c" stroke-width="3"/>
     <circle cx="120" cy="120" r="100" fill="#d1453b"/>
-    <path d="M120 26q20-2 34 6t30 12 18 28 6 30-4 32-18 26-30 18-36 6-34-4-28-18-18-30-6-32 8-30 22-26 30-14 24-4z" fill="#f6d98c"/>
+    ${queso(88)}
     <circle cx="82" cy="88" r="10" fill="#fbe7b0"/><circle cx="160" cy="152" r="12" fill="#fbe7b0"/><circle cx="152" cy="70" r="8" fill="#fbe7b0"/><circle cx="88" cy="170" r="9" fill="#fbe7b0"/>
     ${mitadPizza(izq, "izq")}${mitadPizza(der, "der")}
-    <path d="M120 10v220" stroke="#a8692c" stroke-width="2" stroke-dasharray="4 6"/>
+    ${izq === der ? "" : `<path d="M120 10v220" stroke="#a8692c" stroke-width="2" stroke-dasharray="4 6"/>`}
     ${sombra("izq")}${sombra("der")}
   </svg>`);
 }
@@ -534,6 +544,305 @@ function armadorJuntada(local, cfg, carrito) {
     { className: "armador armador-juntada", id: "armador-juntada" },
     cabeza(cfg, "¿Cuántas pizzas pido?", "Decinos cuántos son y cuánta hambre hay. Te armamos el pedido para la juntada."),
     crear("div", { className: "juntada-cuerpo" }, crear("div", { className: "juntada-controles" }, contador, nivel, chips, extras), mesa),
+    r.caja,
+  );
+}
+
+// ---------- Café a tu medida ----------
+
+/**
+ * Taza (caliente) o vaso con hielo (frío), del tamaño elegido, con las capas de la bebida de abajo
+ * hacia arriba: café, leche y espuma; arriba, los extras (crema, caramelo, canela).
+ */
+export function dibujoCafe(cfg, eleccion) {
+  const r = cafe.calcular(cfg, eleccion);
+  const escala = r.tamanio.escala ?? 1;
+  const capas = r.bebida.capas ?? { cafe: 1, leche: 0, espuma: 0 };
+  const shot = r.extras.some((x) => x.id === "shot");
+  const conLeche = !!r.leche;
+  const colorLeche = r.leche?.id === "avena" ? "#e6d1a8" : r.leche?.id === "almendras" ? "#efdcc0" : "#f1e2c8";
+  const alto = Math.round(120 * escala);
+  const ancho = Math.round(r.frio ? 78 * escala : 104 * escala);
+  const x0 = 100 - ancho / 2;
+  const base = 196;
+  const tope = base - alto;
+  // Lo que se llena: casi hasta el borde, salvo las bebidas cortas (`llenado` < 1, como el espresso).
+  const lleno = (alto - 12) * (r.bebida.llenado ?? 1);
+  const partes = [
+    ["cafe", shot ? "#2f1a0e" : "#4a2a17", capas.cafe],
+    ["leche", colorLeche, conLeche ? capas.leche : 0],
+    ["espuma", "#fbf3e4", conLeche || r.bebida.id === "espresso" ? capas.espuma : 0],
+  ];
+  const totalProp = partes.reduce((s, p) => s + p[2], 0) || 1;
+  let y = base - 6;
+  let capasSvg = "";
+  for (const [clase, color, prop] of partes) {
+    if (!prop) continue;
+    const h = (lleno * prop) / totalProp;
+    // En el espresso, la espuma es la crema: dorada.
+    const relleno = clase === "espuma" && r.bebida.id === "espresso" ? "#c98b47" : color;
+    capasSvg += `<rect class="cafe-capa" x="${x0 + 4}" y="${(y - h).toFixed(1)}" width="${ancho - 8}" height="${h.toFixed(1)}" fill="${relleno}"/>`;
+    y -= h;
+  }
+  let hielo = "";
+  if (r.frio) {
+    for (const [dx, dy, g] of [[-18, 30, 8], [10, 18, -10], [-6, 52, 14], [16, 62, -6]]) {
+      hielo += `<rect x="${100 + dx * escala - 9}" y="${tope + dy * escala}" width="18" height="18" rx="4" fill="#ffffff" opacity=".55" stroke="#bfe3f2" stroke-width="1.5" transform="rotate(${g} ${100 + dx * escala} ${tope + dy * escala + 9})"/>`;
+    }
+  }
+  let arriba = "";
+  if (r.extras.some((x) => x.id === "crema")) arriba += `<path d="M${x0 + 6} ${tope + 12}c0-22 ${ancho - 12} -22 ${ancho - 12} 0z" fill="#fffaf2" stroke="#e7d9c3" stroke-width="2"/><path d="M${100 - 10} ${tope - 2}q10-14 20 0" fill="#fffaf2" stroke="#e7d9c3" stroke-width="2"/>`;
+  if (r.extras.some((x) => x.id === "caramelo")) arriba += `<path d="M${x0 + 10} ${tope + 10}q${ancho / 4} -10 ${ancho / 2 - 10} 0t${ancho / 2 - 10} 0" fill="none" stroke="#c87a2a" stroke-width="4" stroke-linecap="round"/>`;
+  if (r.extras.some((x) => x.id === "canela")) arriba += [[-14, 6], [6, 4], [16, 9], [-2, 10], [-22, 9]].map(([dx, dy]) => `<circle cx="${100 + dx}" cy="${tope + dy}" r="1.6" fill="#7a3e1a"/>`).join("");
+  const vaso = r.frio
+    ? `<path d="M${x0} ${tope}h${ancho}l-6 ${alto}h-${ancho - 12}z" fill="rgb(255 255 255 / .18)" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M${100 + 8} ${tope - 30}l-6 ${alto + 10}" stroke="#d1453b" stroke-width="5" stroke-linecap="round"/>`
+    : `<path d="M${x0} ${tope}h${ancho}v${alto - 22}a22 22 0 0 1-22 22h-${ancho - 44}a22 22 0 0 1-22-22z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M${x0 + ancho} ${tope + 22}h10a18 18 0 0 1 0 36h-12" fill="none" stroke="currentColor" stroke-width="3"/><ellipse cx="100" cy="${base + 8}" rx="${ancho / 2 + 26}" ry="8" fill="currentColor" opacity=".18"/>`;
+  const humo = r.frio ? "" : `<path class="cafe-humo" d="M92 ${tope - 10}q-6-8 0-16t0-16M108 ${tope - 12}q-6-8 0-16t0-16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".5"/>`;
+  const clip = `cafe-clip-${r.frio ? "f" : "c"}`;
+  const forma = r.frio ? `<path d="M${x0} ${tope}h${ancho}l-6 ${alto}h-${ancho - 12}z"/>` : `<path d="M${x0} ${tope}h${ancho}v${alto - 22}a22 22 0 0 1-22 22h-${ancho - 44}a22 22 0 0 1-22-22z"/>`;
+  return svg(`<svg class="cafe-dibujo" viewBox="0 0 200 220" role="img" aria-label="${r.bebida.nombre}, ${cafe.describir(cfg, eleccion)}">
+    <defs><clipPath id="${clip}">${forma}</clipPath></defs>
+    ${humo}
+    <g clip-path="url(#${clip})">${capasSvg}${hielo}</g>
+    ${vaso}${arriba}
+  </svg>`);
+}
+
+function armadorCafe(local, cfg, carrito) {
+  let e = cafe.inicial(cfg);
+  const escena = crear("div", { className: "cafe-escena" });
+  const opciones = crear("div", { className: "cafe-opciones" });
+  const r = resumen("Tu café");
+
+  const grupo = (titulo, lista, activo, elegir, rotulo) =>
+    crear(
+      "div",
+      { className: "cafe-grupo" },
+      crear("p", { className: "cafe-grupo-titulo" }, titulo),
+      crear(
+        "div",
+        { className: "cafe-botones", role: "radiogroup", "aria-label": titulo },
+        lista.map((x) => crear("button", { type: "button", role: "radio", "aria-checked": String(activo === x.id), onclick: () => elegir(x.id) }, x.nombre, rotulo(x) ? crear("small", {}, rotulo(x)) : null)),
+      ),
+    );
+
+  function pintar() {
+    escena.replaceChildren(dibujoCafe(cfg, e));
+    const mas = (n) => (n ? `+${formatearPesos(n)}` : "");
+    opciones.replaceChildren(
+      ...[
+        grupo("Bebida", cfg.bebidas, e.bebida, (id) => ((e = { ...e, bebida: id }), pintar()), (b) => formatearPesos(b.precio)),
+        grupo("Tamaño", cfg.tamanios, e.tamanio, (id) => ((e = { ...e, tamanio: id }), pintar()), (t) => mas(t.extra)),
+        cafe.llevaLeche(cfg, e) && cfg.leches?.length ? grupo("Leche", cfg.leches, e.leche, (id) => ((e = { ...e, leche: id }), pintar()), (l) => mas(l.extra)) : null,
+        cfg.extras?.length
+          ? crear(
+              "div",
+              { className: "cafe-grupo" },
+              crear("p", { className: "cafe-grupo-titulo" }, "Extras"),
+              crear(
+                "div",
+                { className: "cafe-botones" },
+                cfg.extras.map((x) =>
+                  crear(
+                    "button",
+                    {
+                      type: "button",
+                      "aria-pressed": String(e.extras.includes(x.id)),
+                      onclick: () => ((e = { ...e, extras: e.extras.includes(x.id) ? e.extras.filter((y) => y !== x.id) : [...e.extras, x.id] }), pintar()),
+                    },
+                    x.nombre,
+                    crear("small", {}, x.precio ? `+${formatearPesos(x.precio)}` : "sin cargo"),
+                  ),
+                ),
+              ),
+            )
+          : null,
+        cfg.frio
+          ? crear(
+              "div",
+              { className: "cafe-grupo cafe-temperatura", role: "radiogroup", "aria-label": "Temperatura" },
+              crear("button", { type: "button", role: "radio", "aria-checked": String(!e.frio), onclick: () => ((e = { ...e, frio: false }), pintar()) }, "Caliente"),
+              crear("button", { type: "button", role: "radio", "aria-checked": String(e.frio), onclick: () => ((e = { ...e, frio: true }), pintar()) }, "Frío", cfg.frio.extra ? crear("small", {}, `+${formatearPesos(cfg.frio.extra)}`) : null),
+            )
+          : null,
+      ].filter(Boolean),
+    );
+    const c = cafe.calcular(cfg, e);
+    r.precio.textContent = formatearPesos(c.total);
+    r.nota.textContent = `${c.bebida.nombre}${c.frio ? " frío" : ""} · ${cafe.describir(cfg, e)}`;
+  }
+
+  r.boton.addEventListener("click", () => carrito.agregar(cafe.id(cfg, e)));
+
+  pintar();
+  return crear(
+    "section",
+    { className: "armador armador-cafe", id: "armador-cafe" },
+    cabeza(cfg, "Café a tu medida", "Elegí la bebida, el tamaño y la leche, y mirá cómo queda."),
+    crear("div", { className: "cafe-cuerpo" }, escena, opciones),
+    r.caja,
+  );
+}
+
+// ---------- Pizza desde cero ----------
+
+const SALSAS = { tomate: "#d1453b", blanca: "#f3ead6", picante: "#b5291f" };
+const MASAS = { piedra: { color: "#e2a65a", borde: 8 }, molde: { color: "#d99a4e", borde: 16 }, integral: { color: "#a8713e", borde: 11 } };
+
+/** Pizza entera vista desde arriba con la salsa, la masa y los ingredientes repartidos por toda la superficie. */
+export function dibujoPizzaArmada(cfg, e) {
+  const r = pizza.calcular(cfg, e);
+  const masa = MASAS[r.masa.id] ?? MASAS.piedra;
+  const salsa = SALSAS[r.salsa.id] ?? SALSAS.tomate;
+  const interior = 114 - masa.borde;
+  let piezas = "";
+  r.ingredientes.forEach((ing, i) => {
+    const dibujo = INGREDIENTE[ing.cubierta];
+    if (!dibujo) return;
+    // Mitad izquierda y su espejo: cada ingrediente toma lugares alternados según su orden.
+    LUGARES.forEach(([x, y], j) => {
+      if (j % r.ingredientes.length !== i) return;
+      piezas += dibujo(x, y) + `<g transform="matrix(-1 0 0 1 240 0)">${dibujo(x + 6, 240 - y)}</g>`;
+    });
+  });
+  return svg(`<svg class="pizza-dibujo pizza-armada" viewBox="0 0 240 240" role="img" aria-label="${pizza.describir(cfg, e)}">
+    <circle cx="120" cy="120" r="114" fill="${masa.color}" stroke="#8a5424" stroke-width="3"/>
+    <circle cx="120" cy="120" r="${interior}" fill="${salsa}"/>
+    ${queso(interior - 10)}
+    <circle cx="86" cy="92" r="9" fill="#fbe7b0"/><circle cx="158" cy="150" r="11" fill="#fbe7b0"/><circle cx="150" cy="74" r="7" fill="#fbe7b0"/><circle cx="92" cy="166" r="8" fill="#fbe7b0"/>
+    <defs><clipPath id="pizza-armada-${r.masa.id}"><circle cx="120" cy="120" r="${interior}"/></clipPath></defs>
+    <g clip-path="url(#pizza-armada-${r.masa.id})">${piezas}</g>
+  </svg>`);
+}
+
+function armadorPizza(local, cfg, carrito) {
+  let e = pizza.inicial(cfg);
+  const escena = crear("div", { className: "pizza-escena" });
+  const opciones = crear("div", { className: "cafe-opciones" });
+  const r = resumen("Tu pizza");
+
+  const grupo = (titulo, lista, activo, elegir, rotulo) =>
+    crear(
+      "div",
+      { className: "cafe-grupo" },
+      crear("p", { className: "cafe-grupo-titulo" }, titulo),
+      crear("div", { className: "cafe-botones", role: "radiogroup", "aria-label": titulo }, lista.map((x) => crear("button", { type: "button", role: "radio", "aria-checked": String(activo === x.id), onclick: () => elegir(x.id) }, x.nombre, crear("small", {}, rotulo(x))))),
+    );
+
+  function pintar() {
+    escena.replaceChildren(dibujoPizzaArmada(cfg, e));
+    const c = pizza.calcular(cfg, e);
+    opciones.replaceChildren(
+      grupo("Masa", cfg.masas, e.masa, (id) => ((e = { ...e, masa: id }), pintar()), (m) => formatearPesos(m.precio)),
+      grupo("Salsa", cfg.salsas, e.salsa, (id) => ((e = { ...e, salsa: id }), pintar()), (x) => (x.extra ? `+${formatearPesos(x.extra)}` : "incluida")),
+      crear(
+        "div",
+        { className: "cafe-grupo" },
+        crear("p", { className: "cafe-grupo-titulo" }, `Ingredientes · ${c.quedan === 0 ? "llegaste al máximo" : `te ${c.quedan === 1 ? "queda 1" : `quedan ${c.quedan}`}`}`),
+        crear(
+          "div",
+          { className: "cafe-botones pizza-ingredientes" },
+          cfg.ingredientes.map((i) => {
+            const puesto = e.ingredientes.includes(i.id);
+            return crear(
+              "button",
+              { type: "button", "aria-pressed": String(puesto), disabled: !puesto && c.quedan === 0, onclick: () => ((e = pizza.alternar(cfg, e, i.id)), pintar()) },
+              i.nombre,
+              crear("small", {}, `+${formatearPesos(i.precio)}`),
+            );
+          }),
+        ),
+      ),
+    );
+    r.precio.textContent = formatearPesos(c.total);
+    r.nota.textContent = pizza.describir(cfg, e);
+  }
+
+  r.boton.addEventListener("click", () => {
+    carrito.agregar(pizza.id(e));
+    e = pizza.inicial(cfg);
+    pintar();
+  });
+
+  pintar();
+  return crear(
+    "section",
+    { className: "armador armador-pizza", id: "armador-pizza" },
+    cabeza(cfg, "Armá tu pizza", "Elegí la masa, la salsa y los ingredientes."),
+    crear("div", { className: "pizza-cuerpo" }, escena, opciones),
+    r.caja,
+  );
+}
+
+// ---------- Menú del día ----------
+
+/** Día de la semana (0 = domingo) y fecha larga de hoy, en hora argentina. */
+function hoyEnArgentina(fecha = new Date()) {
+  const zona = "America/Argentina/Buenos_Aires";
+  const dia = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(new Intl.DateTimeFormat("en-US", { timeZone: zona, weekday: "short" }).format(fecha));
+  const texto = new Intl.DateTimeFormat("es-AR", { timeZone: zona, weekday: "long", day: "numeric", month: "long" }).format(fecha);
+  return { dia, texto };
+}
+
+function armadorMenu(local, cfg, carrito) {
+  const hoy = hoyEnArgentina();
+  let eleccion = {};
+  const pasos = crear("ol", { className: "menu-pasos" });
+  const bandeja = crear("div", { className: "menu-bandeja", "aria-label": "Tu bandeja" });
+  const r = resumen("Tu menú");
+
+  function pintar() {
+    pasos.replaceChildren(
+      ...cfg.pasos.map((paso) =>
+        crear(
+          "li",
+          { className: "menu-paso" },
+          crear("p", { className: "cafe-grupo-titulo" }, paso.delDia ? `${paso.nombre} · el de hoy` : paso.nombre),
+          crear(
+            "div",
+            { className: "cafe-botones", role: "radiogroup", "aria-label": paso.nombre },
+            menu.opciones(paso, hoy.dia).map((o) =>
+              crear(
+                "button",
+                { type: "button", role: "radio", "aria-checked": String(eleccion[paso.id] === o.id), onclick: () => ((eleccion = { ...eleccion, [paso.id]: o.id }), pintar()) },
+                o.nombre,
+                o.extra ? crear("small", {}, `+${formatearPesos(o.extra)}`) : null,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    const c = menu.calcular(cfg, eleccion);
+    bandeja.replaceChildren(
+      ...c.elegidos.map(({ paso, opcion }, i) => {
+        const nombreDibujo = opcion ? dibujoPara({ id: opcion.id, nombre: opcion.nombre }) : null;
+        return crear(
+          "div",
+          { className: `menu-hueco${i === 0 ? " menu-hueco-plato" : ""}`, "data-lleno": opcion ? "" : null },
+          nombreDibujo ? svg(svgDibujo(nombreDibujo, "menu-dibujo")) : null,
+          crear("span", { className: "menu-hueco-nombre" }, opcion?.nombre ?? paso.nombre),
+        );
+      }),
+    );
+    r.precio.textContent = formatearPesos(c.total);
+    r.nota.textContent = c.completo ? "Menú completo" : `Falta: ${c.faltan.join(", ").toLowerCase()}`;
+    r.boton.disabled = !c.completo;
+  }
+
+  r.boton.addEventListener("click", () => {
+    carrito.agregar(menu.id(cfg, eleccion));
+    eleccion = {};
+    pintar();
+  });
+
+  pintar();
+  return crear(
+    "section",
+    { className: "armador armador-menu", id: "armador-menu" },
+    cabeza({ ...cfg, volanta: cfg.volanta ? `${cfg.volanta} · ${hoy.texto}` : hoy.texto }, "Menú del día", "Plato, guarnición, bebida y postre a precio fijo."),
+    crear("div", { className: "menu-cuerpo" }, bandeja, pasos),
     r.caja,
   );
 }

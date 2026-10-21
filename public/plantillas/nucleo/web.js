@@ -89,6 +89,8 @@ function pie(local, extra) {
  * Web de pedidos (o carta del salón con data-modo="salon").
  * opciones.dibujo: SVG (texto) de la portada. opciones.textos: reemplaza títulos de TEXTOS.
  * opciones.puntos: línea de puntos en la carta.
+ * opciones.portada(piezas): arma la portada propia de la plantilla con las piezas (estado, título,
+ *   bajada, botones, dibujo); devuelve un elemento o una lista. opciones.cinta: false o una función.
  */
 export async function webLocal(opciones = {}) {
   const local = await cargarContenido();
@@ -105,24 +107,29 @@ export async function webLocal(opciones = {}) {
   const { nav, filtros, cuerpo } = carta(local, { carrito, puntos: opciones.puntos });
   const listaArmadores = salon ? [] : armadores(local, carrito);
 
-  const portada = crear(
-    "section",
-    { className: "portada", id: "inicio" },
-    crear(
-      "div",
-      { className: "portada-texto" },
-      estado(local),
-      crear("h1", { className: "portada-titulo" }, local.eslogan ?? local.nombre),
-      local.descripcion ? crear("p", { className: "portada-bajada" }, salon ? t.salon : local.descripcion) : null,
-      crear(
-        "div",
-        { className: "portada-botones" },
-        crear("a", { className: "boton boton-principal", href: "#carta" }, t.verCarta),
-        salon ? null : crear("a", { className: "boton boton-secundario", href: whatsapp(local), target: "_blank", rel: "noopener" }, t.pedir),
-      ),
-    ),
-    opciones.dibujo && !salon ? crear("div", { className: "portada-dibujo", "aria-hidden": "true" }, svg(conCartel(opciones.dibujo, local))) : null,
-  );
+  // Piezas de la portada: la plantilla las compone a su manera con opciones.portada(piezas);
+  // si no, va la composición de siempre (texto a la izquierda, dibujo a la derecha).
+  const piezas = {
+    local,
+    salon,
+    textos: t,
+    estado: estado(local),
+    titulo: crear("h1", { className: "portada-titulo" }, local.eslogan ?? local.nombre),
+    bajada: local.descripcion ? crear("p", { className: "portada-bajada" }, salon ? t.salon : local.descripcion) : null,
+    verCarta: crear("a", { className: "boton boton-principal", href: "#carta" }, t.verCarta),
+    pedir: salon ? null : crear("a", { className: "boton boton-secundario", href: whatsapp(local), target: "_blank", rel: "noopener" }, t.pedir),
+    /** Enlace al primer pedido interactivo ("Armá tu burger"), si hay. */
+    armador: listaArmadores[0] ? crear("a", { className: "boton boton-armador", href: `#${listaArmadores[0].id}` }, listaArmadores[0].querySelector(".armador-titulo").textContent) : null,
+    dibujo: opciones.dibujo && !salon ? crear("div", { className: "portada-dibujo", "aria-hidden": "true" }, svg(conCartel(opciones.dibujo, local))) : null,
+  };
+  const portada = opciones.portada
+    ? crear("section", { className: "portada", id: "inicio" }, opciones.portada(piezas))
+    : crear(
+        "section",
+        { className: "portada", id: "inicio" },
+        crear("div", { className: "portada-texto" }, piezas.estado, piezas.titulo, piezas.bajada, crear("div", { className: "portada-botones" }, piezas.verCarta, piezas.pedir)),
+        piezas.dibujo,
+      );
 
   const enlaces = salon
     ? []
@@ -138,7 +145,8 @@ export async function webLocal(opciones = {}) {
       "main",
       {},
       portada,
-      cinta(local),
+      // opciones.cinta: false (sin cinta) o una función que arma otro bloque en su lugar.
+      opciones.cinta === false ? null : typeof opciones.cinta === "function" ? opciones.cinta(local) : cinta(local),
       salon ? null : seccion("destacados", t.destacados, destacados(local, { carrito })),
       ...listaArmadores.map((a) => crear("div", { className: "banda banda-armador" }, crear("div", { className: "seccion seccion-armador" }, a))),
       seccion("carta", t.carta, crear("div", { className: "carta-barra" }, nav, filtros), cuerpo),
@@ -151,20 +159,27 @@ export async function webLocal(opciones = {}) {
   return local;
 }
 
-/** Plan Carta: carta para mirar, con portada, filtros y datos del local. */
+/** Plan Carta: carta para mirar, con portada, filtros y datos del local. Opciones: dibujo, volanta,
+ *  puntos, textos y portada(piezas), como en webLocal. */
 export async function cartaSola(opciones = {}) {
   const local = await cargarContenido();
   const t = { ...TEXTOS, ...opciones.textos };
   const { nav, filtros, cuerpo } = carta(local, { puntos: opciones.puntos });
 
+  // Igual que en webLocal: la plantilla puede componer su portada con opciones.portada(piezas).
+  const piezas = {
+    local,
+    textos: t,
+    estado: estado(local),
+    volanta: crear("p", { className: "portada-volanta" }, opciones.volanta ?? "Carta"),
+    titulo: crear("h1", { className: "portada-titulo" }, local.nombre),
+    bajada: local.eslogan ? crear("p", { className: "portada-bajada" }, local.eslogan) : null,
+    dibujo: opciones.dibujo ? crear("div", { className: "portada-dibujo", "aria-hidden": "true" }, svg(conCartel(opciones.dibujo, local))) : null,
+  };
   const portada = crear(
     "section",
     { className: "portada", id: "inicio" },
-    opciones.dibujo ? crear("div", { className: "portada-dibujo", "aria-hidden": "true" }, svg(conCartel(opciones.dibujo, local))) : null,
-    crear("p", { className: "portada-volanta" }, opciones.volanta ?? "Carta"),
-    crear("h1", { className: "portada-titulo" }, local.nombre),
-    local.eslogan ? crear("p", { className: "portada-bajada" }, local.eslogan) : null,
-    estado(local),
+    opciones.portada ? opciones.portada(piezas) : [piezas.dibujo, piezas.volanta, piezas.titulo, piezas.bajada, piezas.estado],
   );
 
   const recomendados = destacados(local);

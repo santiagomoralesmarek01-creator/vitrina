@@ -9,6 +9,9 @@
 //   con descuento por tamaño y opción de regalo con tarjeta.
 // - "burger": hamburguesa capa por capa: pan, medallones, quesos y extras, cada uno con su precio.
 // - "mitades": pizza mitad y mitad, dibujada; se cobra la mitad más cara (o el promedio).
+// - "pizza": pizza desde cero: masa, salsa y hasta N ingredientes, dibujados sobre la pizza.
+// - "menu": menú del día a precio fijo: un plato (que cambia según el día) + guarnición + bebida + postre.
+// - "cafe": café a tu medida: bebida, tamaño, leche, extras y frío o caliente, con la taza dibujada.
 // - "juntada": cuántas pizzas pedir según la cantidad de personas y el hambre; suma productos
 //   comunes de la carta (no lleva id propio).
 
@@ -269,8 +272,146 @@ export const juntada = {
   resolver: () => undefined,
 };
 
-const TIPOS = { vianda, box, burger, mitades, juntada };
-const PREFIJOS = { "vianda:": "vianda", "box:": "box", "box-regalo:": "box", "burger:": "burger", "mitades:": "mitades" };
+// ---------- Café a tu medida ----------
+// cfg: { bebidas: [{ id, nombre, precio, capas: { cafe, leche, espuma } (proporciones), leche?: false,
+//                   llenado?: cuánto se llena la taza, de 0 a 1 (el espresso, menos de la mitad) }],
+//        tamanios: [{ id, nombre, extra, escala }], leches: [{ id, nombre, extra }],
+//        extras: [{ id, nombre, precio }], frio: { extra } (opcional: se puede pedir frío) }
+
+export const cafe = {
+  inicial: (cfg) => ({ bebida: cfg.bebidas[0].id, tamanio: cfg.tamanios[Math.min(1, cfg.tamanios.length - 1)].id, leche: cfg.leches?.[0]?.id ?? null, extras: [], frio: false }),
+
+  /** Si la bebida lleva leche (el espresso o el filtrado no): ahí no se elige leche. */
+  llevaLeche: (cfg, eleccion) => cfg.bebidas.find((b) => b.id === eleccion.bebida)?.leche !== false,
+
+  calcular(cfg, e) {
+    const bebida = cfg.bebidas.find((b) => b.id === e.bebida) ?? cfg.bebidas[0];
+    const tamanio = cfg.tamanios.find((t) => t.id === e.tamanio) ?? cfg.tamanios[0];
+    const leche = this.llevaLeche(cfg, e) ? cfg.leches?.find((l) => l.id === e.leche) : null;
+    const extras = (cfg.extras ?? []).filter((x) => e.extras.includes(x.id));
+    const frio = e.frio && cfg.frio ? cfg.frio.extra ?? 0 : 0;
+    const total = bebida.precio + (tamanio.extra ?? 0) + (leche?.extra ?? 0) + extras.reduce((s, x) => s + x.precio, 0) + frio;
+    return { bebida, tamanio, leche, extras, frio: e.frio && !!cfg.frio, total };
+  },
+
+  describir(cfg, e) {
+    const r = this.calcular(cfg, e);
+    // "Frío" no va acá: ya va en el nombre ("Latte frío").
+    return [r.tamanio.nombre.toLowerCase(), r.leche ? `leche ${r.leche.nombre.toLowerCase()}` : null, ...r.extras.map((x) => x.nombre.toLowerCase())].filter(Boolean).join(" · ");
+  },
+
+  id(cfg, e) {
+    const partes = [e.bebida, e.tamanio, this.llevaLeche(cfg, e) ? e.leche ?? "" : "", [...e.extras].sort().join("+"), e.frio ? "frio" : ""];
+    return `cafe:${partes.join(";")}`;
+  },
+
+  leer(cfg, id) {
+    if (!id.startsWith("cafe:")) return null;
+    const [bebida, tamanio, leche, extras, frio] = id.slice(5).split(";");
+    if (!cfg.bebidas.some((b) => b.id === bebida) || !cfg.tamanios.some((t) => t.id === tamanio)) return null;
+    const lista = extras ? extras.split("+") : [];
+    if (!lista.every((x) => (cfg.extras ?? []).some((e) => e.id === x))) return null;
+    if (leche && !(cfg.leches ?? []).some((l) => l.id === leche)) return null;
+    if (frio === "frio" && !cfg.frio) return null;
+    return { bebida, tamanio, leche: leche || null, extras: lista, frio: frio === "frio" };
+  },
+
+  resolver(local, cfg, id) {
+    const e = this.leer(cfg, id);
+    if (!e) return undefined;
+    const r = this.calcular(cfg, e);
+    return { id, nombre: `${r.bebida.nombre}${r.frio ? " frío" : ""}`, precio: r.total, detalle: this.describir(cfg, e) };
+  },
+};
+
+// ---------- Pizza desde cero ----------
+// cfg: { masas: [{ id, nombre, precio }], salsas: [{ id, nombre, extra }],
+//        ingredientes: [{ id, nombre, precio, cubierta }], max }
+// Precio: la masa (que ya trae muzzarella) + la salsa + cada ingrediente.
+
+export const pizza = {
+  inicial: (cfg) => ({ masa: cfg.masas[0].id, salsa: cfg.salsas[0].id, ingredientes: [] }),
+
+  alternar(cfg, e, id) {
+    if (e.ingredientes.includes(id)) return { ...e, ingredientes: e.ingredientes.filter((x) => x !== id) };
+    if (e.ingredientes.length >= (cfg.max ?? 5)) return e;
+    return { ...e, ingredientes: [...e.ingredientes, id] };
+  },
+
+  calcular(cfg, e) {
+    const masa = cfg.masas.find((m) => m.id === e.masa) ?? cfg.masas[0];
+    const salsa = cfg.salsas.find((x) => x.id === e.salsa) ?? cfg.salsas[0];
+    const ingredientes = e.ingredientes.map((id) => cfg.ingredientes.find((i) => i.id === id)).filter(Boolean);
+    return { masa, salsa, ingredientes, total: masa.precio + (salsa.extra ?? 0) + ingredientes.reduce((s, i) => s + i.precio, 0), quedan: (cfg.max ?? 5) - ingredientes.length };
+  },
+
+  describir(cfg, e) {
+    const r = this.calcular(cfg, e);
+    return [r.masa.nombre, `salsa ${r.salsa.nombre.toLowerCase()}`, ...r.ingredientes.map((i) => i.nombre.toLowerCase())].join(" · ");
+  },
+
+  id: (e) => `pizza:${e.masa};${e.salsa};${[...e.ingredientes].sort().join("+")}`,
+
+  leer(cfg, id) {
+    if (!id.startsWith("pizza:")) return null;
+    const [masa, salsa, lista] = id.slice(6).split(";");
+    const ingredientes = lista ? lista.split("+") : [];
+    if (!cfg.masas.some((m) => m.id === masa) || !cfg.salsas.some((x) => x.id === salsa)) return null;
+    if (!ingredientes.every((i) => cfg.ingredientes.some((x) => x.id === i)) || new Set(ingredientes).size !== ingredientes.length) return null;
+    if (ingredientes.length > (cfg.max ?? 5)) return null;
+    return { masa, salsa, ingredientes };
+  },
+
+  resolver(local, cfg, id) {
+    const e = this.leer(cfg, id);
+    if (!e) return undefined;
+    return { id, nombre: cfg.nombre ?? "Pizza armada", precio: this.calcular(cfg, e).total, detalle: this.describir(cfg, e) };
+  },
+};
+
+// ---------- Menú del día ----------
+// cfg: { precio, pasos: [{ id, nombre, opciones: [{ id, nombre, extra? }], delDia?: { "1": [ids], … } }] }
+// `delDia` (0 = domingo … 6 = sábado) limita las opciones de un paso según el día: el plato del día.
+
+export const menu = {
+  /** Las opciones de un paso para un día de la semana. */
+  opciones(paso, dia) {
+    const hoy = paso.delDia?.[String(dia)];
+    return hoy ? paso.opciones.filter((o) => hoy.includes(o.id)) : paso.opciones;
+  },
+
+  calcular(cfg, eleccion) {
+    const elegidos = cfg.pasos.map((p) => ({ paso: p, opcion: p.opciones.find((o) => o.id === eleccion[p.id]) }));
+    const faltan = elegidos.filter((x) => !x.opcion).map((x) => x.paso.nombre);
+    const total = cfg.precio + elegidos.reduce((s, x) => s + (x.opcion?.extra ?? 0), 0);
+    return { elegidos, faltan, completo: !faltan.length, total };
+  },
+
+  id: (cfg, eleccion) => `menu:${cfg.pasos.map((p) => `${p.id}=${eleccion[p.id] ?? ""}`).join(";")}`,
+
+  leer(cfg, id) {
+    if (!id.startsWith("menu:")) return null;
+    const eleccion = {};
+    for (const parte of id.slice(5).split(";")) {
+      const [paso, opcion] = parte.split("=");
+      if (!cfg.pasos.some((p) => p.id === paso)) return null;
+      eleccion[paso] = opcion;
+    }
+    return eleccion;
+  },
+
+  /** El día no se valida acá: el menú elegido ayer y pedido hoy sigue siendo un pedido válido. */
+  resolver(local, cfg, id) {
+    const eleccion = this.leer(cfg, id);
+    if (!eleccion) return undefined;
+    const r = this.calcular(cfg, eleccion);
+    if (!r.completo) return undefined;
+    return { id, nombre: cfg.nombre ?? "Menú del día", precio: r.total, detalle: r.elegidos.map((x) => x.opcion.nombre).join(" + ") };
+  },
+};
+
+const TIPOS = { vianda, box, burger, mitades, juntada, cafe, pizza, menu };
+const PREFIJOS = { "vianda:": "vianda", "box:": "box", "box-regalo:": "box", "burger:": "burger", "mitades:": "mitades", "cafe:": "cafe", "pizza:": "pizza", "menu:": "menu" };
 
 /** El producto armado que corresponde a un id del carrito, o undefined si no es un armado válido. */
 export function resolverArmado(local, id) {
