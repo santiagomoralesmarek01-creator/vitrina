@@ -5,9 +5,9 @@ import '@fontsource/inter/500.css'
 import '../shared/volver.css'
 import './style.css'
 
-type Tipo = 'carta' | 'landing' | 'app'
+type Tipo = 'carta' | 'landing' | 'app' | 'plantilla'
 
-const NOMBRE_TIPO: Record<Tipo, string> = { carta: 'Carta', landing: 'Landing', app: 'App' }
+const NOMBRE_TIPO: Record<Tipo, string> = { carta: 'Carta', landing: 'Landing', app: 'App', plantilla: 'Plantilla' }
 
 interface Ejemplo {
   id: string
@@ -17,7 +17,11 @@ interface Ejemplo {
   descripcion: string
   interacciones: string[]
   fondo: string
+  /** Dirección propia; por defecto, /<id>/. Las plantillas viven en public/plantillas (repo prototipos). */
+  href?: string
 }
+
+const PLANTILLA = (id: string) => `/plantillas/plantillas/${id}/`
 
 const EJEMPLOS: Ejemplo[] = [
   {
@@ -164,6 +168,67 @@ const EJEMPLOS: Ejemplo[] = [
     interacciones: ['Docena mixta que llena la bandeja', 'Mejor precio entre docenas, medias y sueltas', 'Zonas de envío por barrio'],
     fondo: '#f7efe3',
   },
+  // Plantillas listas para entregar: el diseño ya está hecho y se cambia sólo el contenido del local.
+  {
+    id: 'local-barrio',
+    tipo: 'plantilla',
+    nombre: 'Barrio',
+    rubro: 'Rotisería · plan Local',
+    descripcion: 'Papel crema y terracota, con el frente del local dibujado y su nombre en el cartel.',
+    interacciones: ['Semana de viandas con descuento por días', 'Pedido por WhatsApp con envío', 'Carta del salón para el QR'],
+    fondo: '#f3e9d8',
+    href: PLANTILLA('local-barrio'),
+  },
+  {
+    id: 'local-cafe',
+    tipo: 'plantilla',
+    nombre: 'Brote',
+    rubro: 'Cafetería · plan Local',
+    descripcion: 'Crema y salvia, serif en cursiva y bordes ondulados, con una mesa de café humeante.',
+    interacciones: ['Box de merienda para llenar', 'Opción de regalo con tarjeta', 'Carta del salón para el QR'],
+    fondo: '#cfdccf',
+    href: PLANTILLA('local-cafe'),
+  },
+  {
+    id: 'local-horno',
+    tipo: 'plantilla',
+    nombre: 'Horno',
+    rubro: 'Pizzería · plan Local',
+    descripcion: 'Pizzería porteña: verde botella, bronce y piso a cuadros, con el horno encendido.',
+    interacciones: ['Pizza mitad y mitad dibujada', '¿Cuántas pizzas pido? para la juntada', 'Carta del salón para el QR'],
+    fondo: '#1f3a2e',
+    href: PLANTILLA('local-horno'),
+  },
+  {
+    id: 'local-noche',
+    tipo: 'plantilla',
+    nombre: 'Noche',
+    rubro: 'Hamburguesería · plan Local',
+    descripcion: 'Carbón, brasas y humo, con tipografía muy condensada.',
+    interacciones: ['Burger capa por capa con precio en vivo', 'Pedido por WhatsApp con envío', 'Modo claro de papel'],
+    fondo: '#141110',
+    href: PLANTILLA('local-noche'),
+  },
+  {
+    id: 'carta-clasica',
+    tipo: 'plantilla',
+    nombre: 'Clásica',
+    rubro: 'Restaurante · plan Carta',
+    descripcion: 'Carta impresa: papel marfil con doble filete y línea de puntos hasta el precio.',
+    interacciones: ['Índice que sigue la lectura', 'Filtros vegetariano, vegano y sin TACC', 'Agotados tachados'],
+    fondo: '#e9e1d0',
+    href: PLANTILLA('carta-clasica'),
+  },
+  {
+    id: 'app-comanda',
+    tipo: 'app',
+    nombre: 'Comanda',
+    rubro: 'Tablero de cocina',
+    descripcion: 'Los pedidos del local como tickets de comandera, de nuevos a entregados, con reloj de demora.',
+    interacciones: ['Arrastrar tickets entre columnas', 'Demoras en ámbar y rojo', 'Números del turno'],
+    fondo: '#eceae4',
+    href: PLANTILLA('app-comanda'),
+  },
 ]
 
 const grilla = document.getElementById('grilla')!
@@ -176,14 +241,14 @@ document.querySelectorAll<HTMLElement>('#filtros [data-filtro]').forEach((b) => 
 grilla.innerHTML = EJEMPLOS.map(
   (e, i) => `
   <article class="tarjeta" data-tipo="${e.tipo}" style="--fondo-tarjeta: ${e.fondo}; --i: ${i}">
-    <a href="/${e.id}/" class="tarjeta-enlace" aria-label="Abrir ${e.nombre}, ${e.rubro}">
+    <a href="${e.href ?? `/${e.id}/`}" class="tarjeta-enlace" aria-label="Abrir ${e.nombre}, ${e.rubro}">
       <div class="vista">
         <img src="/previews/${e.id}.jpg" alt="" loading="lazy" decoding="async" />
       </div>
     </a>
     <div class="tarjeta-texto">
       <p class="tipo">${NOMBRE_TIPO[e.tipo]} · ${e.rubro}</p>
-      <h2><a href="/${e.id}/">${e.nombre}</a></h2>
+      <h2><a href="${e.href ?? `/${e.id}/`}">${e.nombre}</a></h2>
       <p class="descripcion">${e.descripcion}</p>
       <ul class="interacciones">${e.interacciones.map((x) => `<li>${x}</li>`).join('')}</ul>
     </div>

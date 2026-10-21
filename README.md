@@ -23,6 +23,14 @@ como trabajos para clientes ficticios.
 | [Raíz](raiz/) | Landing de restaurante de autor | Alta cocina en blanco hueso, Didone y dibujos de una línea | Menú de siete pasos que se revela al bajar, maridaje y versiones vegetariana / sin TACC, reserva con seña |
 | [La Norteña](nortena/) | Carta de empanadas | Folclore norteño: guardas de aguayo en CSS | Docena mixta que llena la bandeja, mejor precio entre docenas / medias / sueltas, zonas de envío |
 
+## Plantillas para gastronomía
+
+En `public/plantillas/` está el catálogo de plantillas listas para entregar (webs de pedidos, cartas
+y apps para cafeterías, rotiserías y pizzerías), publicado en `/plantillas/`. Es HTML, CSS y JS sin
+build, así que Vite lo copia tal cual. **No se edita acá:** viene del repo `prototipos`; para
+actualizarlo se copian de nuevo `index.html`, `catalogo*`, `capturas/`, `nucleo/`, `plantillas/` y
+`contenido/`, y las capturas a `public/previews/`. En la galería figuran con el filtro "Plantillas".
+
 La página de inicio es una galería: al pasar el mouse por cada tarjeta se
 recorre la captura completa de la página, y se puede filtrar por tipo.
 
