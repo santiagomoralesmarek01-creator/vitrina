@@ -25,6 +25,33 @@ const PLANTILLA = (id: string) => `/plantillas/plantillas/${id}/`
 
 const EJEMPLOS: Ejemplo[] = [
   {
+    id: 'alpaso',
+    tipo: 'app',
+    nombre: 'Al Paso',
+    rubro: 'Cafetería para llevar',
+    descripcion: 'Pop urbana en azul eléctrico, rosa chicle y amarillo, para pedir al paso desde el celular.',
+    interacciones: ['Vaso que se llena por capas en vivo', 'Las de la casa cargan el armador', 'Retiro con franja horaria'],
+    fondo: '#3047ff',
+  },
+  {
+    id: 'tueste',
+    tipo: 'carta',
+    nombre: 'Cobre',
+    rubro: 'Barra de café de especialidad',
+    descripcion: 'Oscura y editorial, carbón, crema y cobre, con la curva de tueste que se dibuja sola.',
+    interacciones: ['"¿Cómo lo tomás?" que recomienda café y método', 'Rueda de sabores que marca los orígenes', 'Granos con molienda a medida'],
+    fondo: '#141110',
+  },
+  {
+    id: 'vidriera',
+    tipo: 'carta',
+    nombre: 'Clotilde',
+    rubro: 'Pastelería y café',
+    descripcion: 'Toldo pistacho, fachada frambuesa y letras doradas, con la vidriera de tortas que gira.',
+    interacciones: ['Vidriera giratoria de porciones', 'Caja de masas que se llena y se cierra con moño', 'Torta con dedicatoria y retiro con 48 h'],
+    fondo: '#7d1a2e',
+  },
+  {
     id: 'bodegon',
     tipo: 'carta',
     nombre: 'Bodegón Don Ernesto',

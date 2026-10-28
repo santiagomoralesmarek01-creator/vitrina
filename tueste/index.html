@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#141110" />
+    <meta name="description" content="Barra de café de especialidad: recomendador de bebida, rueda de sabores, cafés de origen y granos molidos a medida. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Cobre · Barra de especialidad" />
+    <meta property="og:description" content="Barra de café de especialidad: recomendador de bebida, rueda de sabores, cafés de origen y granos molidos a medida. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/tueste/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/tueste.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Cobre · Barra de especialidad</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141110'/%3E%3Cellipse cx='32' cy='32' rx='15' ry='21' transform='rotate(28 32 32)' fill='%23c8794a'/%3E%3Cpath d='M26 13c9 9-3 25 8 38' fill='none' stroke='%23141110' stroke-width='3.4' stroke-linecap='round' transform='rotate(28 32 32)'/%3E%3C/svg%3E" />
+    <!-- Vercel Web Analytics: cuenta las visitas (sin cookies); el script se inserta desde acá para que Vite no intente empaquetarlo. Se activa en el panel de Vercel → Analytics. -->
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script>(function () { var s = document.createElement("script"); s.defer = true; s.src = "/_vercel/insights/script.js"; document.head.appendChild(s); })();</script>
+  </head>
+  <body>
+    <header class="portada">
+      <p class="portada-linea mono"><span>Tanda Nº 41</span><span>Tostado el lunes</span><span>Villa Crespo</span></p>
+      <h1 class="marca">Cobre</h1>
+      <p class="portada-sub">Barra de especialidad <span aria-hidden="true">/</span> tostadores</p>
+      <figure class="curva" aria-labelledby="curva-pie">
+        <svg viewBox="0 0 360 190" aria-hidden="true">
+          <g class="curva-grilla">
+            <path d="M30 20 H350 M30 70 H350 M30 120 H350 M30 165 H350" />
+          </g>
+          <text class="curva-eje" x="24" y="23" text-anchor="end">220°</text>
+          <text class="curva-eje" x="24" y="123" text-anchor="end">120°</text>
+          <path class="curva-aire" d="M30 60 C 80 70, 120 90, 170 96 S 280 104, 350 112" />
+          <path class="curva-grano" d="M30 40 C 44 150, 60 160, 82 150 S 160 95, 230 62 S 310 34, 338 30" />
+          <path class="curva-crack" d="M262 20 V165" />
+          <text class="curva-nota" x="256" y="156" text-anchor="end">1er crack · 9:40</text>
+          <circle class="curva-fin" cx="338" cy="30" r="4" />
+          <text class="curva-eje" x="30" y="184">0:00</text>
+          <text class="curva-eje" x="350" y="184" text-anchor="end">11:30</text>
+        </svg>
+        <figcaption id="curva-pie" class="mono">Curva de tueste de la tanda 41: Guatemala Huehuetenango, desarrollo de 1:50 después del primer crack.</figcaption>
+      </figure>
+      <p class="portada-lede">
+        Cinco orígenes, tostados de a poco en una máquina de tambor de cobre. Te ayudamos a elegir
+        cómo tomarlo, y te llevás los granos molidos para tu método.
+      </p>
+      <dl class="portada-datos mono">
+        <div><dt>Horario</dt><dd>Lun a dom, 8 a 20 h</dd></div>
+        <div><dt>Retiro</dt><dd>Pedí y pasá a buscarlo</dd></div>
+      </dl>
+    </header>
+
+    <nav class="indice" aria-label="Secciones">
+      <a href="#recomendador"><span class="mono">I</span> Cómo lo tomás</a>
+      <a href="#sabores"><span class="mono">II</span> Sabores</a>
+      <a href="#granos"><span class="mono">III</span> Granos</a>
+      <a href="#barra"><span class="mono">IV</span> Barra</a>
+    </nav>
+
+    <main>
+      <!-- I. Recomendador -->
+      <section class="seccion recomendador" id="recomendador" aria-labelledby="t-rec">
+        <header class="seccion-cabeza">
+          <p class="seccion-num mono">I</p>
+          <h2 id="t-rec">¿Cómo lo tomás?</h2>
+          <p class="seccion-bajada">Cuatro preguntas y te decimos qué pedir, con qué método y qué café.</p>
+        </header>
+
+        <div class="test" id="test">
+          <div class="test-progreso" aria-hidden="true"><span id="test-barra"></span></div>
+          <div id="test-cuerpo" class="test-cuerpo"></div>
+        </div>
+      </section>
+
+      <!-- II. Rueda + orígenes -->
+      <section class="seccion sabores" id="sabores" aria-labelledby="t-sab">
+        <header class="seccion-cabeza">
+          <p class="seccion-num mono">II</p>
+          <h2 id="t-sab">Rueda de sabores</h2>
+          <p class="seccion-bajada">Tocá una familia y te marcamos qué cafés de esta tanda la tienen.</p>
+        </header>
+
+        <div class="sabores-grilla">
+          <div class="rueda-columna">
+            <div class="rueda-caja">
+              <svg id="rueda" class="rueda" viewBox="-200 -200 400 400" role="radiogroup" aria-label="Familias de sabor"></svg>
+            </div>
+            <p class="rueda-resumen" id="rueda-resumen" aria-live="polite"></p>
+            <button type="button" class="enlace mono" id="rueda-limpiar" hidden>Ver todos los cafés</button>
+          </div>
+
+          <div class="origenes" id="origenes"></div>
+        </div>
+      </section>
+
+      <!-- III. Granos -->
+      <section class="seccion granos" id="granos" aria-labelledby="t-gra">
+        <header class="seccion-cabeza">
+          <p class="seccion-num mono">III</p>
+          <h2 id="t-gra">Granos para llevar</h2>
+          <p class="seccion-bajada">Te lo molemos en el momento según cómo lo prepares en casa.</p>
+        </header>
+
+        <div class="granos-grilla">
+          <div class="granos-form">
+            <fieldset class="campo">
+              <legend class="rotulo mono">Café</legend>
+              <div class="opciones-cafe" role="radiogroup" aria-label="Café" id="g-cafes"></div>
+            </fieldset>
+            <fieldset class="campo">
+              <legend class="rotulo mono">Peso</legend>
+              <div class="segmentado" role="radiogroup" aria-label="Peso" id="g-pesos"></div>
+            </fieldset>
+            <fieldset class="campo">
+              <legend class="rotulo mono">Molienda <small>según tu método</small></legend>
+              <div class="opciones-molienda" role="radiogroup" aria-label="Molienda" id="g-moliendas"></div>
+            </fieldset>
+          </div>
+
+          <aside class="molino" aria-labelledby="g-mol-nombre">
+            <svg id="g-dibujo" class="molino-dibujo" viewBox="0 0 240 150" role="img" aria-labelledby="g-mol-nombre g-mol-parecido"></svg>
+            <div class="escala" aria-hidden="true">
+              <span class="mono">Fina</span>
+              <div class="escala-riel"><span id="g-marca" class="escala-marca"></span></div>
+              <span class="mono">Gruesa</span>
+            </div>
+            <p class="molino-nombre" id="g-mol-nombre"></p>
+            <p class="molino-parecido" id="g-mol-parecido"></p>
+            <div class="molino-ticket">
+              <p class="molino-desc" id="g-desc"></p>
+              <p class="molino-precio mono" id="g-precio" aria-live="polite"></p>
+              <p class="molino-ahorro mono" id="g-ahorro"></p>
+              <button type="button" class="boton" id="g-sumar">Sumar al pedido</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- IV. Barra -->
+      <section class="seccion barra" id="barra" aria-labelledby="t-bar">
+        <header class="seccion-cabeza">
+          <p class="seccion-num mono">IV</p>
+          <h2 id="t-bar">La barra</h2>
+          <p class="seccion-bajada">Todo se hace con el café de la tanda. Leche de avena sin cargo.</p>
+        </header>
+        <div class="carta" id="carta"></div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p class="pie-marca">Cobre</p>
+      <p class="mono">Av. Corrientes 5100 · Villa Crespo · 8 a 20 h</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Café, cafés de origen y precios ficticios.</p>
+    </footer>
+
+    <!-- Barra del pedido, al alcance del pulgar -->
+    <div class="bolsa" id="bolsa" hidden>
+      <button type="button" class="bolsa-boton" id="bolsa-abrir" aria-haspopup="dialog">
+        <span class="bolsa-cant mono" id="bolsa-cant"></span>
+        <span class="bolsa-texto">Ver pedido</span>
+        <span class="bolsa-total mono" id="bolsa-total"></span>
+      </button>
+    </div>
+    <p class="aviso-sumado" id="sumado" role="status" aria-live="polite"></p>
+
+    <dialog class="hoja" id="hoja" aria-labelledby="hoja-titulo">
+      <div class="hoja-cabeza">
+        <h2 id="hoja-titulo">Tu pedido</h2>
+        <button type="button" class="cerrar" id="hoja-cerrar" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+
+      <div id="hoja-pedido" class="hoja-cuerpo">
+        <ul class="items" id="items"></ul>
+        <p class="items-total"><span>Total</span><strong class="mono" id="hoja-total"></strong></p>
+        <form id="form" class="form" novalidate>
+          <label class="campo-texto">
+            <span class="rotulo mono">Tu nombre</span>
+            <input type="text" id="nombre" name="nombre" autocomplete="given-name" required maxlength="40" />
+          </label>
+          <label class="campo-texto">
+            <span class="rotulo mono">Retiro en la barra</span>
+            <select id="retiro" name="retiro"></select>
+          </label>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <button type="submit" class="boton boton--ancho">Enviar pedido</button>
+          <p class="form-nota">Pagás al retirar: efectivo, débito o transferencia.</p>
+        </form>
+      </div>
+
+      <div id="hoja-demo" class="hoja-cuerpo demo" hidden>
+        <p class="demo-titulo mono">Así le llega el pedido a Cobre</p>
+        <figure class="wa" aria-label="Vista previa del mensaje de WhatsApp">
+          <div class="wa-cabeza">
+            <span class="wa-avatar" aria-hidden="true">C</span>
+            <span><strong>Cobre · Pedidos</strong><small>en línea</small></span>
+          </div>
+          <div class="wa-chat">
+            <p class="wa-burbuja" id="wa-texto"></p>
+          </div>
+        </figure>
+        <p class="demo-aclaracion">Es una demostración: el pedido no se mandó a ningún lado.</p>
+        <a class="boton boton--ancho boton--wa" id="contacto" target="_blank" rel="noopener">¿Querés una web así para tu cafetería? Escribime</a>
+        <button type="button" class="enlace mono" id="demo-volver">Volver al pedido</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

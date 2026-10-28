@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#3047ff" />
+    <meta name="description" content="Cafetería para llevar: armá tu bebida capa por capa y mirá cómo se llena el vaso, con precio en vivo y pedido para retirar. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Al Paso · Café para llevar" />
+    <meta property="og:description" content="Cafetería para llevar: armá tu bebida capa por capa y mirá cómo se llena el vaso, con precio en vivo y pedido para retirar. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/alpaso/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/alpaso.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Al Paso · Café para llevar</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%233047ff'/><path d='M17 18h30l-4 36H21z' fill='%23fff' stroke='%2317142b' stroke-width='3' stroke-linejoin='round'/><path d='M19.6 40h24.8l-1.4 14H21z' fill='%233a1d10'/><path d='M18.8 31h26.4l-.8 9H19.6z' fill='%23f4e7d3'/><rect x='14' y='12' width='36' height='7' rx='3.5' fill='%23ff5c93' stroke='%2317142b' stroke-width='3'/></svg>" />
+    <!-- Vercel Web Analytics: cuenta las visitas (sin cookies); el script se inserta desde acá para que Vite no intente empaquetarlo. Se activa en el panel de Vercel → Analytics. -->
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script>(function () { var s = document.createElement("script"); s.defer = true; s.src = "/_vercel/insights/script.js"; document.head.appendChild(s); })();</script>
+  </head>
+  <body>
+    <header class="portada">
+      <div class="portada-texto">
+        <p class="chapa">Café para llevar · Abasto</p>
+        <h1>Al<br />Paso</h1>
+        <p class="bajada">Lo armás en el celu, lo retirás en la ventanilla y seguís. Sin fila, sin vueltas.</p>
+        <div class="portada-acciones">
+          <a class="boton boton--amarillo" href="#armador">Armá tu bebida</a>
+          <a class="boton boton--linea" href="#casa">Ver las de la casa</a>
+        </div>
+      </div>
+      <div class="portada-vaso" aria-hidden="true">
+        <svg id="vaso-portada" class="vaso" viewBox="0 -30 200 330"></svg>
+        <span class="sticker sticker--rosa">Listo en 10 min</span>
+        <span class="sticker sticker--menta">Leches vegetales</span>
+      </div>
+      <ul class="datos">
+        <li><strong>Lun a sáb</strong> 7 a 21 h</li>
+        <li><strong>Av. Corrientes 3150</strong> · ventanilla</li>
+        <li><strong>Pagás</strong> al retirar</li>
+      </ul>
+    </header>
+
+    <div class="cinta" aria-hidden="true">
+      <p><span>Espresso</span><span>Cold brew</span><span>Matcha</span><span>Chai</span><span>Chocolate</span><span>Avena</span><span>Al paso</span><span>Espresso</span><span>Cold brew</span><span>Matcha</span><span>Chai</span><span>Chocolate</span><span>Avena</span><span>Al paso</span></p>
+    </div>
+
+    <main>
+      <section class="seccion casa" id="casa" aria-labelledby="t-casa">
+        <div class="seccion-cabeza">
+          <h2 id="t-casa">Las de la casa</h2>
+          <p class="sub">Tocá una y la cargamos en el armador. Después le cambiás lo que quieras.</p>
+        </div>
+        <div class="grilla-casa" id="de-la-casa"></div>
+      </section>
+
+      <section class="seccion armador" id="armador" aria-labelledby="t-armador">
+        <div class="seccion-cabeza">
+          <h2 id="t-armador">Armá tu bebida</h2>
+          <p class="sub">Cada cosa que elegís cae en el vaso. Lo que ves es lo que te llevás.</p>
+        </div>
+
+        <div class="armador-grilla">
+          <div class="mostrador">
+            <div class="mostrador-vaso">
+              <svg id="vaso" class="vaso" viewBox="0 -30 200 330" role="img" aria-label="Tu bebida"></svg>
+            </div>
+            <div class="mostrador-info" aria-live="polite">
+              <p class="mostrador-casa" id="nombre-casa"></p>
+              <p class="mostrador-nombre" id="nombre-bebida"></p>
+              <p class="mostrador-desc" id="desc-bebida"></p>
+              <p class="mostrador-precio" id="precio-bebida"></p>
+              <ol class="capas-lista" id="capas-lista" aria-label="Capas del vaso, de arriba hacia abajo"></ol>
+            </div>
+          </div>
+
+          <form class="controles" id="controles" novalidate>
+            <fieldset class="grupo">
+              <legend><span class="paso">1</span> Base</legend>
+              <div class="opciones opciones--bases" id="op-base"></div>
+            </fieldset>
+
+            <fieldset class="grupo">
+              <legend><span class="paso">2</span> Tamaño</legend>
+              <div class="opciones opciones--tres" id="op-tamanio"></div>
+            </fieldset>
+
+            <div class="grupo grupo--shots">
+              <p class="legend" id="t-shots"><span class="paso">3</span> Shots de espresso</p>
+              <div class="contador" role="group" aria-labelledby="t-shots">
+                <button type="button" class="contador-boton" id="shots-menos" aria-label="Un shot menos">−</button>
+                <output id="shots" class="contador-n" aria-live="polite">2</output>
+                <button type="button" class="contador-boton" id="shots-mas" aria-label="Un shot más">+</button>
+              </div>
+              <p class="nota" id="shots-nota"></p>
+            </div>
+
+            <fieldset class="grupo">
+              <legend><span class="paso">4</span> Leche</legend>
+              <div class="opciones" id="op-leche"></div>
+            </fieldset>
+
+            <fieldset class="grupo">
+              <legend><span class="paso">5</span> Jarabe</legend>
+              <div class="opciones" id="op-jarabe"></div>
+            </fieldset>
+
+            <fieldset class="grupo">
+              <legend><span class="paso">6</span> Extras</legend>
+              <div class="opciones opciones--tres" id="op-extras"></div>
+              <p class="nota" id="extras-nota"></p>
+            </fieldset>
+
+            <div class="controles-pie">
+              <button type="submit" class="boton boton--grande" id="sumar">Sumar al pedido</button>
+              <button type="button" class="boton boton--linea" id="reiniciar">Empezar de nuevo</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="seccion acompaniar" id="acompaniar" aria-labelledby="t-acomp">
+        <div class="seccion-cabeza">
+          <h2 id="t-acomp">Para acompañar</h2>
+          <p class="sub">Horneado todas las mañanas. Lo sumás y te lo damos en la misma bolsa.</p>
+        </div>
+        <div class="grilla-acomp" id="acomps"></div>
+      </section>
+
+      <section class="seccion pedido" id="pedido" aria-labelledby="t-pedido">
+        <div class="seccion-cabeza">
+          <h2 id="t-pedido">Tu pedido</h2>
+          <p class="sub">Para retirar por la ventanilla de Corrientes. Pagás ahí, con lo que quieras.</p>
+        </div>
+        <div class="pedido-caja">
+          <p class="pedido-vacio" id="pedido-vacio">Todavía no sumaste nada. <a href="#armador">Armá una bebida</a> o elegí <a href="#casa">una de la casa</a>.</p>
+          <ul class="pedido-lista" id="pedido-lista"></ul>
+          <form class="pedido-form" id="pedido-form" novalidate>
+            <label class="campo">
+              <span class="campo-rotulo">¿A nombre de quién?</span>
+              <input type="text" id="nombre" name="nombre" autocomplete="given-name" maxlength="30" placeholder="Así te llamamos en la ventanilla" aria-describedby="nombre-error" />
+              <span class="campo-error" id="nombre-error"></span>
+            </label>
+            <fieldset class="franjas-grupo">
+              <legend class="campo-rotulo">¿Cuándo pasás?</legend>
+              <div class="franjas" id="franjas"></div>
+            </fieldset>
+            <div class="pedido-total">
+              <span>Total</span>
+              <strong id="pedido-total">$ 0</strong>
+            </div>
+            <p class="campo-error" id="pedido-error" role="alert"></p>
+            <button type="submit" class="boton boton--grande boton--rosa" id="enviar">Enviar pedido</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p class="pie-marca">Al Paso</p>
+      <p>Av. Corrientes 3150, Abasto · Lunes a sábado de 7 a 21 h</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Cafetería, dirección y precios ficticios.</p>
+    </footer>
+
+    <nav class="barra" aria-label="Pedido">
+      <a class="barra-pedido" href="#pedido" id="barra-pedido">
+        <span class="barra-cuenta" id="barra-cuenta">0</span>
+        <span class="barra-textos"><span>Tu pedido</span><strong id="barra-total">$ 0</strong></span>
+      </a>
+      <button type="button" class="barra-sumar" id="barra-sumar">
+        <span>Sumar bebida</span>
+        <strong id="barra-precio">$ 0</strong>
+      </button>
+    </nav>
+
+    <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+
+    <dialog class="demo" id="demo" aria-labelledby="t-demo">
+      <div class="demo-caja">
+        <h2 id="t-demo">Así le llega tu pedido a Al Paso</h2>
+        <div class="chat">
+          <div class="chat-cabeza">
+            <span class="chat-avatar" aria-hidden="true">AP</span>
+            <span><strong>Al Paso</strong><small>en línea</small></span>
+          </div>
+          <div class="chat-fondo">
+            <div class="burbuja">
+              <p class="burbuja-texto" id="demo-texto"></p>
+              <span class="burbuja-hora" id="demo-hora"></span>
+            </div>
+          </div>
+        </div>
+        <p class="demo-aviso">Es una demostración: el pedido no se mandó a ningún lado.</p>
+        <a class="boton boton--grande boton--wa" id="demo-contacto" target="_blank" rel="noopener">¿Querés una web así para tu cafetería? Escribime</a>
+        <div class="demo-acciones">
+          <button type="button" class="boton boton--linea" id="demo-cerrar">Volver</button>
+          <button type="button" class="boton boton--linea" id="demo-nuevo">Empezar otro pedido</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

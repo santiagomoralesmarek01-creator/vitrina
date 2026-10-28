@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#7d1a2e" />
+    <meta name="description" content="Pastelería de barrio con vidriera giratoria de porciones, caja de masas finas que se llena y se cierra con moño, y tortas por encargo con dedicatoria. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Clotilde · Pastelería y vidriera" />
+    <meta property="og:description" content="Pastelería de barrio con vidriera giratoria de porciones, caja de masas finas que se llena y se cierra con moño, y tortas por encargo con dedicatoria. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/vidriera/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/vidriera.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Clotilde · Pastelería y vidriera</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237d1a2e'/%3E%3Cpath d='M10 30 L32 22 L54 30 V44 H10Z' fill='%23fbf1e6'/%3E%3Cpath d='M10 30 L54 30 V36 H10Z' fill='%23f3d24f'/%3E%3Cpath d='M10 30 L32 22 L54 30' fill='none' stroke='%23c8344f' stroke-width='3'/%3E%3Ccircle cx='32' cy='17' r='6' fill='%23c8344f'/%3E%3Cpath d='M32 11 q2 -4 6 -5' stroke='%2393ad6a' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M8 48 H56' stroke='%23e3c27a' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <!-- Vercel Web Analytics: cuenta las visitas (sin cookies); el script se inserta desde acá para que Vite no intente empaquetarlo. Se activa en el panel de Vercel → Analytics. -->
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script>(function () { var s = document.createElement("script"); s.defer = true; s.src = "/_vercel/insights/script.js"; document.head.appendChild(s); })();</script>
+  </head>
+  <body>
+    <header class="fachada">
+      <div class="toldo" aria-hidden="true"><span class="toldo-texto">Pastelería · Confitería</span></div>
+      <div class="cartel">
+        <p class="cartel-arriba">Masas finas, tortas y café</p>
+        <h1 class="marca">Clotilde</h1>
+        <p class="cartel-abajo">Villa Crespo · desde 1962</p>
+      </div>
+      <nav class="indice" aria-label="Secciones">
+        <a href="#vidriera">Porciones</a>
+        <a href="#caja">Caja de masas</a>
+        <a href="#tortas">Tortas enteras</a>
+        <a href="#cafe">Café</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 1. Vidriera giratoria -->
+      <section class="seccion" id="vidriera" aria-labelledby="t-vidriera">
+        <div class="encabezado">
+          <p class="volanta">Hoy en la vidriera</p>
+          <h2 id="t-vidriera">Porciones del día</h2>
+          <p class="sub">Girá la vidriera (con las flechas o deslizando) y tocá una porción para ver qué tiene.</p>
+        </div>
+
+        <div class="vitrina">
+          <div class="vitrina-marco">
+            <p class="vitrina-rotulo" aria-hidden="true">Pastelería fina</p>
+            <div class="giratoria" id="giratoria" role="group" aria-roledescription="vidriera giratoria" aria-label="Porciones de la vidriera. Usá las flechas izquierda y derecha para girarla.">
+              <div class="anillo" id="anillo">
+                <div class="plato-giratorio" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div class="vidrio" aria-hidden="true"></div>
+          </div>
+          <div class="vitrina-controles">
+            <button type="button" class="girar" id="girar-izq" aria-label="Girar hacia la porción anterior">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            </button>
+            <p class="vitrina-cuenta" id="vitrina-cuenta" aria-hidden="true"></p>
+            <button type="button" class="girar" id="girar-der" aria-label="Girar hacia la porción siguiente">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <article class="detalle" id="detalle" aria-live="polite"></article>
+      </section>
+
+      <!-- 2. Caja de masas finas -->
+      <section class="seccion seccion--caja" id="caja" aria-labelledby="t-caja">
+        <div class="encabezado">
+          <p class="volanta">Para llevar de visita</p>
+          <h2 id="t-caja">Armá tu caja de masas finas</h2>
+          <p class="sub">Elegí el tamaño y llenala a tu gusto. Cuando está completa, la cerramos con moño. La de 12 tiene 10&nbsp;% menos.</p>
+        </div>
+
+        <div class="caja-grilla">
+          <div class="caja-escena" id="caja-escena">
+            <div class="caja-tamanios" role="radiogroup" aria-label="Tamaño de la caja" id="caja-tamanios"></div>
+            <div class="caja" id="caja-dibujo" data-tamanio="6">
+              <div class="caja-papel">
+                <ol class="caja-lugares" id="caja-lugares" aria-label="Lugares de la caja"></ol>
+              </div>
+              <div class="tapa" aria-hidden="true"><span class="tapa-etiqueta">Clotilde</span></div>
+              <div class="cinta cinta--v" aria-hidden="true"></div>
+              <div class="cinta cinta--h" aria-hidden="true"></div>
+              <svg class="mono" viewBox="0 0 120 80" aria-hidden="true">
+                <path d="M60 40 C40 10 8 12 14 34 C18 50 44 46 60 40Z" class="mono-lazo" />
+                <path d="M60 40 C80 10 112 12 106 34 C102 50 76 46 60 40Z" class="mono-lazo" />
+                <path d="M56 42 L40 76 L50 72 L56 78 L60 44Z" class="mono-punta" />
+                <path d="M64 42 L80 76 L70 72 L64 78 L60 44Z" class="mono-punta" />
+                <ellipse cx="60" cy="40" rx="9" ry="8" class="mono-nudo" />
+              </svg>
+            </div>
+            <div class="caja-estado" aria-live="polite">
+              <p class="caja-contador" id="caja-contador"></p>
+              <p class="caja-precio" id="caja-precio"></p>
+            </div>
+            <div class="caja-acciones" id="caja-acciones"></div>
+          </div>
+
+          <ul class="masas" id="masas" aria-label="Masas finas"></ul>
+        </div>
+      </section>
+
+      <!-- 3. Torta entera -->
+      <section class="seccion seccion--tortas" id="tortas" aria-labelledby="t-tortas">
+        <div class="encabezado">
+          <p class="volanta">Por encargo</p>
+          <h2 id="t-tortas">Tortas enteras con dedicatoria</h2>
+          <p class="sub">Escribí la dedicatoria y mirala sobre la torta. Las hacemos con 48&nbsp;h de aviso; los lunes y feriados está cerrado.</p>
+        </div>
+
+        <div class="tortas-grilla">
+          <div class="escaparate">
+            <div class="escaparate-fondo" id="torta-dibujo"></div>
+            <p class="escaparate-precio" id="torta-precio" aria-live="polite"></p>
+          </div>
+
+          <form class="encargo" id="encargo" novalidate>
+            <fieldset class="campo">
+              <legend class="rotulo">La torta</legend>
+              <div class="opciones opciones--tortas" role="radiogroup" aria-label="Torta" id="tortas-lista"></div>
+            </fieldset>
+
+            <fieldset class="campo">
+              <legend class="rotulo">Tamaño</legend>
+              <div class="opciones opciones--tamanio" role="radiogroup" aria-label="Tamaño" id="tamanios-torta"></div>
+            </fieldset>
+
+            <div class="campo">
+              <label class="rotulo" for="dedicatoria">Dedicatoria <small>(sin cargo)</small></label>
+              <div class="dedicatoria-caja">
+                <input id="dedicatoria" name="dedicatoria" type="text" maxlength="40" autocomplete="off" placeholder="Feliz cumple, Abu" aria-describedby="dedicatoria-cuenta" />
+                <span class="dedicatoria-cuenta" id="dedicatoria-cuenta"></span>
+              </div>
+            </div>
+
+            <fieldset class="campo">
+              <legend class="rotulo">Día de retiro</legend>
+              <div class="calendario" id="calendario">
+                <div class="calendario-cabeza" aria-hidden="true">
+                  <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span>Do</span>
+                </div>
+                <div class="calendario-dias" id="calendario-dias" role="group" aria-label="Días para retirar la torta"></div>
+              </div>
+              <ul class="leyenda" aria-label="Referencias del calendario">
+                <li><span class="punto punto--libre"></span>Se puede</li>
+                <li><span class="punto punto--aviso"></span>Menos de 48 h</li>
+                <li><span class="punto punto--cerrado"></span>Cerrado</li>
+              </ul>
+            </fieldset>
+
+            <fieldset class="campo" id="campo-horario" hidden>
+              <legend class="rotulo" id="rotulo-horario">Horario</legend>
+              <div class="opciones opciones--horario" role="radiogroup" aria-labelledby="rotulo-horario" id="horarios"></div>
+            </fieldset>
+
+            <div class="encargo-pie">
+              <p class="encargo-resumen" id="encargo-resumen" aria-live="polite"></p>
+              <button type="submit" class="boton" id="sumar-torta">Sumar torta al pedido</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- 4. Café -->
+      <section class="seccion seccion--cafe" id="cafe" aria-labelledby="t-cafe">
+        <div class="encabezado">
+          <p class="volanta">Para acompañar</p>
+          <h2 id="t-cafe">Café y algo más</h2>
+          <p class="sub">Para llevar, en vaso con tapa.</p>
+        </div>
+        <ul class="bebidas" id="bebidas"></ul>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p class="pie-marca">Clotilde</p>
+      <p>Av. Corrientes 5400, Villa Crespo · Martes a sábado de 8 a 20 h, domingos de 8 a 13 h · Lunes cerrado</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Pastelería, dirección y precios ficticios.</p>
+    </footer>
+
+    <div class="barra" id="barra">
+      <button type="button" class="barra-boton" id="abrir-pedido" aria-haspopup="dialog">
+        <span class="barra-caja" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M5 12h22v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" /><path d="M3 8h26v5H3z" /><path d="M16 8v20" /></svg>
+          <span class="barra-num" id="barra-num">0</span>
+        </span>
+        <span class="barra-texto">
+          <span class="barra-titulo" id="barra-titulo">Tu pedido</span>
+          <span class="barra-total" id="barra-total"></span>
+        </span>
+        <span class="barra-ver">Ver pedido</span>
+      </button>
+    </div>
+
+    <p class="aviso-flotante" id="aviso" role="status" aria-live="polite"></p>
+
+    <dialog class="hoja" id="dlg-pedido" aria-labelledby="t-pedido">
+      <form method="dialog" class="hoja-cuerpo" id="form-pedido" novalidate>
+        <div class="hoja-cabeza">
+          <h2 id="t-pedido">Tu pedido</h2>
+          <button type="button" class="cerrar" data-cerrar aria-label="Cerrar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </div>
+        <ul class="resumen" id="resumen"></ul>
+        <p class="resumen-total"><span>Total</span> <strong id="resumen-total"></strong></p>
+        <p class="resumen-retiro" id="resumen-retiro"></p>
+        <div class="datos">
+          <label for="nombre">Tu nombre</label>
+          <input id="nombre" name="nombre" type="text" autocomplete="given-name" required aria-describedby="nombre-error" />
+          <p class="error" id="nombre-error" hidden>Poné tu nombre así sabemos a quién darle el pedido.</p>
+          <label for="nota">Nota para la pastelería <small>(opcional)</small></label>
+          <textarea id="nota" name="nota" rows="2" maxlength="200" placeholder="Ej.: con velitas, sin nueces…"></textarea>
+        </div>
+        <div class="hoja-acciones">
+          <button type="submit" class="boton boton--grande" id="enviar">Enviar pedido</button>
+          <button type="button" class="boton boton--borde" data-cerrar>Seguir eligiendo</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="hoja hoja--demo" id="dlg-demo" aria-labelledby="t-demo">
+      <div class="hoja-cuerpo">
+        <div class="hoja-cabeza">
+          <h2 id="t-demo">Así le llega a Clotilde</h2>
+          <button type="button" class="cerrar" data-cerrar aria-label="Cerrar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </div>
+        <div class="wa" role="img" aria-labelledby="wa-texto">
+          <div class="wa-cabeza">
+            <span class="wa-avatar" aria-hidden="true">C</span>
+            <span class="wa-quien"><strong>Clotilde Pastelería</strong><small>en línea</small></span>
+          </div>
+          <div class="wa-chat">
+            <p class="wa-fecha">Hoy</p>
+            <div class="wa-burbuja">
+              <p class="wa-texto" id="wa-texto"></p>
+              <span class="wa-hora" id="wa-hora"></span>
+            </div>
+          </div>
+        </div>
+        <p class="demo-aviso">Es una demostración: el pedido no se mandó a ningún lado.</p>
+        <div class="hoja-acciones">
+          <a class="boton boton--grande boton--wa" id="contacto" target="_blank" rel="noopener">¿Querés una web así para tu cafetería? Escribime</a>
+          <button type="button" class="boton boton--borde" data-cerrar>Volver a la vidriera</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

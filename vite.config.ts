@@ -20,6 +20,9 @@ const PAGINAS = [
   'lupulo',
   'raiz',
   'nortena',
+  'alpaso',
+  'tueste',
+  'vidriera',
 ]
 
 export default defineConfig({
