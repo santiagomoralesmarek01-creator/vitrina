@@ -25,6 +25,15 @@ const PLANTILLA = (id: string) => `/plantillas/plantillas/${id}/`
 
 const EJEMPLOS: Ejemplo[] = [
   {
+    id: 'repulgue',
+    tipo: 'carta',
+    nombre: 'Pellizco',
+    rubro: 'Casa de empanadas',
+    descripcion: 'Risografía a dos tintas, azul de imprenta y coral sobre papel crudo, con grano y registro corrido.',
+    interacciones: ['El código del repulgue y el juego "¿Adiviná qué gusto es?"', 'Bolsa de papel que se llena con el mejor precio', 'Calculadora para la juntada y horno en vivo'],
+    fondo: '#f3ecdc',
+  },
+  {
     id: 'alpaso',
     tipo: 'app',
     nombre: 'Al Paso',

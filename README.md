@@ -25,6 +25,7 @@ como trabajos para clientes ficticios.
 | [Al Paso](alpaso/) | App: cafetería para llevar | Pop urbana: azul eléctrico, rosa chicle y amarillo | Vaso en SVG que se llena por capas (shots, leche, jarabe, espuma, hielo), las de la casa, retiro por franja horaria y demo del pedido por WhatsApp |
 | [Cobre](tueste/) | Carta de café de especialidad | Oscura y editorial: carbón, crema y cobre | "¿Cómo lo tomás?" que recomienda café y método, rueda de sabores en SVG, granos con molienda a medida y pedido con retiro |
 | [Clotilde](vidriera/) | Carta de pastelería y café | Toldo pistacho, fachada frambuesa y dorado | Vidriera giratoria, caja de masas que se llena y se cierra con moño, torta con dedicatoria y retiro con 48 h de aviso |
+| [Pellizco](repulgue/) | Carta de casa de empanadas | Risografía a dos tintas: azul de imprenta y coral sobre papel crudo | El código del repulgue con juego de adivinar, bolsa de papel que se llena con el mejor precio entre docena, media y sueltas, calculadora para la juntada y horno en vivo |
 
 ## Plantillas para gastronomía
 

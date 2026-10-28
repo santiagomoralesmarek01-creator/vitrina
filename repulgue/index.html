@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3ecdc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161827" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Casa de empanadas impresa a dos tintas: aprendé el código del repulgue, jugá a adivinar el gusto, llená la bolsa con el mejor precio y calculá cuántas pedir para la juntada. Ejemplo de la Vitrina." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Vitrina · por MrK" />
+    <meta property="og:title" content="Pellizco · Casa de empanadas" />
+    <meta property="og:description" content="Casa de empanadas impresa a dos tintas: aprendé el código del repulgue, jugá a adivinar el gusto, llená la bolsa con el mejor precio y calculá cuántas pedir para la juntada. Ejemplo de la Vitrina." />
+    <meta property="og:url" content="https://vitrina-iota-ten.vercel.app/repulgue/" />
+    <meta property="og:image" content="https://vitrina-iota-ten.vercel.app/og/repulgue.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="MrK" />
+    <title>Pellizco · Casa de empanadas</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23f3ecdc'/><path d='M10 44C11 18 53 18 54 44Q32 50 10 44Z' fill='%23f2634a' transform='translate(3 3)'/><path d='M10 44C11 18 53 18 54 44Q32 50 10 44Z' fill='none' stroke='%232b4bc8' stroke-width='4' stroke-linejoin='round'/><path d='M15 33l4-3M22 26l3-4M32 23v-5M42 26l-3-4M49 33l-4-3' stroke='%232b4bc8' stroke-width='3.4' stroke-linecap='round'/></svg>" />
+    <!-- Vercel Web Analytics: cuenta las visitas (sin cookies); el script se inserta desde acá para que Vite no intente empaquetarlo. Se activa en el panel de Vercel → Analytics. -->
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script>(function () { var s = document.createElement("script"); s.defer = true; s.src = "/_vercel/insights/script.js"; document.head.appendChild(s); })();</script>
+  </head>
+  <body>
+    <a class="saltar" href="#bolsa">Ir directo al pedido</a>
+
+    <header class="portada">
+      <div class="marcas" aria-hidden="true">
+        <span class="marca marca--1"></span><span class="marca marca--2"></span>
+        <span class="marca marca--3"></span><span class="marca marca--4"></span>
+      </div>
+      <div class="portada-texto">
+        <p class="chapa"><span>Casa de empanadas</span><span>Chacarita · Buenos Aires</span></p>
+        <h1 class="corrido" data-texto="Pellizco">Pellizco</h1>
+        <p class="bajada">Empanadas al horno de barro, cerradas a mano y cada una con su repulgue. Si sabés leer el borde, ya sabés qué te toca.</p>
+        <div class="horno-vivo" id="horno" aria-live="polite">
+          <svg class="horno-anillo" viewBox="0 0 44 44" aria-hidden="true">
+            <circle cx="22" cy="22" r="18" class="anillo-fondo" />
+            <circle cx="22" cy="22" r="18" class="anillo-avance" id="horno-avance" pathLength="100" />
+            <path d="M14 27c0-6 4-11 8-11s8 5 8 11z" class="anillo-horno" />
+          </svg>
+          <p><span class="horno-rotulo">Horno en vivo</span><span id="horno-texto">Mirando el horno…</span></p>
+        </div>
+        <div class="portada-acciones">
+          <a class="boton boton--azul" href="#bolsa">Armá tu bolsa</a>
+          <a class="boton boton--linea" href="#codigo">Aprendé el código</a>
+        </div>
+      </div>
+      <div class="portada-dibujo" aria-hidden="true">
+        <svg id="portada-empanada" class="portada-svg" viewBox="0 0 160 120"></svg>
+        <svg class="vapor" viewBox="0 0 120 70">
+          <path d="M30 66c-8-12 8-18 0-30s8-18 0-30" style="--i: 0" />
+          <path d="M60 66c-8-12 8-18 0-30s8-18 0-30" style="--i: 1" />
+          <path d="M90 66c-8-12 8-18 0-30s8-18 0-30" style="--i: 2" />
+        </svg>
+        <p class="sello-redondo"><span>Al horno</span><strong>N.º 1</strong><span>de barro</span></p>
+      </div>
+      <ul class="datos">
+        <li><strong>$1.300</strong> la unidad</li>
+        <li><strong>$7.200</strong> la media</li>
+        <li><strong>$13.500</strong> la docena</li>
+        <li><strong>Mar a dom</strong> 11:30 a 15 y 19 a 23:30</li>
+      </ul>
+    </header>
+
+    <main>
+      <section class="seccion codigo" id="codigo" aria-labelledby="t-codigo">
+        <div class="seccion-cabeza">
+          <p class="numero" aria-hidden="true">01</p>
+          <h2 id="t-codigo" class="corrido" data-texto="El código del repulgue">El código del repulgue</h2>
+          <p class="sub">En cada casa de empanadas el borde dice qué hay adentro. Estas son las nuestras: tocá una y se abre.</p>
+        </div>
+        <ul class="cartas" id="cartas"></ul>
+
+        <div class="juego" id="juego" aria-labelledby="t-juego">
+          <div class="juego-cabeza">
+            <h3 id="t-juego">¿Adiviná qué gusto es?</h3>
+            <p class="sub">Te mostramos un repulgue, vos elegís. Sin espiar las cartas.</p>
+          </div>
+          <div class="juego-cuerpo">
+            <div class="juego-mesa">
+              <svg id="juego-dibujo" class="juego-svg" viewBox="0 0 160 120" role="img" aria-label="Empanada misteriosa"></svg>
+              <p class="juego-pista" id="juego-pista"></p>
+            </div>
+            <div class="juego-lado">
+              <div class="juego-opciones" id="juego-opciones" role="group" aria-label="¿Qué gusto es?"></div>
+              <p class="juego-resultado" id="juego-resultado" aria-live="polite"></p>
+              <button type="button" class="boton boton--coral" id="juego-otra">Otra empanada</button>
+              <dl class="marcador" aria-live="polite">
+                <div><dt>Aciertos</dt><dd id="m-aciertos">0/0</dd></div>
+                <div><dt>Racha</dt><dd id="m-racha">0</dd></div>
+                <div><dt>Mejor</dt><dd id="m-mejor">0</dd></div>
+              </dl>
+              <p class="marcador-titulo" id="m-titulo">Sin jugar todavía</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion bolsa" id="bolsa" aria-labelledby="t-bolsa">
+        <div class="seccion-cabeza">
+          <p class="numero" aria-hidden="true">02</p>
+          <h2 id="t-bolsa" class="corrido" data-texto="Armá tu bolsa">Armá tu bolsa</h2>
+          <p class="sub">Sumá de a una. Nosotros armamos la cuenta con docenas, medias y sueltas para que pagues lo menos posible.</p>
+        </div>
+
+        <div class="bolsa-grilla">
+          <div class="mostrador">
+            <div class="bolsa-caja" id="bolsa-caja">
+              <svg id="bolsa-svg" class="bolsa-svg" viewBox="0 0 240 300" role="img" aria-label="Tu bolsa, vacía"></svg>
+            </div>
+            <div class="ticket" aria-live="polite">
+              <p class="ticket-rotulo">Tu bolsa</p>
+              <p class="ticket-cuenta" id="ticket-cuenta">Vacía</p>
+              <p class="ticket-desglose" id="ticket-desglose">Sumá empanadas de la lista.</p>
+              <p class="ticket-total" id="ticket-total">$0</p>
+              <p class="ticket-ahorro" id="ticket-ahorro"></p>
+              <div class="ticket-sugerencia" id="ticket-sugerencia" hidden>
+                <p id="sugerencia-texto"></p>
+                <button type="button" class="boton boton--chico boton--coral" id="sugerencia-boton">Sumar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="lista-lado">
+            <ul class="gustos" id="gustos" aria-label="Gustos"></ul>
+            <button type="button" class="boton boton--linea boton--chico" id="vaciar" disabled>Vaciar la bolsa</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion juntada" id="juntada" aria-labelledby="t-juntada">
+        <div class="seccion-cabeza">
+          <p class="numero" aria-hidden="true">03</p>
+          <h2 id="t-juntada" class="corrido" data-texto="¿Cuántas pido para la juntada?">¿Cuántas pido para la juntada?</h2>
+          <p class="sub">Decinos cuántos son y te armamos la bolsa. Calculamos 3 por persona si es la comida y una y media si es para picar.</p>
+        </div>
+
+        <div class="juntada-grilla">
+          <form class="calculadora" id="calculadora" novalidate>
+            <div class="campo">
+              <label for="personas" class="rotulo">¿Cuántos son?</label>
+              <div class="contador">
+                <button type="button" data-paso="personas" data-d="-1" aria-label="Una persona menos">−</button>
+                <input type="number" id="personas" inputmode="numeric" min="1" max="40" value="8" />
+                <button type="button" data-paso="personas" data-d="1" aria-label="Una persona más">+</button>
+              </div>
+            </div>
+            <fieldset class="campo">
+              <legend class="rotulo">¿Es la comida o para picar?</legend>
+              <div class="segmento">
+                <label><input type="radio" name="modo" value="principal" checked /><span>Es la comida</span></label>
+                <label><input type="radio" name="modo" value="picada" /><span>Para picar</span></label>
+              </div>
+            </fieldset>
+            <div class="campo">
+              <label for="veggies" class="rotulo">¿Cuántos no comen carne?</label>
+              <div class="contador">
+                <button type="button" data-paso="veggies" data-d="-1" aria-label="Un vegetariano menos">−</button>
+                <input type="number" id="veggies" inputmode="numeric" min="0" max="40" value="2" />
+                <button type="button" data-paso="veggies" data-d="1" aria-label="Un vegetariano más">+</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="cartel" aria-live="polite">
+            <p class="cartel-rotulo">Para <span id="j-personas">8 personas</span> te sugerimos</p>
+            <p class="cartel-grande corrido" id="j-cuanto" data-texto="">2 docenas</p>
+            <p class="cartel-detalle" id="j-detalle"></p>
+            <ul class="reparto" id="j-reparto"></ul>
+            <button type="button" class="boton boton--azul boton--ancho" id="j-cargar">Cargar a la bolsa</button>
+            <p class="cartel-nota">Reemplaza lo que haya en la bolsa. Después lo cambiás como quieras.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion pedido" id="pedido" aria-labelledby="t-pedido">
+        <div class="seccion-cabeza">
+          <p class="numero" aria-hidden="true">04</p>
+          <h2 id="t-pedido" class="corrido" data-texto="Tu pedido">Tu pedido</h2>
+          <p class="sub">Revisalo, decinos cómo te llega y lo mandamos por WhatsApp.</p>
+        </div>
+
+        <form class="comanda" id="pedido-form" novalidate>
+          <div class="comanda-lista">
+            <ul id="resumen" class="resumen"></ul>
+            <p class="resumen-vacio" id="resumen-vacio">Todavía no hay nada en la bolsa. <a href="#bolsa">Elegí tus gustos</a>.</p>
+          </div>
+
+          <div class="comanda-datos">
+            <div class="campo">
+              <label for="nombre" class="rotulo">Tu nombre</label>
+              <input type="text" id="nombre" autocomplete="given-name" aria-describedby="nombre-error" />
+              <p class="error" id="nombre-error"></p>
+            </div>
+            <fieldset class="campo">
+              <legend class="rotulo">¿Cómo te llega?</legend>
+              <div class="segmento">
+                <label><input type="radio" name="entrega" value="retiro" checked /><span>Retiro en el local</span></label>
+                <label><input type="radio" name="entrega" value="envio" /><span>Envío a casa</span></label>
+              </div>
+            </fieldset>
+            <div class="campo" id="campo-direccion" hidden>
+              <label for="direccion" class="rotulo">Dirección <small id="envio-nota"></small></label>
+              <input type="text" id="direccion" autocomplete="street-address" aria-describedby="direccion-error" />
+              <p class="error" id="direccion-error"></p>
+            </div>
+
+            <dl class="cuentas">
+              <div><dt id="c-desglose">Empanadas</dt><dd id="c-subtotal">$0</dd></div>
+              <div><dt>Envío</dt><dd id="c-envio">—</dd></div>
+              <div class="cuentas-total"><dt>Total</dt><dd id="c-total">$0</dd></div>
+            </dl>
+            <p class="error" id="pedido-error" aria-live="assertive"></p>
+            <button type="submit" class="boton boton--azul boton--ancho boton--grande">Enviar pedido</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <div class="pie-tintas" aria-hidden="true"><span class="t-azul">Azul</span><span class="t-coral">Coral</span><span class="t-mezcla">Las dos</span></div>
+      <p><strong>Pellizco</strong> · Av. Dorrego 1050, Chacarita · Martes a domingo, 11:30 a 15 y 19 a 23:30</p>
+      <p class="pie-chico">Proyecto de ejemplo de la Vitrina. Local, precios y pedidos ficticios.</p>
+    </footer>
+
+    <div class="barra" id="barra" aria-hidden="true">
+      <p class="barra-info"><strong id="barra-cuenta">0 empanadas</strong><span id="barra-total">$0</span></p>
+      <a class="boton boton--coral" href="#pedido" id="barra-ir" tabindex="-1">Ver pedido</a>
+    </div>
+
+    <div class="aviso" id="aviso" role="status"></div>
+
+    <dialog class="demo" id="demo" aria-labelledby="t-demo">
+      <div class="demo-caja">
+        <h2 id="t-demo" tabindex="-1" autofocus>Así le llega tu pedido a Pellizco</h2>
+        <div class="chat">
+          <div class="chat-cabeza">
+            <span class="chat-avatar" aria-hidden="true">P</span>
+            <span><strong>Pellizco</strong><small>en línea</small></span>
+          </div>
+          <div class="chat-fondo">
+            <div class="burbuja">
+              <p class="burbuja-texto" id="demo-texto"></p>
+              <span class="burbuja-hora" id="demo-hora"></span>
+            </div>
+          </div>
+        </div>
+        <p class="demo-aviso">Es una demostración: el pedido no se mandó a ningún lado.</p>
+        <a class="boton boton--grande boton--wa" id="demo-contacto" target="_blank" rel="noopener">¿Querés una web así para tu local? Escribime</a>
+        <div class="demo-acciones">
+          <button type="button" class="boton boton--linea" id="demo-cerrar">Volver</button>
+          <button type="button" class="boton boton--linea" id="demo-nuevo">Empezar otra bolsa</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
